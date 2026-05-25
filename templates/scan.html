@@ -129,52 +129,42 @@
 
     <script>
 
-        const result = document.getElementById("result")
+    function onScanSuccess(decodedText) {
 
-        function onScanSuccess(decodedText, decodedResult) {
+        navigator.vibrate(200)
 
-            navigator.vibrate(200)
+        document.getElementById("result").innerHTML = `
+            <div class="success">
+                ✅ Ticket Valido<br><br>
+                ${decodedText}
+            </div>
+        `
 
-            result.innerHTML = `
-                <div class="success">
-                    ✅ Ticket Valido<br><br>
-                    ${decodedText}
-                </div>
-            `
+    }
 
-        }
+    function onScanFailure(error) {
+    }
 
-        function onScanFailure(error) {
-        }
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        {
+            fps: 10,
+            qrbox: {
+                width: 250,
+                height: 250
+            },
+            rememberLastUsedCamera: true,
+            supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA]
+        },
+        false
+    )
 
-        const html5QrCode = new Html5Qrcode("reader")
+    html5QrcodeScanner.render(
+        onScanSuccess,
+        onScanFailure
+    )
 
-        Html5Qrcode.getCameras().then(devices => {
-
-            if (devices.length) {
-
-                html5QrCode.start(
-                    {
-                        facingMode: "environment"
-                    },
-                    {
-                        fps: 10,
-                        qrbox: 250,
-                        aspectRatio: 1.0
-                    },
-                    onScanSuccess,
-                    onScanFailure
-                )
-
-            }
-
-        }).catch(err => {
-
-            console.log(err)
-
-        })
-
-    </script>
+</script>
 
 </body>
 </html>
