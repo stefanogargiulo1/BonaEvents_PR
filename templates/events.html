@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventi</title>
+
+    <style>
+
+        body{
+            margin:0;
+            background:#0f0f0f;
+            font-family:Arial;
+            color:white;
+        }
+
+        .navbar{
+            background:#151515;
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-bottom:1px solid #222;
+        }
+
+        .logo{
+            color:#ff1e1e;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:40px;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:#1a1a1a;
+            padding:25px;
+            border-radius:20px;
+            border:1px solid #222;
+            transition:0.2s;
+            cursor:pointer;
+            text-decoration:none;
+            color:white;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+            border:1px solid #ff1e1e;
+        }
+
+        h2{
+            color:#ff1e1e;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            BonaEvents PR 🔥
+        </div>
+
+        <div>
+            <a href="/logout" style="color:white;text-decoration:none;">
+                Logout
+            </a>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <h1>Eventi Disponibili</h1>
+
+        <div class="cards">
+
+            {% for event in events %}
+
+            <a class="card" href="#">
+
+                <h2>{{ event }}</h2>
+
+                <p>
+                    Clicca per creare ticket
+                </p>
+
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>

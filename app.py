@@ -33,7 +33,18 @@ def dashboard():
     if "user" not in session:
         return redirect(url_for("login"))
 
-    return render_template("index.html")
+    events = [
+        "Boat Party",
+        "White Party",
+        "La French",
+        "Foam Madness",
+        "Pool Party",
+        "Azur Beach Party",
+        "Bona Loca",
+        "Sunset Rooftop"
+    ]
+
+    return render_template("events.html", events=events)
 
 
 @app.route("/logout")
