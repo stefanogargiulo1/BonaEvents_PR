@@ -4,6 +4,9 @@ from datetime import datetime
 import qrcode
 import os
 from flask import jsonify
+from PIL import Image
+import cv2
+import numpy as np
 
 app = Flask(__name__)
 
@@ -165,6 +168,50 @@ def scan():
 
     return render_template("scan.html")
 
+@app.route("/upload_scan", methods=["POST"])
+def upload_scan():
+
+    if "file" not in request.files:
+        return "Nessun file"
+
+    file = request.files["file"]
+
+    # CONVERTI IMMAGINE
+    file_bytes = np.frombuffer(file.read(), np.uint8)
+
+    img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+
+    detector = cv2.QRCodeDetector()
+
+    data, bbox, _ = detector.detectAndDecode(img)
+
+    if data:
+
+        return f"""
+
+        <body style='background:#0f0f0f;color:white;font-family:Arial;text-align:center;padding-top:100px'>
+
+            <h1 style='color:lime'>
+                ✅ Ticket Valido
+            </h1>
+
+            <h2>{data}</h2>
+
+        </body>
+
+        """
+
+    return """
+
+    <body style='background:#0f0f0f;color:white;font-family:Arial;text-align:center;padding-top:100px'>
+
+        <h1 style='color:red'>
+            ❌ QR NON TROVATO
+        </h1>
+
+    </body>
+
+    """
 
 if __name__ == "__main__":
     app.run(debug=True)
