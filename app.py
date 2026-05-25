@@ -7,7 +7,8 @@ app = Flask(__name__)
 def home():
     return "BonaEvents PR Panel Online 🔥"
 
+# Railway usa questa variabile automaticamente
 port = int(os.environ.get("PORT", 8080))
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=port)
+# IMPORTANTISSIMO:
+app.run(host="0.0.0.0", port=port)
