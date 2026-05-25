@@ -142,37 +142,19 @@
 
     const html5QrCode = new Html5Qrcode("reader")
 
-    Html5Qrcode.getCameras().then(devices => {
-
-        if (devices && devices.length) {
-
-            let backCamera = devices.find(device =>
-                device.label.toLowerCase().includes('back')
-            )
-
-            let cameraId = backCamera
-                ? backCamera.id
-                : devices[0].id
-
-            html5QrCode.start(
-                cameraId,
-                {
-                    fps: 20,
-                    qrbox: {
-                        width: 300,
-                        height: 300
-                    }
-                },
-                onScanSuccess
-            )
-
-        }
-
-    }).catch(err => {
-
-        console.log(err)
-
-    })
+    html5QrCode.start(
+        {
+            facingMode: "environment"
+        },
+        {
+            fps: 20,
+            qrbox: {
+                width: 300,
+                height: 300
+            }
+        },
+        onScanSuccess
+    )
 
 </script>
 
