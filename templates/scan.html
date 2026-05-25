@@ -5,23 +5,98 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Camera Test</title>
+<title>BonaEvents Scanner</title>
+
+<script src="https://unpkg.com/@zxing/browser@latest"></script>
 
 <style>
 
 body{
     margin:0;
-    background:black;
+    background:#0f0f0f;
+    font-family:Arial, sans-serif;
+    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+    min-height:100vh;
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    padding:20px;
+}
+
+.box{
+    background:#1a1a1a;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0px 0px 30px rgba(255,0,0,0.15);
+    text-align:center;
+}
+
+h1{
+    color:#ff1e1e;
+    margin-bottom:10px;
+    font-size:40px;
+}
+
+.subtitle{
+    color:#999;
+    margin-bottom:30px;
+    font-size:16px;
 }
 
 video{
     width:100%;
     max-width:500px;
     border-radius:20px;
+    border:3px solid #ff1e1e;
+    background:black;
+}
+
+#result{
+    margin-top:25px;
+    background:#111;
+    padding:20px;
+    border-radius:15px;
+    font-size:22px;
+    font-weight:bold;
+    min-height:30px;
+}
+
+.success{
+    color:#00ff88;
+}
+
+.error{
+    color:#ff4d4d;
+}
+
+.scanner-line{
+    width:100%;
+    height:4px;
+    background:#ff1e1e;
+    margin-top:20px;
+    border-radius:999px;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+    0%{
+        opacity:0.3;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0.3;
+    }
+
 }
 
 </style>
@@ -29,16 +104,38 @@ video{
 </head>
 <body>
 
-<video
-    id="video"
-    autoplay
-    playsinline
-    muted
-></video>
+<div class="container">
+
+    <div class="box">
+
+        <h1>BonaEvents Scanner 🎟️</h1>
+
+        <div class="subtitle">
+            Scannerizza il QR del ticket
+        </div>
+
+        <video
+            id="video"
+            autoplay
+            playsinline
+            muted
+        ></video>
+
+        <div class="scanner-line"></div>
+
+        <div id="result">
+            In attesa scansione...
+        </div>
+
+    </div>
+
+</div>
 
 <script>
 
 const video = document.getElementById("video")
+
+const resultDiv = document.getElementById("result")
 
 navigator.mediaDevices.getUserMedia({
 
@@ -52,13 +149,39 @@ navigator.mediaDevices.getUserMedia({
 
     video.srcObject = stream
 
+    const codeReader = new ZXing.BrowserQRCodeReader()
+
+    codeReader.decodeFromVideoElement(
+        video,
+        (result, err) => {
+
+            if (result) {
+
+                navigator.vibrate(200)
+
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        ✅ Ticket Valido<br><br>
+                        ${result.text}
+                    </div>
+                `
+
+            }
+
+        }
+    )
+
 })
 
 .catch(err => {
 
-    alert(err)
-
     console.log(err)
+
+    resultDiv.innerHTML = `
+        <div class="error">
+            ❌ Errore fotocamera
+        </div>
+    `
 
 })
 
