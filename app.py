@@ -7,9 +7,6 @@ import os
 app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
 
-USERNAME = "pr1"
-PASSWORD = "1234"
-
 DB_NAME = os.getenv("DB_NAME", "tickets.db")
 
 
@@ -20,22 +17,81 @@ def get_db_connection():
 
 
 def init_db():
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
+    # =========================
+    # TABELLA TICKETS
+    # =========================
     cursor.execute("""
+
         CREATE TABLE IF NOT EXISTS tickets (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             ticket_code TEXT UNIQUE NOT NULL,
+
             event TEXT NOT NULL,
+
             rate TEXT,
+
             customer TEXT,
+
             email TEXT,
+
             phone TEXT,
+
             used INTEGER DEFAULT 0,
+
             validated_at TEXT,
+
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
+
         )
+
+    """)
+
+    # =========================
+    # TABELLA USERS
+    # =========================
+    cursor.execute("""
+
+        CREATE TABLE IF NOT EXISTS users (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            username TEXT UNIQUE NOT NULL,
+
+            password TEXT NOT NULL,
+
+            role TEXT NOT NULL
+
+        )
+
+    """)
+
+    # =========================
+    # ADMIN DEFAULT
+    # =========================
+    cursor.execute("""
+
+        INSERT OR IGNORE INTO users (
+
+            username,
+            password,
+            role
+
+        )
+
+        VALUES (
+
+            'admin',
+            'admin123',
+            'admin'
+
+        )
+
     """)
 
     conn.commit()
@@ -45,25 +101,59 @@ def init_db():
 init_db()
 
 
+# =========================================
+# LOGIN
+# =========================================
 @app.route("/", methods=["GET", "POST"])
 def login():
+
     if request.method == "POST":
+
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if username == USERNAME and password == PASSWORD:
-            session["user"] = username
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+
+            SELECT * FROM users
+
+            WHERE username = ?
+            AND password = ?
+
+        """, (
+
+            username,
+            password
+
+        ))
+
+        user = cursor.fetchone()
+
+        conn.close()
+
+        if user:
+
+            session["user"] = user["username"]
+            session["role"] = user["role"]
+
             return redirect(url_for("dashboard"))
 
     return render_template("login.html")
 
 
+# =========================================
+# DASHBOARD
+# =========================================
 @app.route("/dashboard")
 def dashboard():
+
     if "user" not in session:
         return redirect(url_for("login"))
 
     events = [
+
         "Boat Party",
         "White Party",
         "La French",
@@ -72,17 +162,30 @@ def dashboard():
         "Azur Beach Party",
         "Bona Loca",
         "Sunset Rooftop"
+
     ]
 
-    return render_template("events.html", events=events)
+    return render_template(
+
+        "events.html",
+        events=events,
+        role=session.get("role"),
+        username=session.get("user")
+
+    )
 
 
+# =========================================
+# CREA TICKET
+# =========================================
 @app.route("/ticket/<event_name>", methods=["GET", "POST"])
 def ticket(event_name):
+
     if "user" not in session:
         return redirect(url_for("login"))
 
     if request.method == "POST":
+
         rate = request.form.get("rate")
         customer = request.form.get("customer")
         email = request.form.get("email")
@@ -92,27 +195,44 @@ def ticket(event_name):
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM tickets")
+
         total = cursor.fetchone()[0] + 1
 
         year = datetime.now().year
+
         ticket_code = f"BE-{year}-{total:06d}"
 
+        # =========================
+        # CREA QR CODE
+        # =========================
         qr = qrcode.QRCode(
             version=1,
             box_size=20,
             border=5
         )
+
         qr.add_data(ticket_code)
+
         qr.make(fit=True)
 
-        img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+        img = qr.make_image(
+            fill_color="black",
+            back_color="white"
+        ).convert("RGB")
 
         os.makedirs("static/qrcodes", exist_ok=True)
+
         qr_path = f"static/qrcodes/{ticket_code}.png"
+
         img.save(qr_path)
 
+        # =========================
+        # SALVA DATABASE
+        # =========================
         cursor.execute("""
+
             INSERT INTO tickets (
+
                 ticket_code,
                 event,
                 rate,
@@ -121,44 +241,69 @@ def ticket(event_name):
                 phone,
                 used,
                 validated_at
+
             )
+
             VALUES (?, ?, ?, ?, ?, ?, 0, NULL)
+
         """, (
+
             ticket_code,
             event_name,
             rate,
             customer,
             email,
             phone
+
         ))
 
         conn.commit()
         conn.close()
 
         return render_template(
+
             "success.html",
+
             ticket_code=ticket_code,
+
             qr_image=f"qrcodes/{ticket_code}.png",
+
             event=event_name,
+
             rate=rate,
+
             customer=customer,
+
             email=email,
+
             phone=phone
+
         )
 
-    return render_template("ticket.html", event_name=event_name)
+    return render_template(
+        "ticket.html",
+        event_name=event_name
+    )
 
 
+# =========================================
+# PAGINA SCANNER
+# =========================================
 @app.route("/scan")
 def scan():
+
     if "user" not in session:
         return redirect(url_for("login"))
 
     return render_template("scan.html")
 
 
+# =========================================
+# VALIDAZIONE TICKET
+# =========================================
 @app.route("/validate-ticket", methods=["POST"])
 def validate_ticket():
+
     if "user" not in session:
         return jsonify({
             "success": False,
@@ -166,10 +311,14 @@ def validate_ticket():
         }), 401
 
     data = request.get_json(silent=True)
+
     if not data or "ticket_code" not in data:
+
         return jsonify({
+
             "success": False,
             "message": "Codice ticket mancante"
+
         }), 400
 
     ticket_code = data["ticket_code"].strip()
@@ -177,53 +326,115 @@ def validate_ticket():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM tickets WHERE ticket_code = ?", (ticket_code,))
+    cursor.execute("""
+
+        SELECT * FROM tickets
+        WHERE ticket_code = ?
+
+    """, (ticket_code,))
+
     ticket = cursor.fetchone()
 
+    # =========================
+    # TICKET NON TROVATO
+    # =========================
     if not ticket:
+
         conn.close()
+
         return jsonify({
+
             "success": False,
             "status": "invalid",
             "message": "Ticket non valido"
+
         }), 404
 
     validated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    # =========================
+    # UPDATE ATOMICO
+    # =========================
     cursor.execute("""
+
         UPDATE tickets
-        SET used = 1, validated_at = ?
-        WHERE ticket_code = ? AND used = 0
-    """, (validated_at, ticket_code))
+
+        SET
+            used = 1,
+            validated_at = ?
+
+        WHERE
+            ticket_code = ?
+            AND used = 0
+
+    """, (
+
+        validated_at,
+        ticket_code
+
+    ))
 
     conn.commit()
 
+    # =========================
+    # GIÀ UTILIZZATO
+    # =========================
     if cursor.rowcount == 0:
-        cursor.execute("SELECT * FROM tickets WHERE ticket_code = ?", (ticket_code,))
+
+        cursor.execute("""
+
+            SELECT * FROM tickets
+            WHERE ticket_code = ?
+
+        """, (ticket_code,))
+
         ticket = cursor.fetchone()
+
         conn.close()
 
         return jsonify({
+
             "success": False,
+
             "status": "already_used",
+
             "message": "Ticket già convalidato",
+
             "ticket": {
+
                 "ticket_code": ticket["ticket_code"],
                 "event": ticket["event"],
                 "customer": ticket["customer"],
                 "validated_at": ticket["validated_at"]
+
             }
+
         }), 200
 
-    cursor.execute("SELECT * FROM tickets WHERE ticket_code = ?", (ticket_code,))
+    # =========================
+    # TICKET VALIDO
+    # =========================
+    cursor.execute("""
+
+        SELECT * FROM tickets
+        WHERE ticket_code = ?
+
+    """, (ticket_code,))
+
     updated_ticket = cursor.fetchone()
+
     conn.close()
 
     return jsonify({
+
         "success": True,
+
         "status": "valid",
+
         "message": "Ticket valido e convalidato correttamente",
+
         "ticket": {
+
             "ticket_code": updated_ticket["ticket_code"],
             "event": updated_ticket["event"],
             "customer": updated_ticket["customer"],
@@ -231,13 +442,20 @@ def validate_ticket():
             "email": updated_ticket["email"],
             "phone": updated_ticket["phone"],
             "validated_at": updated_ticket["validated_at"]
+
         }
+
     }), 200
 
 
+# =========================================
+# LOGOUT
+# =========================================
 @app.route("/logout")
 def logout():
+
     session.clear()
+
     return redirect(url_for("login"))
 
 
