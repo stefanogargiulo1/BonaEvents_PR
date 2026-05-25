@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS tickets (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
+    ticket_code TEXT,
+
     event TEXT,
     rate TEXT,
     customer TEXT,

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -61,14 +62,26 @@ def ticket(event_name):
         email = request.form.get("email")
         phone = request.form.get("phone")
 
-        # SALVA TICKET NEL DATABASE
+        # CONNESSIONE DATABASE
         conn = sqlite3.connect("tickets.db")
 
         cursor = conn.cursor()
 
+        # CONTA TICKET TOTALI
+        cursor.execute("SELECT COUNT(*) FROM tickets")
+
+        total = cursor.fetchone()[0] + 1
+
+        # CREA CODICE TICKET
+        year = datetime.now().year
+
+        ticket_code = f"BE-{year}-{total:06d}"
+
+        # SALVA TICKET NEL DATABASE
         cursor.execute("""
 
         INSERT INTO tickets (
+            ticket_code,
             event,
             rate,
             customer,
@@ -76,10 +89,11 @@ def ticket(event_name):
             phone
         )
 
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
 
         """, (
 
+            ticket_code,
             event_name,
             rate,
             customer,
@@ -94,6 +108,7 @@ def ticket(event_name):
 
         return render_template(
             "success.html",
+            ticket_code=ticket_code,
             event=event_name,
             rate=rate,
             customer=customer,
