@@ -160,11 +160,17 @@ def scan():
 @app.route("/validate-ticket", methods=["POST"])
 def validate_ticket():
     if "user" not in session:
-        return jsonify({"success": False, "message": "Non autorizzato"}), 401
+        return jsonify({
+            "success": False,
+            "message": "Non autorizzato"
+        }), 401
 
     data = request.get_json(silent=True)
     if not data or "ticket_code" not in data:
-        return jsonify({"success": False, "message": "Codice ticket mancante"}), 400
+        return jsonify({
+            "success": False,
+            "message": "Codice ticket mancante"
+        }), 400
 
     ticket_code = data["ticket_code"].strip()
 
