@@ -5,54 +5,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BonaEvents Scanner</title>
-
-<script src="https://unpkg.com/@zxing/browser@latest"></script>
+<title>Camera Test</title>
 
 <style>
 
 body{
     margin:0;
-    background:#0f0f0f;
-    font-family:Arial;
-    color:white;
+    background:black;
     display:flex;
     justify-content:center;
     align-items:center;
-    min-height:100vh;
-}
-
-.box{
-    width:100%;
-    max-width:500px;
-    background:#1a1a1a;
-    border-radius:25px;
-    padding:30px;
-    box-shadow:0px 0px 30px rgba(255,0,0,0.15);
-    text-align:center;
-}
-
-h1{
-    color:#ff1e1e;
+    height:100vh;
 }
 
 video{
     width:100%;
+    max-width:500px;
     border-radius:20px;
-    margin-top:20px;
-}
-
-#result{
-    margin-top:25px;
-    background:#111;
-    padding:20px;
-    border-radius:15px;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.success{
-    color:#00ff88;
 }
 
 </style>
@@ -60,85 +29,38 @@ video{
 </head>
 <body>
 
-<div class="box">
-
-    <h1>BonaEvents Scanner 🎟️</h1>
-
-    <video id="video"></video>
-
-    <div id="result">
-        In attesa scansione...
-    </div>
-
-</div>
+<video
+    id="video"
+    autoplay
+    playsinline
+    muted
+></video>
 
 <script>
 
-const resultDiv = document.getElementById("result")
+const video = document.getElementById("video")
 
-const codeReader = new ZXing.BrowserQRCodeReader()
+navigator.mediaDevices.getUserMedia({
 
-async function startScanner() {
-
-    try {
-
-        const videoInputDevices =
-            await ZXing.BrowserCodeReader.listVideoInputDevices()
-
-        console.log(videoInputDevices)
-
-        let selectedDeviceId = videoInputDevices[0].deviceId
-
-        // CERCA CAMERA POSTERIORE
-        videoInputDevices.forEach(device => {
-
-            if (
-                device.label.toLowerCase().includes('back') ||
-                device.label.toLowerCase().includes('rear')
-            ) {
-
-                selectedDeviceId = device.deviceId
-
-            }
-
-        })
-
-        codeReader.decodeFromVideoDevice(
-            selectedDeviceId,
-            'video',
-            (result, err) => {
-
-                if (result) {
-
-                    navigator.vibrate(200)
-
-                    resultDiv.innerHTML = `
-                        <div class="success">
-                            ✅ Ticket Valido<br><br>
-                            ${result.text}
-                        </div>
-                    `
-
-                }
-
-            }
-        )
-
-    } catch (err) {
-
-        console.error(err)
-
-        resultDiv.innerHTML = `
-            <div style="color:red">
-                ❌ Errore fotocamera
-            </div>
-        `
-
+    video: {
+        facingMode: "environment"
     }
 
-}
+})
 
-startScanner()
+.then(stream => {
+
+    video.srcObject = stream
+
+})
+
+.catch(err => {
+
+    alert(err)
+
+    console.log(err)
+
+})
 
 </script>
 
