@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea Ticket</title>
+
+    <style>
+
+        body{
+            margin:0;
+            background:#0f0f0f;
+            font-family:Arial;
+            color:white;
+        }
+
+        .container{
+            max-width:500px;
+            margin:auto;
+            padding:40px;
+        }
+
+        .box{
+            background:#1a1a1a;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0px 0px 20px rgba(255,0,0,0.15);
+        }
+
+        h1{
+            color:#ff1e1e;
+        }
+
+        input, select{
+            width:100%;
+            padding:15px;
+            margin-top:15px;
+            border:none;
+            border-radius:10px;
+            background:#111;
+            color:white;
+            box-sizing:border-box;
+        }
+
+        button{
+            width:100%;
+            padding:15px;
+            margin-top:20px;
+            border:none;
+            border-radius:10px;
+            background:#ff1e1e;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#cc0000;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="box">
+
+            <h1>{{ event_name }}</h1>
+
+            <form>
+
+                <select>
+
+                    <option>Female First Rate</option>
+                    <option>Female Second Rate</option>
+                    <option>Male First Rate</option>
+                    <option>Male Second Rate</option>
+
+                </select>
+
+                <input type="text" placeholder="Nome Cliente">
+
+                <input type="email" placeholder="Email Cliente">
+
+                <input type="text" placeholder="Telefono Cliente">
+
+                <button type="submit">
+                    CREA TICKET
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

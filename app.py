@@ -46,6 +46,16 @@ def dashboard():
 
     return render_template("events.html", events=events)
 
+@app.route("/ticket/<event_name>")
+def ticket(event_name):
+
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    return render_template(
+        "ticket.html",
+        event_name=event_name
+    )
 
 @app.route("/logout")
 def logout():
