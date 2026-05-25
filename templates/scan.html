@@ -1,204 +1,195 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BonaEvents Scanner</title>
+    <script src="https://unpkg.com/html5-qrcode" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
 
-<title>BonaEvents Scanner</title>
+        h1 {
+            margin-bottom: 10px;
+        }
 
-<script src="https://unpkg.com/@zxing/browser@latest"></script>
+        #reader {
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+        }
 
-<style>
+        #result {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-line;
+        }
 
-body{
-    margin:0;
-    background:#0f0f0f;
-    font-family:Arial, sans-serif;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-}
+        .waiting {
+            background: #334155;
+            color: #e2e8f0;
+        }
 
-.container{
-    width:100%;
-    max-width:500px;
-    padding:20px;
-}
+        .success {
+            background: #166534;
+            color: #dcfce7;
+        }
 
-.box{
-    background:#1a1a1a;
-    border-radius:25px;
-    padding:30px;
-    box-shadow:0px 0px 30px rgba(255,0,0,0.15);
-    text-align:center;
-}
+        .error {
+            background: #991b1b;
+            color: #fee2e2;
+        }
 
-h1{
-    color:#ff1e1e;
-    margin-bottom:10px;
-    font-size:40px;
-}
+        .warning {
+            background: #92400e;
+            color: #fef3c7;
+        }
 
-.subtitle{
-    color:#999;
-    margin-bottom:30px;
-    font-size:16px;
-}
+        button {
+            margin-top: 15px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 10px;
+            background: #3b82f6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-video{
-    width:100%;
-    border-radius:20px;
-    background:black;
-}
-
-#result{
-    margin-top:25px;
-    background:#111;
-    padding:20px;
-    border-radius:15px;
-    font-size:22px;
-    font-weight:bold;
-    min-height:30px;
-}
-
-.success{
-    color:#00ff88;
-}
-
-.error{
-    color:#ff4d4d;
-}
-
-.scanner-line{
-    width:100%;
-    height:4px;
-    background:#ff1e1e;
-    margin-top:20px;
-    border-radius:999px;
-    animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-
-    0%{
-        opacity:0.3;
-    }
-
-    50%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0.3;
-    }
-
-}
-
-</style>
-
+        button:hover {
+            background: #2563eb;
+        }
+    </style>
 </head>
 <body>
-
-<div class="container">
-
-    <div class="box">
-
+    <div class="container">
         <h1>BonaEvents Scanner 🎟️</h1>
+        <p>Scannerizza il QR del ticket</p>
 
-        <div class="subtitle">
-            Scannerizza il QR del ticket
-        </div>
+        <div id="reader"></div>
+        <div id="result" class="waiting">In attesa scansione...</div>
 
-        <video id="video"></video>
-
-        <div class="scanner-line"></div>
-
-        <div id="result">
-            In attesa scansione...
-        </div>
-
+        <button onclick="restartScanner()">Scansiona un altro ticket</button>
     </div>
 
-</div>
+    <script>
+        let html5QrCode;
+        let isProcessing = false;
 
-<script>
+        function setResult(message, type) {
+            const resultBox = document.getElementById("result");
+            resultBox.className = "";
+            resultBox.classList.add(type);
+            resultBox.textContent = message;
+        }
 
-const resultDiv = document.getElementById("result")
+        async function onScanSuccess(decodedText) {
+            if (isProcessing) return;
+            isProcessing = true;
 
-const codeReader = new ZXing.BrowserMultiFormatReader()
-
-async function startScanner() {
-
-    try {
-
-        const videoInputDevices =
-            await codeReader.listVideoInputDevices()
-
-        console.log(videoInputDevices)
-
-        let selectedDeviceId = videoInputDevices[0].deviceId
-
-        videoInputDevices.forEach(device => {
-
-            const label = device.label.toLowerCase()
-
-            if (
-                label.includes("back") ||
-                label.includes("rear") ||
-                label.includes("environment")
-            ) {
-
-                selectedDeviceId = device.deviceId
-
-            }
-
-        })
-
-        codeReader.decodeFromVideoDevice(
-            selectedDeviceId,
-            'video',
-            (result, err) => {
-
-                if (result) {
-
-                    navigator.vibrate(200)
-
-                    resultDiv.innerHTML = `
-                        <div class="success">
-                            ✅ Ticket Valido<br><br>
-                            ${result.text}
-                        </div>
-                    `
-
+            try {
+                if (html5QrCode) {
+                    await html5QrCode.stop();
                 }
 
+                setResult("Controllo ticket in corso...", "waiting");
+
+                const response = await fetch("/validate-ticket", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        ticket_code: decodedText
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.status === "valid") {
+                    setResult(
+                        "✅ TICKET VALIDO\n\n" +
+                        "Codice: " + data.ticket.ticket_code + "\n" +
+                        "Cliente: " + (data.ticket.customer || "-") + "\n" +
+                        "Evento: " + data.ticket.event + "\n" +
+                        "Validato alle: " + data.ticket.validated_at,
+                        "success"
+                    );
+                } else if (data.status === "already_used") {
+                    setResult(
+                        "⚠️ TICKET GIÀ UTILIZZATO\n\n" +
+                        "Codice: " + data.ticket.ticket_code + "\n" +
+                        "Cliente: " + (data.ticket.customer || "-") + "\n" +
+                        "Evento: " + data.ticket.event + "\n" +
+                        "Già validato alle: " + (data.ticket.validated_at || "-"),
+                        "warning"
+                    );
+                } else {
+                    setResult("❌ TICKET NON VALIDO", "error");
+                }
+            } catch (error) {
+                setResult("❌ Errore durante la validazione del ticket", "error");
             }
-        )
+        }
 
-    } catch (err) {
+        function onScanFailure(error) {
+        }
 
-        console.log(err)
+        async function startScanner() {
+            setResult("In attesa scansione...", "waiting");
 
-        resultDiv.innerHTML = `
-            <div class="error">
-                ❌ Errore fotocamera
-            </div>
-        `
+            html5QrCode = new Html5Qrcode("reader");
 
-    }
+            try {
+                await html5QrCode.start(
+                    { facingMode: "environment" },
+                    {
+                        fps: 10,
+                        qrbox: { width: 250, height: 250 }
+                    },
+                    onScanSuccess,
+                    onScanFailure
+                );
+            } catch (err) {
+                setResult("❌ Impossibile avviare la fotocamera", "error");
+            }
+        }
 
-}
+        async function restartScanner() {
+            isProcessing = false;
 
-window.addEventListener("load", () => {
+            try {
+                if (html5QrCode && html5QrCode.isScanning) {
+                    await html5QrCode.stop();
+                }
+            } catch (e) {
+            }
 
-    startScanner()
+            startScanner();
+        }
 
-})
-
-</script>
-
+        window.addEventListener("load", function () {
+            startScanner();
+        });
+    </script>
 </body>
 </html>
