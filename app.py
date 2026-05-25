@@ -81,6 +81,8 @@ def ticket(event_name):
                 # CREA QR CODE
         qr = qrcode.make(ticket_code)
 
+                # CREA CARTELLA SE NON ESISTE
+        os.makedirs("static/qrcodes", exist_ok=True)
         qr_path = f"static/qrcodes/{ticket_code}.png"
 
         qr.save(qr_path)
