@@ -5,4 +5,4 @@ flask-sqlalchemy
 qrcode[pil]
 flask-qrcode
 pillow
-opencv-python
+opencv-python-headless
