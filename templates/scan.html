@@ -2,89 +2,104 @@
 <html lang="it">
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BonaEvents Scanner</title>
+<title>BonaEvents Scanner</title>
 
-    <style>
+<script src="https://unpkg.com/@zxing/browser@latest"></script>
 
-        body{
-            margin:0;
-            background:#0f0f0f;
-            font-family:Arial;
-            color:white;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            min-height:100vh;
-        }
+<style>
 
-        .box{
-            width:100%;
-            max-width:500px;
-            background:#1a1a1a;
-            border-radius:25px;
-            padding:30px;
-            box-shadow:0px 0px 30px rgba(255,0,0,0.15);
-            text-align:center;
-        }
+body{
+    margin:0;
+    background:#0f0f0f;
+    font-family:Arial;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
 
-        h1{
-            color:#ff1e1e;
-        }
+.box{
+    width:100%;
+    max-width:500px;
+    background:#1a1a1a;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0px 0px 30px rgba(255,0,0,0.15);
+    text-align:center;
+}
 
-        .upload-btn{
+h1{
+    color:#ff1e1e;
+}
 
-            display:block;
-            width:100%;
-            padding:20px;
-            margin-top:30px;
-            background:#ff1e1e;
-            border:none;
-            border-radius:15px;
-            color:white;
-            font-size:20px;
-            font-weight:bold;
+video{
+    width:100%;
+    border-radius:20px;
+    margin-top:20px;
+}
 
-        }
+#result{
+    margin-top:25px;
+    background:#111;
+    padding:20px;
+    border-radius:15px;
+    font-size:22px;
+    font-weight:bold;
+}
 
-        input{
-            display:none;
-        }
+.success{
+    color:#00ff88;
+}
 
-    </style>
+</style>
 
 </head>
 <body>
 
-    <div class="box">
+<div class="box">
 
-        <h1>BonaEvents Scanner 🎟️</h1>
+    <h1>BonaEvents Scanner 🎟️</h1>
 
-        <form
-            action="/upload_scan"
-            method="POST"
-            enctype="multipart/form-data"
-        >
+    <video id="video"></video>
 
-            <label class="upload-btn">
-
-                SCANSIONA QR
-
-                <input
-                    type="file"
-                    name="file"
-                    accept="image/*"
-                    capture="environment"
-                    onchange="this.form.submit()"
-                >
-
-            </label>
-
-        </form>
-
+    <div id="result">
+        In attesa scansione...
     </div>
+
+</div>
+
+<script>
+
+const codeReader = new ZXing.BrowserQRCodeReader()
+
+const result = document.getElementById("result")
+
+codeReader.decodeFromVideoDevice(
+    null,
+    'video',
+    (resultScan, err) => {
+
+        if (resultScan) {
+
+            navigator.vibrate(200)
+
+            result.innerHTML = `
+                <div class="success">
+                    ✅ Ticket Valido<br><br>
+                    ${resultScan.text}
+                </div>
+            `
+
+        }
+
+    }
+)
+
+</script>
 
 </body>
 </html>
