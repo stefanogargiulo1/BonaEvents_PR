@@ -70,6 +70,9 @@
         <div class="info">
             
             <p><b>Ticket ID:</b> {{ ticket_code }}</p>
+            <br>
+
+<img src="{{ url_for('static', filename=qr_image) }}" width="200">
 
             <p><b>Evento:</b> {{ event }}</p>
 

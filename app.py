@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 from datetime import datetime
+import qrcode
+import os
 
 app = Flask(__name__)
 
@@ -76,6 +78,12 @@ def ticket(event_name):
         year = datetime.now().year
 
         ticket_code = f"BE-{year}-{total:06d}"
+                # CREA QR CODE
+        qr = qrcode.make(ticket_code)
+
+        qr_path = f"static/qrcodes/{ticket_code}.png"
+
+        qr.save(qr_path)
 
         # SALVA TICKET NEL DATABASE
         cursor.execute("""
@@ -109,6 +117,7 @@ def ticket(event_name):
         return render_template(
             "success.html",
             ticket_code=ticket_code,
+            qr_image=f"qrcodes/{ticket_code}.png",
             event=event_name,
             rate=rate,
             customer=customer,
