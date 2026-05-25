@@ -81,10 +81,11 @@
             background:#ff1e1e;
             margin-top:20px;
             border-radius:999px;
-            animation: pulse 1.5s infinite;
+            animation:pulse 1.5s infinite;
         }
 
         @keyframes pulse{
+
             0%{
                 opacity:0.3;
             }
@@ -96,6 +97,7 @@
             100%{
                 opacity:0.3;
             }
+
         }
 
     </style>
@@ -127,36 +129,52 @@
 
     <script>
 
-    function onScanSuccess(decodedText) {
+        const result = document.getElementById("result")
 
-        navigator.vibrate(200)
+        function onScanSuccess(decodedText, decodedResult) {
 
-        document.getElementById("result").innerHTML = `
-            <div class="success">
-                ✅ Ticket Valido<br><br>
-                ${decodedText}
-            </div>
-        `
+            navigator.vibrate(200)
 
-    }
+            result.innerHTML = `
+                <div class="success">
+                    ✅ Ticket Valido<br><br>
+                    ${decodedText}
+                </div>
+            `
 
-    const html5QrCode = new Html5Qrcode("reader")
+        }
 
-    html5QrCode.start(
-        {
-            facingMode: "environment"
-        },
-        {
-            fps: 20,
-            qrbox: {
-                width: 300,
-                height: 300
+        function onScanFailure(error) {
+        }
+
+        const html5QrCode = new Html5Qrcode("reader")
+
+        Html5Qrcode.getCameras().then(devices => {
+
+            if (devices.length) {
+
+                html5QrCode.start(
+                    {
+                        facingMode: "environment"
+                    },
+                    {
+                        fps: 10,
+                        qrbox: 250,
+                        aspectRatio: 1.0
+                    },
+                    onScanSuccess,
+                    onScanFailure
+                )
+
             }
-        },
-        onScanSuccess
-    )
 
-</script>
+        }).catch(err => {
+
+            console.log(err)
+
+        })
+
+    </script>
 
 </body>
 </html>
