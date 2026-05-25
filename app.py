@@ -86,8 +86,8 @@ def ticket(event_name):
         # CREA QR CODE MIGLIORATO
         qr = qrcode.QRCode(
             version=1,
-            box_size=15,
-            border=5
+            box_size=30,
+            border=10
         )
 
         qr.add_data(ticket_code)
@@ -97,7 +97,7 @@ def ticket(event_name):
         img = qr.make_image(
             fill_color="black",
             back_color="white"
-        )
+        ).convert("RGB")
 
         # CREA CARTELLA SE NON ESISTE
         os.makedirs("static/qrcodes", exist_ok=True)
