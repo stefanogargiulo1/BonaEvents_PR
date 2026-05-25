@@ -10,7 +10,7 @@ app.secret_key = "bonaevents_secret"
 USERNAME = "pr1"
 PASSWORD = "1234"
 
-DB_NAME = "tickets.db"
+DB_NAME = os.getenv("DB_NAME", "tickets.db")
 
 
 def get_db_connection():
@@ -188,8 +188,21 @@ def validate_ticket():
             "message": "Ticket non valido"
         }), 404
 
-    if ticket["used"] == 1:
+    validated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    cursor.execute("""
+        UPDATE tickets
+        SET used = 1, validated_at = ?
+        WHERE ticket_code = ? AND used = 0
+    """, (validated_at, ticket_code))
+
+    conn.commit()
+
+    if cursor.rowcount == 0:
+        cursor.execute("SELECT * FROM tickets WHERE ticket_code = ?", (ticket_code,))
+        ticket = cursor.fetchone()
         conn.close()
+
         return jsonify({
             "success": False,
             "status": "already_used",
@@ -202,15 +215,8 @@ def validate_ticket():
             }
         }), 200
 
-    validated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    cursor.execute("""
-        UPDATE tickets
-        SET used = 1, validated_at = ?
-        WHERE ticket_code = ?
-    """, (validated_at, ticket_code))
-
-    conn.commit()
+    cursor.execute("SELECT * FROM tickets WHERE ticket_code = ?", (ticket_code,))
+    updated_ticket = cursor.fetchone()
     conn.close()
 
     return jsonify({
@@ -218,13 +224,13 @@ def validate_ticket():
         "status": "valid",
         "message": "Ticket valido e convalidato correttamente",
         "ticket": {
-            "ticket_code": ticket["ticket_code"],
-            "event": ticket["event"],
-            "customer": ticket["customer"],
-            "rate": ticket["rate"],
-            "email": ticket["email"],
-            "phone": ticket["phone"],
-            "validated_at": validated_at
+            "ticket_code": updated_ticket["ticket_code"],
+            "event": updated_ticket["event"],
+            "customer": updated_ticket["customer"],
+            "rate": updated_ticket["rate"],
+            "email": updated_ticket["email"],
+            "phone": updated_ticket["phone"],
+            "validated_at": updated_ticket["validated_at"]
         }
     }), 200
 
