@@ -3,37 +3,99 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Scanner QR</title>
+    <title>Scanner Ticket</title>
 
     <script src="https://unpkg.com/html5-qrcode"></script>
 
     <style>
 
         body{
+            margin:0;
             background:#0f0f0f;
+            font-family:Arial, sans-serif;
             color:white;
-            font-family:Arial;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .container{
+            width:100%;
+            max-width:500px;
+            padding:20px;
+        }
+
+        .scanner-box{
+            background:#1a1a1a;
+            border-radius:25px;
+            padding:30px;
+            box-shadow:0px 0px 30px rgba(255,0,0,0.15);
             text-align:center;
-            padding-top:50px;
         }
 
         h1{
-            color:#00ff88;
+            color:#ff1e1e;
+            margin-bottom:10px;
+            font-size:32px;
+        }
+
+        .subtitle{
+            color:#999;
+            margin-bottom:30px;
+            font-size:15px;
         }
 
         #reader{
-            width:350px;
-            margin:auto;
-            background:white;
-            padding:20px;
+            width:100%;
+            overflow:hidden;
             border-radius:20px;
+            border:3px solid #ff1e1e;
+            background:white;
         }
 
         #result{
-            margin-top:30px;
-            font-size:25px;
+            margin-top:25px;
+            padding:20px;
+            border-radius:15px;
+            font-size:22px;
             font-weight:bold;
+            background:#111;
+            border:1px solid #2a2a2a;
+            min-height:30px;
+        }
+
+        .success{
+            color:#00ff88;
+        }
+
+        .error{
+            color:#ff4d4d;
+        }
+
+        .scanner-line{
+            width:100%;
+            height:4px;
+            background:#ff1e1e;
+            margin-top:20px;
+            border-radius:999px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse{
+            0%{
+                opacity:0.3;
+            }
+
+            50%{
+                opacity:1;
+            }
+
+            100%{
+                opacity:0.3;
+            }
         }
 
     </style>
@@ -41,30 +103,64 @@
 </head>
 <body>
 
-    <h1>Scanner Ticket 🎟️</h1>
+    <div class="container">
 
-    <div id="reader"></div>
+        <div class="scanner-box">
 
-    <div id="result"></div>
+            <h1>BonaEvents Scanner 🎟️</h1>
+
+            <div class="subtitle">
+                Scannerizza il QR del ticket
+            </div>
+
+            <div id="reader"></div>
+
+            <div class="scanner-line"></div>
+
+            <div id="result">
+                In attesa scansione...
+            </div>
+
+        </div>
+
+    </div>
 
     <script>
 
         function onScanSuccess(decodedText){
 
-            document.getElementById("result").innerHTML =
-            "✅ Ticket Scansionato:<br>" + decodedText
+            navigator.vibrate(200)
 
+            document.getElementById("result").innerHTML =
+            `<div class="success">
+                ✅ Ticket Scansionato<br><br>
+                ${decodedText}
+            </div>`
+
+        }
+
+        function onScanFailure(error){
         }
 
         let html5QrcodeScanner = new Html5QrcodeScanner(
             "reader",
             {
                 fps:10,
-                qrbox:250
-            }
+                qrbox:250,
+                rememberLastUsedCamera:true,
+
+                videoConstraints: {
+                    facingMode: { exact: "environment" }
+                }
+
+            },
+            false
         )
 
-        html5QrcodeScanner.render(onScanSuccess)
+        html5QrcodeScanner.render(
+            onScanSuccess,
+            onScanFailure
+        )
 
     </script>
 
