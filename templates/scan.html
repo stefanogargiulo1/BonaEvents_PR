@@ -7,7 +7,7 @@
 
     <title>BonaEvents Scanner</title>
 
-    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
 
     <style>
 
@@ -42,10 +42,8 @@
             margin-bottom:30px;
         }
 
-        video{
+        #reader{
             width:100%;
-            border-radius:20px;
-            border:3px solid #ff1e1e;
         }
 
         #result{
@@ -72,7 +70,7 @@
 
         <p>Scannerizza il QR del ticket</p>
 
-        <video id="preview"></video>
+        <div id="reader"></div>
 
         <div id="result">
             In attesa scansione...
@@ -82,41 +80,29 @@
 
     <script>
 
-        let scanner = new Instascan.Scanner({
-            video: document.getElementById('preview'),
-            mirror:false
-        })
-
-        scanner.addListener('scan', function(content) {
+        function onScanSuccess(decodedText) {
 
             navigator.vibrate(200)
 
             document.getElementById("result").innerHTML = `
                 <div class="success">
                     ✅ Ticket Valido<br><br>
-                    ${content}
+                    ${decodedText}
                 </div>
             `
 
-        })
+        }
 
-        Instascan.Camera.getCameras().then(function (cameras) {
-
-            if (cameras.length > 0) {
-
-                scanner.start(cameras[cameras.length - 1])
-
-            } else {
-
-                alert('Nessuna fotocamera trovata')
-
+        let scanner = new Html5QrcodeScanner(
+            "reader",
+            {
+                fps: 10,
+                qrbox: 250,
+                rememberLastUsedCamera: true
             }
+        )
 
-        }).catch(function (e) {
-
-            console.error(e)
-
-        })
+        scanner.render(onScanSuccess)
 
     </script>
 
