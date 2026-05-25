@@ -3,6 +3,7 @@ import sqlite3
 from datetime import datetime
 import qrcode
 import os
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -140,6 +141,13 @@ def logout():
 
     return redirect(url_for("login"))
 
+@app.route("/scan")
+def scan():
+
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("scan.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
