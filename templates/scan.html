@@ -5,30 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Scanner Ticket</title>
+    <title>BonaEvents Scanner</title>
 
-    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
     <style>
 
         body{
             margin:0;
             background:#0f0f0f;
-            font-family:Arial, sans-serif;
+            font-family:Arial;
             color:white;
-            min-height:100vh;
             display:flex;
             justify-content:center;
             align-items:center;
+            min-height:100vh;
         }
 
-        .container{
+        .box{
             width:100%;
             max-width:500px;
-            padding:20px;
-        }
-
-        .scanner-box{
             background:#1a1a1a;
             border-radius:25px;
             padding:30px;
@@ -39,65 +35,30 @@
         h1{
             color:#ff1e1e;
             margin-bottom:10px;
-            font-size:32px;
         }
 
-        .subtitle{
+        p{
             color:#999;
             margin-bottom:30px;
-            font-size:15px;
         }
 
-        #reader{
+        video{
             width:100%;
-            overflow:hidden;
             border-radius:20px;
             border:3px solid #ff1e1e;
-            background:white;
         }
 
         #result{
             margin-top:25px;
+            background:#111;
             padding:20px;
             border-radius:15px;
             font-size:22px;
             font-weight:bold;
-            background:#111;
-            border:1px solid #2a2a2a;
-            min-height:30px;
         }
 
         .success{
             color:#00ff88;
-        }
-
-        .error{
-            color:#ff4d4d;
-        }
-
-        .scanner-line{
-            width:100%;
-            height:4px;
-            background:#ff1e1e;
-            margin-top:20px;
-            border-radius:999px;
-            animation:pulse 1.5s infinite;
-        }
-
-        @keyframes pulse{
-
-            0%{
-                opacity:0.3;
-            }
-
-            50%{
-                opacity:1;
-            }
-
-            100%{
-                opacity:0.3;
-            }
-
         }
 
     </style>
@@ -105,77 +66,59 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="box">
 
-        <div class="scanner-box">
+        <h1>BonaEvents Scanner 🎟️</h1>
 
-            <h1>BonaEvents Scanner 🎟️</h1>
+        <p>Scannerizza il QR del ticket</p>
 
-            <div class="subtitle">
-                Scannerizza il QR del ticket
-            </div>
+        <video id="preview"></video>
 
-            <div id="reader"></div>
-
-            <div class="scanner-line"></div>
-
-            <div id="result">
-                In attesa scansione...
-            </div>
-
+        <div id="result">
+            In attesa scansione...
         </div>
 
     </div>
 
     <script>
 
-    function onScanSuccess(decodedText) {
+        let scanner = new Instascan.Scanner({
+            video: document.getElementById('preview'),
+            mirror:false
+        })
 
-        navigator.vibrate(200)
+        scanner.addListener('scan', function(content) {
 
-        document.getElementById("result").innerHTML = `
-            <div class="success">
-                ✅ Ticket Valido<br><br>
-                ${decodedText}
-            </div>
-        `
+            navigator.vibrate(200)
 
-    }
+            document.getElementById("result").innerHTML = `
+                <div class="success">
+                    ✅ Ticket Valido<br><br>
+                    ${content}
+                </div>
+            `
 
-    function onScanFailure(error) {
-    }
+        })
 
-    const scanner = new Html5QrcodeScanner(
-        "reader",
-        {
-            fps: 5,
-            qrbox: {
-                width: 300,
-                height: 300
-            },
+        Instascan.Camera.getCameras().then(function (cameras) {
 
-            aspectRatio: 1.0,
+            if (cameras.length > 0) {
 
-            rememberLastUsedCamera: true,
+                scanner.start(cameras[cameras.length - 1])
 
-            showTorchButtonIfSupported: true,
-            showZoomSliderIfSupported: true,
+            } else {
 
-            defaultZoomValueIfSupported: 2,
+                alert('Nessuna fotocamera trovata')
 
-            supportedScanTypes: [
-                Html5QrcodeScanType.SCAN_TYPE_CAMERA
-            ]
-        },
-        false
-    )
+            }
 
-    scanner.render(
-        onScanSuccess,
-        onScanFailure
-    )
+        }).catch(function (e) {
 
-</script>
+            console.error(e)
+
+        })
+
+    </script>
 
 </body>
 </html>
