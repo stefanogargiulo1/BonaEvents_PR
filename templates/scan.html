@@ -50,9 +50,7 @@ h1{
 
 video{
     width:100%;
-    max-width:500px;
     border-radius:20px;
-    border:3px solid #ff1e1e;
     background:black;
 }
 
@@ -114,12 +112,7 @@ video{
             Scannerizza il QR del ticket
         </div>
 
-        <video
-            id="video"
-            autoplay
-            playsinline
-            muted
-        ></video>
+        <video id="video"></video>
 
         <div class="scanner-line"></div>
 
@@ -141,11 +134,14 @@ async function startScanner() {
 
     try {
 
-        const devices = await ZXing.BrowserCodeReader.listVideoInputDevices()
+        const videoInputDevices =
+            await codeReader.listVideoInputDevices()
 
-        let selectedDeviceId = devices[0].deviceId
+        console.log(videoInputDevices)
 
-        devices.forEach(device => {
+        let selectedDeviceId = videoInputDevices[0].deviceId
+
+        videoInputDevices.forEach(device => {
 
             const label = device.label.toLowerCase()
 
@@ -182,13 +178,13 @@ async function startScanner() {
             }
         )
 
-    } catch(err) {
+    } catch (err) {
 
         console.log(err)
 
         resultDiv.innerHTML = `
             <div class="error">
-                ❌ Errore scanner
+                ❌ Errore fotocamera
             </div>
         `
 
@@ -196,7 +192,11 @@ async function startScanner() {
 
 }
 
-startScanner()
+window.addEventListener("load", () => {
+
+    startScanner()
+
+})
 
 </script>
 
