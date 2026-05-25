@@ -133,57 +133,70 @@ video{
 
 <script>
 
-const video = document.getElementById("video")
-
 const resultDiv = document.getElementById("result")
 
-navigator.mediaDevices.getUserMedia({
+const codeReader = new ZXing.BrowserMultiFormatReader()
 
-    video: {
-        facingMode: "environment"
-    }
+async function startScanner() {
 
-})
+    try {
 
-.then(stream => {
+        const devices = await ZXing.BrowserCodeReader.listVideoInputDevices()
 
-    video.srcObject = stream
+        let selectedDeviceId = devices[0].deviceId
 
-    const codeReader = new ZXing.BrowserQRCodeReader()
+        devices.forEach(device => {
 
-    codeReader.decodeFromVideoElement(
-        video,
-        (result, err) => {
+            const label = device.label.toLowerCase()
 
-            if (result) {
+            if (
+                label.includes("back") ||
+                label.includes("rear") ||
+                label.includes("environment")
+            ) {
 
-                navigator.vibrate(200)
-
-                resultDiv.innerHTML = `
-                    <div class="success">
-                        ✅ Ticket Valido<br><br>
-                        ${result.text}
-                    </div>
-                `
+                selectedDeviceId = device.deviceId
 
             }
 
-        }
-    )
+        })
 
-})
+        codeReader.decodeFromVideoDevice(
+            selectedDeviceId,
+            'video',
+            (result, err) => {
 
-.catch(err => {
+                if (result) {
 
-    console.log(err)
+                    navigator.vibrate(200)
 
-    resultDiv.innerHTML = `
-        <div class="error">
-            ❌ Errore fotocamera
-        </div>
-    `
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            ✅ Ticket Valido<br><br>
+                            ${result.text}
+                        </div>
+                    `
 
-})
+                }
+
+            }
+        )
+
+    } catch(err) {
+
+        console.log(err)
+
+        resultDiv.innerHTML = `
+            <div class="error">
+                ❌ Errore scanner
+            </div>
+        `
+
+    }
+
+}
+
+startScanner()
 
 </script>
 
