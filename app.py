@@ -46,16 +46,34 @@ def dashboard():
 
     return render_template("events.html", events=events)
 
-@app.route("/ticket/<event_name>")
+
+@app.route("/ticket/<event_name>", methods=["GET", "POST"])
 def ticket(event_name):
 
     if "user" not in session:
         return redirect(url_for("login"))
 
+    if request.method == "POST":
+
+        rate = request.form.get("rate")
+        customer = request.form.get("customer")
+        email = request.form.get("email")
+        phone = request.form.get("phone")
+
+        return render_template(
+            "success.html",
+            event=event_name,
+            rate=rate,
+            customer=customer,
+            email=email,
+            phone=phone
+        )
+
     return render_template(
         "ticket.html",
         event_name=event_name
     )
+
 
 @app.route("/logout")
 def logout():

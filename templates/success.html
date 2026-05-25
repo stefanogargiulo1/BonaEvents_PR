@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Creato</title>
+
+    <style>
+
+        body{
+            margin:0;
+            background:#0f0f0f;
+            font-family:Arial;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .box{
+            background:#1a1a1a;
+            padding:40px;
+            border-radius:20px;
+            width:400px;
+            box-shadow:0px 0px 20px rgba(255,0,0,0.15);
+            text-align:center;
+        }
+
+        h1{
+            color:#00ff88;
+        }
+
+        p{
+            color:#ccc;
+        }
+
+        .info{
+            margin-top:20px;
+            text-align:left;
+            background:#111;
+            padding:20px;
+            border-radius:10px;
+        }
+
+        a{
+            display:block;
+            margin-top:25px;
+            background:#ff1e1e;
+            padding:15px;
+            border-radius:10px;
+            text-decoration:none;
+            color:white;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="box">
+
+        <h1>✅ Ticket Creato</h1>
+
+        <p>
+            Il ticket è stato creato con successo.
+        </p>
+
+        <div class="info">
+
+            <p><b>Evento:</b> {{ event }}</p>
+
+            <p><b>Rate:</b> {{ rate }}</p>
+
+            <p><b>Cliente:</b> {{ customer }}</p>
+
+            <p><b>Email:</b> {{ email }}</p>
+
+            <p><b>Telefono:</b> {{ phone }}</p>
+
+        </div>
+
+        <a href="/dashboard">
+            TORNA EVENTI
+        </a>
+
+    </div>
+
+</body>
+</html>
