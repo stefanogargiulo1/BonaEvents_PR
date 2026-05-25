@@ -79,14 +79,29 @@ def ticket(event_name):
         year = datetime.now().year
 
         ticket_code = f"BE-{year}-{total:06d}"
-                # CREA QR CODE
-        qr = qrcode.make(ticket_code)
 
-                # CREA CARTELLA SE NON ESISTE
+        # CREA QR CODE MIGLIORATO
+        qr = qrcode.QRCode(
+            version=1,
+            box_size=15,
+            border=5
+        )
+
+        qr.add_data(ticket_code)
+
+        qr.make(fit=True)
+
+        img = qr.make_image(
+            fill_color="black",
+            back_color="white"
+        )
+
+        # CREA CARTELLA SE NON ESISTE
         os.makedirs("static/qrcodes", exist_ok=True)
+
         qr_path = f"static/qrcodes/{ticket_code}.png"
 
-        qr.save(qr_path)
+        img.save(qr_path)
 
         # SALVA TICKET NEL DATABASE
         cursor.execute("""
@@ -141,6 +156,7 @@ def logout():
 
     return redirect(url_for("login"))
 
+
 @app.route("/scan")
 def scan():
 
@@ -148,6 +164,7 @@ def scan():
         return redirect(url_for("login"))
 
     return render_template("scan.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
