@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+import sqlite3
 
 app = Flask(__name__)
 
@@ -60,6 +61,37 @@ def ticket(event_name):
         email = request.form.get("email")
         phone = request.form.get("phone")
 
+        # SALVA TICKET NEL DATABASE
+        conn = sqlite3.connect("tickets.db")
+
+        cursor = conn.cursor()
+
+        cursor.execute("""
+
+        INSERT INTO tickets (
+            event,
+            rate,
+            customer,
+            email,
+            phone
+        )
+
+        VALUES (?, ?, ?, ?, ?)
+
+        """, (
+
+            event_name,
+            rate,
+            customer,
+            email,
+            phone
+
+        ))
+
+        conn.commit()
+
+        conn.close()
+
         return render_template(
             "success.html",
             event=event_name,
@@ -81,3 +113,7 @@ def logout():
     session.clear()
 
     return redirect(url_for("login"))
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
