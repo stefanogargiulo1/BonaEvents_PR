@@ -74,30 +74,71 @@ video{
 
 <script>
 
+const resultDiv = document.getElementById("result")
+
 const codeReader = new ZXing.BrowserQRCodeReader()
 
-const result = document.getElementById("result")
+async function startScanner() {
 
-codeReader.decodeFromVideoDevice(
-    null,
-    'video',
-    (resultScan, err) => {
+    try {
 
-        if (resultScan) {
+        const videoInputDevices =
+            await ZXing.BrowserCodeReader.listVideoInputDevices()
 
-            navigator.vibrate(200)
+        console.log(videoInputDevices)
 
-            result.innerHTML = `
-                <div class="success">
-                    ✅ Ticket Valido<br><br>
-                    ${resultScan.text}
-                </div>
-            `
+        let selectedDeviceId = videoInputDevices[0].deviceId
 
-        }
+        // CERCA CAMERA POSTERIORE
+        videoInputDevices.forEach(device => {
+
+            if (
+                device.label.toLowerCase().includes('back') ||
+                device.label.toLowerCase().includes('rear')
+            ) {
+
+                selectedDeviceId = device.deviceId
+
+            }
+
+        })
+
+        codeReader.decodeFromVideoDevice(
+            selectedDeviceId,
+            'video',
+            (result, err) => {
+
+                if (result) {
+
+                    navigator.vibrate(200)
+
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            ✅ Ticket Valido<br><br>
+                            ${result.text}
+                        </div>
+                    `
+
+                }
+
+            }
+        )
+
+    } catch (err) {
+
+        console.error(err)
+
+        resultDiv.innerHTML = `
+            <div style="color:red">
+                ❌ Errore fotocamera
+            </div>
+        `
 
     }
-)
+
+}
+
+startScanner()
 
 </script>
 
