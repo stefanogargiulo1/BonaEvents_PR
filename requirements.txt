@@ -3,3 +3,4 @@ gunicorn
 flask-login
 flask-sqlalchemy
 qrcode[pil]
+flask-qrcode
