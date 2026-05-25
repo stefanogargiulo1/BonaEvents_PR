@@ -6,7 +6,6 @@
     <title>Login PR</title>
 
     <style>
-
         body{
             margin:0;
             background:#0f0f0f;
@@ -74,17 +73,41 @@
             font-size:14px;
         }
 
-    </style>
+        .msg{
+            margin-top:15px;
+            padding:12px;
+            border-radius:10px;
+            font-size:14px;
+            text-align:center;
+        }
 
+        .error{
+            background:#7f1d1d;
+            color:#fecaca;
+            border:1px solid #ef4444;
+        }
+
+        .links{
+            text-align:center;
+            margin-top:18px;
+            font-size:14px;
+        }
+
+        .links a{
+            color:#ff6b6b;
+            text-decoration:none;
+        }
+
+        .links a:hover{
+            text-decoration:underline;
+        }
+    </style>
 </head>
 <body>
-
     <div class="login-box">
-
         <h1>BonaEvents PR 🔥</h1>
 
         <form method="POST">
-
             <input 
                 type="text" 
                 name="username"
@@ -102,14 +125,19 @@
             <button type="submit">
                 LOGIN
             </button>
-
         </form>
+
+        {% if error %}
+        <div class="msg error">{{ error }}</div>
+        {% endif %}
+
+        <div class="links">
+            <a href="{{ url_for('register') }}">Registrati come PR / Scanner</a>
+        </div>
 
         <div class="footer">
             Powered by BonaEvents
         </div>
-
     </div>
-
 </body>
 </html>

@@ -3,104 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventi</title>
-
+    <title>Dashboard - BonaEvents</title>
     <style>
-
-        body{
-            margin:0;
-            background:#0f0f0f;
-            font-family:Arial;
-            color:white;
-        }
-
-        .navbar{
-            background:#151515;
-            padding:20px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            border-bottom:1px solid #222;
-        }
-
-        .logo{
-            color:#ff1e1e;
-            font-size:24px;
-            font-weight:bold;
-        }
-
-        .container{
-            padding:40px;
-        }
-
-        .cards{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:20px;
-        }
-
-        .card{
-            background:#1a1a1a;
-            padding:25px;
-            border-radius:20px;
-            border:1px solid #222;
-            transition:0.2s;
-            cursor:pointer;
-            text-decoration:none;
-            color:white;
-        }
-
-        .card:hover{
-            transform:translateY(-5px);
-            border:1px solid #ff1e1e;
-        }
-
-        h2{
-            color:#ff1e1e;
-        }
-
+        body{font-family:Arial,sans-serif;background:#0f172a;color:#fff;margin:0;padding:24px}
+        .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+        .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px}
+        .card{background:#1e293b;padding:20px;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+        .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;color:#fff;font-weight:bold;margin-top:10px}
+        .blue{background:#2563eb}.green{background:#16a34a}.amber{background:#d97706}.red{background:#dc2626}.slate{background:#475569}
+        .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+        .muted{color:#cbd5e1}
     </style>
-
 </head>
 <body>
-
-    <div class="navbar">
-
-        <div class="logo">
-            BonaEvents PR 🔥
-        </div>
-
+    <div class="top">
         <div>
-            <a href="/logout" style="color:white;text-decoration:none;">
-                Logout
-            </a>
+            <h1>Ciao {{ username }}</h1>
+            <div class="muted">Ruolo: {{ role }}</div>
         </div>
-
+        <div class="actions">
+            {% if role == 'admin' %}
+            <a class="btn amber" href="{{ url_for('admin_users') }}">Gestione utenti</a>
+            {% endif %}
+            {% if role in ['admin','scanner'] %}
+            <a class="btn green" href="{{ url_for('scan') }}">Apri scanner</a>
+            {% endif %}
+            <a class="btn red" href="{{ url_for('logout') }}">Logout</a>
+        </div>
     </div>
 
-    <div class="container">
-
-        <h1>Eventi Disponibili</h1>
-
-        <div class="cards">
-
-            {% for event in events %}
-
-            <a class="card" href="/ticket/{{ event }}">
-
-                <h2>{{ event }}</h2>
-
-                <p>
-                    Clicca per creare ticket
-                </p>
-
-            </a>
-
-            {% endfor %}
-
+    {% if role in ['admin','pr'] %}
+    <div class="cards">
+        {% for event in events %}
+        <div class="card">
+            <h3>{{ event }}</h3>
+            <p class="muted">Crea un nuovo ticket per questo evento.</p>
+            <a class="btn blue" href="{{ url_for('ticket', event_name=event) }}">Crea ticket</a>
         </div>
-
+        {% endfor %}
     </div>
-
+    {% else %}
+    <div class="card" style="margin-top:24px">
+        <h3>Account scanner</h3>
+        <p class="muted">Il tuo profilo è abilitato alla sola scansione e validazione dei ticket.</p>
+        <a class="btn green" href="{{ url_for('scan') }}">Vai allo scanner</a>
+    </div>
+    {% endif %}
 </body>
 </html>

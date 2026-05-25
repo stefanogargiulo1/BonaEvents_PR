@@ -3,94 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Creato</title>
-
+    <title>Ticket creato</title>
     <style>
-
-        body{
-            margin:0;
-            background:#0f0f0f;
-            font-family:Arial;
-            color:white;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-        }
-
-        .box{
-            background:#1a1a1a;
-            padding:40px;
-            border-radius:20px;
-            width:400px;
-            box-shadow:0px 0px 20px rgba(255,0,0,0.15);
-            text-align:center;
-        }
-
-        h1{
-            color:#00ff88;
-        }
-
-        p{
-            color:#ccc;
-        }
-
-        .info{
-            margin-top:20px;
-            text-align:left;
-            background:#111;
-            padding:20px;
-            border-radius:10px;
-        }
-
-        a{
-            display:block;
-            margin-top:25px;
-            background:#ff1e1e;
-            padding:15px;
-            border-radius:10px;
-            text-decoration:none;
-            color:white;
-            font-weight:bold;
-        }
-
+        body{font-family:Arial,sans-serif;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:20px}
+        .box{background:#1e293b;padding:30px;border-radius:18px;width:100%;max-width:560px;text-align:center}
+        img{max-width:280px;background:#fff;padding:12px;border-radius:12px;margin:18px auto}
+        .info{text-align:left;background:#0f172a;padding:16px;border-radius:12px}
+        a{display:inline-block;margin-top:16px;padding:12px 16px;border-radius:10px;background:#2563eb;color:#fff;text-decoration:none;font-weight:bold}
     </style>
-
 </head>
 <body>
-
     <div class="box">
-
-        <h1>✅ Ticket Creato</h1>
-
-        <p>
-            Il ticket è stato creato con successo.
-        </p>
-
+        <h1>Ticket creato con successo</h1>
+        <p>Codice ticket: <strong>{{ ticket_code }}</strong></p>
+        <img src="{{ url_for('static', filename=qr_image) }}" alt="QR Ticket">
         <div class="info">
-            
-            <p><b>Ticket ID:</b> {{ ticket_code }}</p>
-            <br>
-
-<img src="{{ url_for('static', filename=qr_image) }}" width="200">
-
-            <p><b>Evento:</b> {{ event }}</p>
-
-            <p><b>Rate:</b> {{ rate }}</p>
-
-            <p><b>Cliente:</b> {{ customer }}</p>
-
-            <p><b>Email:</b> {{ email }}</p>
-
-            <p><b>Telefono:</b> {{ phone }}</p>
-
+            <p><strong>Evento:</strong> {{ event }}</p>
+            <p><strong>Tariffa:</strong> {{ rate }}</p>
+            <p><strong>Cliente:</strong> {{ customer }}</p>
+            <p><strong>Email:</strong> {{ email or '-' }}</p>
+            <p><strong>Telefono:</strong> {{ phone or '-' }}</p>
         </div>
-
-        <a href="/dashboard">
-            TORNA EVENTI
-        </a>
-
+        <a href="{{ url_for('dashboard') }}">Torna dashboard</a>
     </div>
-
 </body>
 </html>

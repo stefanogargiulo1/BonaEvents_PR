@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utenti - Admin</title>
+    <style>
+        body{font-family:Arial,sans-serif;background:#0f172a;color:#fff;margin:0;padding:24px}
+        table{width:100%;border-collapse:collapse;background:#1e293b;border-radius:16px;overflow:hidden}
+        th,td{padding:14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+        th{background:#172554}
+        .btn{padding:8px 12px;border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:bold}
+        .green{background:#16a34a}.red{background:#dc2626}.slate{background:#475569}
+        .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+        .badge{padding:6px 10px;border-radius:999px;font-size:12px;font-weight:bold}
+        .pending{background:#78350f;color:#fde68a}.approved{background:#14532d;color:#bbf7d0}.rejected{background:#7f1d1d;color:#fecaca}
+        form{display:inline}
+        a{color:#93c5fd;text-decoration:none}
+    </style>
+</head>
+<body>
+    <div class="top">
+        <h1>Gestione utenti</h1>
+        <a href="{{ url_for('dashboard') }}">Torna dashboard</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Ruolo</th>
+                <th>Stato</th>
+                <th>Creato</th>
+                <th>Approvato</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <span class="badge {{ user.status }}">{{ user.status }}</span>
+                </td>
+                <td>{{ user.created_at or '-' }}</td>
+                <td>{{ user.approved_at or '-' }}</td>
+                <td>
+                    {% if user.username != 'admin' %}
+                    <form method="POST" action="{{ url_for('approve_user', user_id=user.id) }}">
+                        <button class="btn green" type="submit">Approva</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('reject_user', user_id=user.id) }}">
+                        <button class="btn red" type="submit">Rifiuta</button>
+                    </form>
+                    {% else %}
+                    <span class="badge approved">Protetto</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

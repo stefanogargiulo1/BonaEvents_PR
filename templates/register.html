@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione - BonaEvents</title>
+    <style>
+        body{font-family:Arial,sans-serif;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
+        .box{background:#1f2937;padding:30px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);width:100%;max-width:460px}
+        input,select,button{width:100%;padding:14px;border-radius:10px;border:none;margin-top:12px;box-sizing:border-box}
+        input,select{background:#f8fafc}
+        button{background:#16a34a;color:#fff;font-weight:bold;cursor:pointer}
+        .msg{margin-top:12px;padding:12px;border-radius:10px}
+        .err{background:#7f1d1d;color:#fecaca}
+        .ok{background:#14532d;color:#bbf7d0}
+        a{color:#93c5fd;text-decoration:none}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Registrazione account</h1>
+        <p>Crea un account PR oppure Scanner. L'admin dovrà approvarlo.</p>
+        {% if error %}<div class="msg err">{{ error }}</div>{% endif %}
+        {% if success %}<div class="msg ok">{{ success }}</div>{% endif %}
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <select name="role" required>
+                <option value="">Seleziona ruolo</option>
+                <option value="pr">PR</option>
+                <option value="scanner">Scanner</option>
+            </select>
+            <button type="submit">Invia registrazione</button>
+        </form>
+        <p style="margin-top:16px"><a href="{{ url_for('login') }}">Torna al login</a></p>
+    </div>
+</body>
+</html>
