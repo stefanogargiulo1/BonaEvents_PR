@@ -80,31 +80,68 @@
 
     <script>
 
-        function onScanSuccess(decodedText) {
+    const result = document.getElementById("result")
 
-            navigator.vibrate(200)
+    function onScanSuccess(decodedText, decodedResult) {
 
-            document.getElementById("result").innerHTML = `
-                <div class="success">
-                    ✅ Ticket Valido<br><br>
-                    ${decodedText}
+        navigator.vibrate(200)
+
+        result.innerHTML = `
+            <div class="success">
+                ✅ Ticket Valido<br><br>
+                ${decodedText}
+            </div>
+        `
+
+    }
+
+    function onScanFailure(error) {
+
+        console.log(error)
+
+    }
+
+    window.addEventListener("load", () => {
+
+        const html5QrCode = new Html5Qrcode("reader")
+
+        Html5Qrcode.getCameras().then(cameras => {
+
+            if (cameras && cameras.length) {
+
+                let cameraId = cameras[cameras.length - 1].id
+
+                html5QrCode.start(
+                    cameraId,
+                    {
+                        fps: 10,
+                        qrbox: {
+                            width: 250,
+                            height: 250
+                        },
+                        aspectRatio: 1.0
+                    },
+                    onScanSuccess,
+                    onScanFailure
+                )
+
+            }
+
+        }).catch(err => {
+
+            console.log(err)
+
+            result.innerHTML = `
+                <div style="color:red;">
+                    ❌ Errore fotocamera
                 </div>
             `
 
-        }
+        })
 
-        let scanner = new Html5QrcodeScanner(
-            "reader",
-            {
-                fps: 10,
-                qrbox: 250,
-                rememberLastUsedCamera: true
-            }
-        )
+    })
 
-        scanner.render(onScanSuccess)
-
-    </script>
+</script>
 
 </body>
 </html>
