@@ -83,8 +83,8 @@ def orders_create_webhook():
 
         for i in range(quantity):
 
-            cursor.execute("SELECT COUNT(*) FROM tickets")
-            total = cursor.fetchone()[0] + 1
+            cursor.execute("SELECT COUNT(*) AS count FROM tickets")
+            total = cursor.fetchone()["count"] + 1
 
             year = datetime.now().year
             ticket_code = f"BE-{year}-{total:06d}"
@@ -120,7 +120,7 @@ def orders_create_webhook():
                     used,
                     validated_at
                 )
-                VALUES (?, ?, ?, ?, ?, ?, 0, NULL)
+                VALUES (%s, %s, %s, %s, %s, %s, 0, NULL)
             """, (
                 ticket_code,
                 event_name,
@@ -199,23 +199,24 @@ def init_db():
 
 
     cursor.execute("""
-        INSERT OR IGNORE INTO users (
-            id,
-            username,
-            password,
-            role,
-            status,
-            approved_at
-        )
-        VALUES (
-            1,
-            'admin',
-            'admin123',
-            'admin',
-            'approved',
-            CURRENT_TIMESTAMP
-        )
-    """)
+    INSERT INTO users (
+        id,
+        username,
+        password,
+        role,
+        status,
+        approved_at
+    )
+    VALUES (
+        1,
+        'admin',
+        'admin123',
+        'admin',
+        'approved',
+        CURRENT_TIMESTAMP
+    )
+    ON CONFLICT (username) DO NOTHING
+""")
 
     cursor.execute("""
         UPDATE users
@@ -297,7 +298,7 @@ def login():
 
         cursor.execute("""
             SELECT * FROM users
-            WHERE username = ? AND password = ?
+            WHERE username = %s AND password = %s
         """, (username, password))
 
         user = cursor.fetchone()
@@ -340,7 +341,7 @@ def register():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
         existing_user = cursor.fetchone()
 
         if existing_user:
@@ -355,7 +356,7 @@ def register():
                 status,
                 approved_at
             )
-            VALUES (?, ?, ?, 'pending', NULL)
+            VALUES (%s, %s, %s, 'pending', NULL)
         """, (username, password, role))
 
         conn.commit()
@@ -429,7 +430,7 @@ def approve_user(user_id):
         UPDATE users
         SET status = 'approved',
             approved_at = CURRENT_TIMESTAMP
-        WHERE id = ? AND username != 'admin'
+        WHERE id = %s AND username != 'admin'
     """, (user_id,))
 
     conn.commit()
@@ -453,7 +454,7 @@ def reject_user(user_id):
         UPDATE users
         SET status = 'rejected',
             approved_at = NULL
-        WHERE id = ? AND username != 'admin'
+        WHERE id = %s AND username != 'admin'
     """, (user_id,))
 
     conn.commit()
@@ -475,7 +476,7 @@ def delete_user(user_id):
 
     cursor.execute("""
         DELETE FROM users
-        WHERE id = ? AND username != 'admin'
+        WHERE id = %s AND username != 'admin'
     """, (user_id,))
 
     conn.commit()
@@ -501,8 +502,8 @@ def ticket(event_name):
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT COUNT(*) FROM tickets")
-        total = cursor.fetchone()[0] + 1
+        cursor.execute("SELECT COUNT(*) AS count FROM tickets")
+        total = cursor.fetchone()["count"] + 1
 
         year = datetime.now().year
         ticket_code = f"BE-{year}-{total:06d}"
@@ -535,7 +536,7 @@ def ticket(event_name):
                 used,
                 validated_at
             )
-            VALUES (?, ?, ?, ?, ?, ?, 0, NULL)
+            VALUES (%s, %s, %s, %s, %s, %s, 0, NULL)
         """, (
             ticket_code,
             event_name,
@@ -631,7 +632,7 @@ def validate_ticket():
 
     cursor.execute("""
         SELECT * FROM tickets
-        WHERE ticket_code = ?
+        WHERE ticket_code = %s
     """, (ticket_code,))
     ticket = cursor.fetchone()
 
@@ -649,9 +650,9 @@ def validate_ticket():
         UPDATE tickets
         SET
             used = 1,
-            validated_at = ?
+            validated_at = %s
         WHERE
-            ticket_code = ?
+            ticket_code = %s
             AND used = 0
     """, (
         validated_at,
@@ -663,7 +664,7 @@ def validate_ticket():
     if cursor.rowcount == 0:
         cursor.execute("""
             SELECT * FROM tickets
-            WHERE ticket_code = ?
+            WHERE ticket_code = %s
         """, (ticket_code,))
         ticket = cursor.fetchone()
         conn.close()
@@ -682,7 +683,7 @@ def validate_ticket():
 
     cursor.execute("""
         SELECT * FROM tickets
-        WHERE ticket_code = ?
+        WHERE ticket_code = %s
     """, (ticket_code,))
     updated_ticket = cursor.fetchone()
 
@@ -741,7 +742,7 @@ def import_shopify_csv():
                     variant,
                     price
                 )
-                VALUES (?, ?, ?, ?, ?)
+                VALUES (%s, %s, %s, %s, %s)
             """, (
                 title,
                 handle,
