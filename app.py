@@ -12,7 +12,8 @@ app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
 
 
-DB_NAME = os.getenv("DB_NAME", "tickets.db")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_NAME = os.getenv("DB_NAME", os.path.join(BASE_DIR, "tickets.db"))
 SHOPIFY_STORE = os.getenv("SHOPIFY_STORE", "bonaeventsapp.myshopify.com").replace("https://", "").replace("http://", "").strip().strip("/")
 SHOPIFY_ADMIN_TOKEN = os.getenv("SHOPIFY_ADMIN_TOKEN", "")
 SHOPIFY_API_VERSION = os.getenv("SHOPIFY_API_VERSION", "2026-04")
