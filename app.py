@@ -507,6 +507,7 @@ def ticket(event_name):
         customer = request.form.get("customer")
         email = request.form.get("email")
         phone = request.form.get("phone")
+        pr_username = session.get("user")
 
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -542,10 +543,11 @@ def ticket(event_name):
                 customer,
                 email,
                 phone,
+                pr_username,
                 used,
                 validated_at
             )
-            VALUES (%s, %s, %s, %s, %s, %s, 0, NULL)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, 0, NULL)
         """, (
             ticket_code,
             event_name,
@@ -553,6 +555,7 @@ def ticket(event_name):
             customer,
             email,
             phone
+            pr_username
         ))
 
         conn.commit()
