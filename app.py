@@ -178,8 +178,10 @@ def init_db():
             ALTER TABLE tickets
             ADD COLUMN pr_username TEXT
         """)
+        conn.commit()
+
     except:
-        pass
+        conn.rollback()
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
