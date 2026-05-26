@@ -166,11 +166,20 @@ def init_db():
             customer TEXT,
             email TEXT,
             phone TEXT,
+            pr_username TEXT,
             used INTEGER DEFAULT 0,
             validated_at TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
     """)
+    
+    try:
+        cursor.execute("""
+            ALTER TABLE tickets
+            ADD COLUMN pr_username TEXT
+        """)
+    except:
+        pass
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
