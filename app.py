@@ -9,8 +9,16 @@ import base64
 import base64
 import csv
 
+from flask_sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+print("DATABASE_URL:", os.getenv("DATABASE_URL"))
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
