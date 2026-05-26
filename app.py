@@ -163,7 +163,7 @@ def init_db():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tickets (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             ticket_code TEXT UNIQUE NOT NULL,
             event TEXT NOT NULL,
             rate TEXT,
@@ -178,7 +178,7 @@ def init_db():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             username TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL,
             role TEXT NOT NULL,
@@ -190,7 +190,7 @@ def init_db():
        
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS events (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             title TEXT NOT NULL,
             handle TEXT,
             image TEXT,
