@@ -3,24 +3,25 @@ import sqlite3
 from datetime import datetime
 import qrcode
 import os
+import requests
 
 app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
 
 DB_NAME = os.getenv("DB_NAME", "tickets.db")
-
+SHOPIFY_STORE = os.getenv("SHOPIFY_STORE", "bonaeventsapp.myshopify.com").replace("https://", "").replace("http://", "").strip().strip("/")
+SHOPIFY_ADMIN_TOKEN = os.getenv("SHOPIFY_ADMIN_TOKEN", "")
+SHOPIFY_API_VERSION = os.getenv("SHOPIFY_API_VERSION", "2026-04")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
     conn.row_factory = sqlite3.Row
     return conn
 
-
 def column_exists(cursor, table_name, column_name):
     cursor.execute(f"PRAGMA table_info({table_name})")
     columns = cursor.fetchall()
     return any(col[1] == column_name for col in columns)
-
 
 def init_db():
     conn = get_db_connection()
@@ -90,25 +91,53 @@ def init_db():
     conn.commit()
     conn.close()
 
-
 def is_logged_in():
     return "user" in session
-
 
 def is_admin():
     return session.get("role") == "admin"
 
-
 def can_create_tickets():
     return session.get("role") in ["admin", "pr"]
-
 
 def can_scan_tickets():
     return session.get("role") in ["admin", "scanner"]
 
+def fetch_shopify_events():
+    if not SHOPIFY_ADMIN_TOKEN or not SHOPIFY_STORE:
+        return []
+
+    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/graphql.json"
+    query = """
+    query {
+      products(first: 50, sortKey: CREATED_AT, reverse: true) {
+        nodes {
+          id
+          title
+          handle
+          featuredImage {
+            url
+          }
+        }
+      }
+    }
+    """
+
+    headers = {
+        "X-Shopify-Access-Token": SHOPIFY_ADMIN_TOKEN,
+        "Content-Type": "application/json"
+    }
+
+    try:
+        r = requests.post(url, json={"query": query}, headers=headers, timeout=15)
+        r.raise_for_status()
+        data = r.json()
+        nodes = data.get("data", {}).get("products", {}).get("nodes", [])
+        return [n.get("title") for n in nodes if n.get("title")]
+    except Exception:
+        return []
 
 init_db()
-
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -146,7 +175,6 @@ def login():
         return redirect(url_for("dashboard"))
 
     return render_template("login.html")
-
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -192,22 +220,23 @@ def register():
 
     return render_template("register.html")
 
-
 @app.route("/dashboard")
 def dashboard():
     if not is_logged_in():
         return redirect(url_for("login"))
 
-    events = [
-        "Boat Party",
-        "White Party",
-        "La French",
-        "Foam Madness",
-        "Pool Party",
-        "Azur Beach Party",
-        "Bona Loca",
-        "Sunset Rooftop"
-    ]
+    events = fetch_shopify_events()
+    if not events:
+        events = [
+            "Boat Party",
+            "White Party",
+            "La French",
+            "Foam Madness",
+            "Pool Party",
+            "Azur Beach Party",
+            "Bona Loca",
+            "Sunset Rooftop"
+        ]
 
     return render_template(
         "events.html",
@@ -215,7 +244,6 @@ def dashboard():
         role=session.get("role"),
         username=session.get("user")
     )
-
 
 @app.route("/admin/users")
 def admin_users():
@@ -244,7 +272,6 @@ def admin_users():
 
     return render_template("admin_users.html", users=users)
 
-
 @app.route("/admin/users/<int:user_id>/approve", methods=["POST"])
 def approve_user(user_id):
     if not is_logged_in():
@@ -267,7 +294,6 @@ def approve_user(user_id):
     conn.close()
 
     return redirect(url_for("admin_users"))
-
 
 @app.route("/admin/users/<int:user_id>/reject", methods=["POST"])
 def reject_user(user_id):
@@ -292,6 +318,26 @@ def reject_user(user_id):
 
     return redirect(url_for("admin_users"))
 
+@app.route("/admin/users/<int:user_id>/delete", methods=["POST"])
+def delete_user(user_id):
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM users
+        WHERE id = ? AND username != 'admin'
+    """, (user_id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("admin_users"))
 
 @app.route("/ticket/<event_name>", methods=["GET", "POST"])
 def ticket(event_name):
@@ -373,7 +419,6 @@ def ticket(event_name):
         event_name=event_name
     )
 
-
 @app.route("/scan")
 def scan():
     if not is_logged_in():
@@ -383,7 +428,6 @@ def scan():
         return redirect(url_for("dashboard"))
 
     return render_template("scan.html")
-
 
 @app.route("/validate-ticket", methods=["POST"])
 def validate_ticket():
@@ -486,12 +530,14 @@ def validate_ticket():
         }
     }), 200
 
-
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("login"))
 
+@app.route("/shopify/callback")
+def shopify_callback():
+    return "Shopify callback OK"
 
 if __name__ == "__main__":
     app.run(debug=True)
