@@ -9,7 +9,8 @@ import json
 import hmac
 import hashlib
 import base64
-
+import base64
+import csv
 
 app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
@@ -88,6 +89,19 @@ def init_db():
             approved_at TEXT
         )
     """)
+       
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            handle TEXT,
+            image TEXT,
+            variant TEXT,
+            price REAL,
+            inventory INTEGER DEFAULT 0,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
 
     if not column_exists(cursor, "users", "status"):
         cursor.execute("ALTER TABLE users ADD COLUMN status TEXT DEFAULT 'approved'")
@@ -145,139 +159,44 @@ def can_scan_tickets():
 
 def fetch_shopify_events():
 
-    if not SHOPIFY_STOREFRONT_TOKEN or not SHOPIFY_STORE:
-        print("SHOPIFY_STOREFRONT_TOKEN_MISSING")
-        return []
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-    url = f"https://{SHOPIFY_STORE}/api/{SHOPIFY_API_VERSION}/graphql.json"
+    cursor.execute("""
+        SELECT *
+        FROM events
+        ORDER BY title ASC
+    """)
 
-    query = """
-    {
-      products(first: 20) {
-        edges {
-          node {
-            title
-            handle
+    rows = cursor.fetchall()
 
-            images(first: 1) {
-              edges {
-                node {
-                  url
-                }
-              }
+    conn.close()
+
+    grouped = {}
+
+    for row in rows:
+
+        title = row["title"]
+
+        if title not in grouped:
+
+            grouped[title] = {
+                "title": row["title"],
+                "handle": row["handle"],
+                "image": row["image"],
+                "variants": []
             }
 
-            variants(first: 20) {
-              edges {
-                node {
-                  title
-                  price {
-                    amount
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    """
+        grouped[title]["variants"].append({
+            "title": row["variant"],
+            "price": row["price"]
+        })
 
-    payload = json.dumps({
-        "query": query
-    }).encode("utf-8")
-
-    req = urlrequest.Request(
-        url,
-        data=payload,
-        method="POST"
-    )
-
-    req.add_header(
-        "X-Shopify-Storefront-Access-Token",
-        SHOPIFY_STOREFRONT_TOKEN
-    )
-
-    req.add_header(
-        "Content-Type",
-        "application/json"
-    )
-
-    try:
-
-        print("SHOPIFY_URL:", url)
-        print("TOKEN_PRESENT:", bool(SHOPIFY_STOREFRONT_TOKEN))
-
-        with urlrequest.urlopen(req, timeout=15) as resp:
-
-            raw = resp.read().decode("utf-8")
-
-            print("SHOPIFY_RAW:", raw)
-
-            data = json.loads(raw)
-
-            print("SHOPIFY_RESPONSE:", data)
-
-            events = []
-
-            products = data.get("data", {}).get("products", {}).get("edges", [])
-
-            for item in products:
-
-                product = item["node"]
-
-                event = {
-                    "title": product.get("title"),
-                    "handle": product.get("handle"),
-                    "image": None,
-                    "variants": []
-                }
-
-                images = product.get("images", {}).get("edges", [])
-
-                if images:
-                    event["image"] = images[0]["node"]["url"]
-
-                variants = product.get("variants", {}).get("edges", [])
-
-                for variant in variants:
-
-                    v = variant["node"]
-
-                    event["variants"].append({
-                        "title": v.get("title"),
-                        "price": v.get("price", {}).get("amount")
-                    })
-
-                events.append(event)
-
-            print("SHOPIFY_EVENTS_FOUND:", len(events))
-            print("SHOPIFY_EVENTS:", events)
-
-            return events
-
-    except Exception as e:
-
-        print("SHOPIFY_STOREFRONT_ERROR:", type(e).__name__, e)
-
-        return []
-
-    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/products.json?limit=250"
-    req = urlrequest.Request(url, method="GET")
-    req.add_header("X-Shopify-Access-Token", SHOPIFY_ADMIN_TOKEN)
-
-    try:
-        with urlrequest.urlopen(req, timeout=15) as resp:
-            raw = resp.read().decode("utf-8")
-            data = json.loads(raw)
-            print("SHOPIFY_SHOP_OK:", data.get("shop", {}).get("name"))
-            return [data.get("shop", {}).get("name", "OK")]
-    except Exception as e:
-        print("SHOPIFY_FETCH_ERROR:", type(e).__name__, e)
-        return []
+    return list(grouped.values())
 
 
 init_db()
+
 print("DB_PATH:", DB_NAME)
 
 
@@ -672,6 +591,59 @@ def validate_ticket():
         }
     }), 200
 
+@app.route("/import-shopify-csv")
+def import_shopify_csv():
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    csv_path = "PRODOTTI.csv"
+
+    imported = 0
+
+    with open(csv_path, newline='', encoding='utf-8') as csvfile:
+
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+
+            title = row.get("Title", "").strip()
+            handle = row.get("Handle", "").strip()
+            variant = row.get("Option1 Value", "").strip()
+            price = row.get("Variant Price", "0").strip()
+            image = row.get("Image Src", "").strip()
+
+            if not title:
+                continue
+
+            try:
+                price = float(price)
+            except:
+                price = 0
+
+            cursor.execute("""
+                INSERT INTO events (
+                    title,
+                    handle,
+                    image,
+                    variant,
+                    price
+                )
+                VALUES (?, ?, ?, ?, ?)
+            """, (
+                title,
+                handle,
+                image,
+                variant,
+                price
+            ))
+
+            imported += 1
+
+    conn.commit()
+    conn.close()
+
+    return f"Import completato. Eventi importati: {imported}"
 
 @app.route("/logout")
 def logout():
