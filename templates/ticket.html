@@ -4,27 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea Ticket</title>
+
     <style>
-        body{font-family:Arial,sans-serif;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:20px}
-        .box{background:#1f2937;padding:30px;border-radius:18px;width:100%;max-width:520px}
-        input,button{width:100%;padding:14px;border-radius:10px;border:none;margin-top:12px;box-sizing:border-box}
-        input{background:#f8fafc}
-        button{background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
-        a{color:#93c5fd;text-decoration:none}
+
+        body{
+            font-family:Arial,sans-serif;
+            background:#111827;
+            color:#fff;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-height:100vh;
+            margin:0;
+            padding:20px;
+        }
+
+        .box{
+            background:#1f2937;
+            padding:30px;
+            border-radius:18px;
+            width:100%;
+            max-width:520px;
+            box-shadow:0 0 25px rgba(0,0,0,0.4);
+        }
+
+        h1{
+            margin-top:0;
+            margin-bottom:10px;
+            font-size:42px;
+        }
+
+        p{
+            color:#cbd5e1;
+            margin-bottom:20px;
+        }
+
+        input,
+        select,
+        button{
+            width:100%;
+            padding:14px;
+            border-radius:10px;
+            border:none;
+            margin-top:12px;
+            box-sizing:border-box;
+            font-size:15px;
+        }
+
+        input,
+        select{
+            background:#f8fafc;
+            color:#111827;
+        }
+
+        select{
+            cursor:pointer;
+        }
+
+        button{
+            background:#2563eb;
+            color:#fff;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+            transform:translateY(-2px);
+        }
+
+        a{
+            color:#93c5fd;
+            text-decoration:none;
+        }
+
+        .back{
+            margin-top:18px;
+        }
+
     </style>
+
 </head>
+
 <body>
+
     <div class="box">
+
         <h1>{{ event_name }}</h1>
-        <p>Inserisci i dati del cliente per generare il ticket.</p>
+
+        <p>
+            Inserisci i dati del cliente per generare il ticket.
+        </p>
+
         <form method="POST">
-            <input type="text" name="rate" placeholder="Tariffa" required>
-            <input type="text" name="customer" placeholder="Nome cliente" required>
-            <input type="email" name="email" placeholder="Email">
-            <input type="text" name="phone" placeholder="Telefono">
-            <button type="submit">Genera ticket</button>
+
+            <select name="rate" required>
+
+                <option value="">
+                    Seleziona tariffa
+                </option>
+
+                {% for variant in variants %}
+
+                <option value="{{ variant.variant }}">
+
+                    {{ variant.variant }} - €{{ variant.price }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <input
+                type="text"
+                name="customer"
+                placeholder="Nome cliente"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email"
+            >
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="Telefono"
+            >
+
+            <button type="submit">
+                Genera ticket
+            </button>
+
         </form>
-        <p style="margin-top:16px"><a href="{{ url_for('dashboard') }}">Torna dashboard</a></p>
+
+        <p class="back">
+            <a href="{{ url_for('dashboard') }}">
+                Torna dashboard
+            </a>
+        </p>
+
     </div>
+
 </body>
 </html>
