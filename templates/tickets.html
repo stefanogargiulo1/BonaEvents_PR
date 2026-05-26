@@ -181,6 +181,7 @@
                     <th>Codice</th>
                     <th>Evento</th>
                     <th>Cliente</th>
+                    <th>PR</th>
                     <th>Tariffa</th>
                     <th>Email</th>
                     <th>Telefono</th>
@@ -205,6 +206,10 @@
 
                     <td>
                         {{ ticket.customer or '-' }}
+                    </td>
+
+                    <td>
+                        {{ ticket.pr_username or '-' }}
                     </td>
 
                     <td>
