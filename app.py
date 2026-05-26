@@ -272,9 +272,9 @@ def dashboard():
     if not is_logged_in():
         return redirect(url_for("login"))
 
-
     events = fetch_shopify_events()
-
+    print("DASHBOARD_EVENTS:", events)
+    print("DASHBOARD_EVENTS_COUNT:", len(events))
 
     return render_template(
         "events.html",
