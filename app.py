@@ -3,9 +3,6 @@ import sqlite3
 from datetime import datetime
 import qrcode
 import os
-from urllib import request as urlrequest
-from urllib.error import HTTPError, URLError
-import json
 import hmac
 import hashlib
 import base64
@@ -45,6 +42,94 @@ def products_create_webhook():
 
     payload = request.get_json(silent=True) or {}
     print("WEBHOOK_PRODUCTS_CREATE:", payload)
+    return "OK", 200
+@app.route("/webhooks/orders-create", methods=["POST"])
+def orders_create_webhook():
+
+    payload = request.get_json(silent=True) or {}
+
+    print("NEW_ORDER_WEBHOOK:", payload)
+
+    customer = payload.get("customer", {}) or {}
+
+    customer_name = (
+        f"{customer.get('first_name', '')} "
+        f"{customer.get('last_name', '')}"
+    ).strip()
+
+    email = customer.get("email", "")
+    phone = customer.get("phone", "")
+
+    line_items = payload.get("line_items", [])
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    generated = []
+
+    for item in line_items:
+
+        event_name = item.get("title", "Evento")
+        variant_name = item.get("variant_title", "Standard")
+
+        quantity = int(item.get("quantity", 1))
+
+        for i in range(quantity):
+
+            cursor.execute("SELECT COUNT(*) FROM tickets")
+            total = cursor.fetchone()[0] + 1
+
+            year = datetime.now().year
+            ticket_code = f"BE-{year}-{total:06d}"
+
+            qr = qrcode.QRCode(
+                version=1,
+                box_size=20,
+                border=5
+            )
+
+            qr.add_data(ticket_code)
+            qr.make(fit=True)
+
+            img = qr.make_image(
+                fill_color="black",
+                back_color="white"
+            ).convert("RGB")
+
+            os.makedirs("static/qrcodes", exist_ok=True)
+
+            qr_path = f"static/qrcodes/{ticket_code}.png"
+
+            img.save(qr_path)
+
+            cursor.execute("""
+                INSERT INTO tickets (
+                    ticket_code,
+                    event,
+                    rate,
+                    customer,
+                    email,
+                    phone,
+                    used,
+                    validated_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, 0, NULL)
+            """, (
+                ticket_code,
+                event_name,
+                variant_name,
+                customer_name,
+                email,
+                phone
+            ))
+
+            generated.append(ticket_code)
+
+    conn.commit()
+    conn.close()
+
+    print("TICKETS_GENERATED:", generated)
+
     return "OK", 200
 
 def get_db_connection():
