@@ -121,36 +121,16 @@ def fetch_shopify_events():
         print("SHOPIFY_TOKEN_OR_STORE_MISSING")
         return []
 
-    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/graphql.json"
-    query = """
-    query {
-      products(first: 50, sortKey: CREATED_AT, reverse: true) {
-        nodes {
-          id
-          title
-          handle
-          featuredImage {
-            url
-          }
-        }
-      }
-    }
-    """
-
-    payload = json.dumps({"query": query}).encode("utf-8")
-    req = urlrequest.Request(url, data=payload, method="POST")
+    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/shop.json"
+    req = urlrequest.Request(url, method="GET")
     req.add_header("X-Shopify-Access-Token", SHOPIFY_ADMIN_TOKEN)
-    req.add_header("Content-Type", "application/json")
 
     try:
         with urlrequest.urlopen(req, timeout=15) as resp:
             raw = resp.read().decode("utf-8")
             data = json.loads(raw)
-            if "errors" in data:
-                print("SHOPIFY_ERRORS:", data["errors"])
-            nodes = data.get("data", {}).get("products", {}).get("nodes", [])
-            print("SHOPIFY_NODES:", len(nodes))
-            return [n.get("title") for n in nodes if n.get("title")]
+            print("SHOPIFY_SHOP_OK:", data.get("shop", {}).get("name"))
+            return [data.get("shop", {}).get("name", "OK")]
     except Exception as e:
         print("SHOPIFY_FETCH_ERROR:", type(e).__name__, e)
         return []
