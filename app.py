@@ -205,46 +205,54 @@ def fetch_shopify_events():
 
     try:
 
+        print("SHOPIFY_URL:", url)
+        print("TOKEN_PRESENT:", bool(SHOPIFY_STOREFRONT_TOKEN))
+
         with urlrequest.urlopen(req, timeout=15) as resp:
 
             raw = resp.read().decode("utf-8")
 
+            print("SHOPIFY_RAW:", raw)
+
             data = json.loads(raw)
+
+            print("SHOPIFY_RESPONSE:", data)
 
             events = []
 
-            products = data["data"]["products"]["edges"]
+            products = data.get("data", {}).get("products", {}).get("edges", [])
 
             for item in products:
 
                 product = item["node"]
 
                 event = {
-                    "title": product["title"],
-                    "handle": product["handle"],
+                    "title": product.get("title"),
+                    "handle": product.get("handle"),
                     "image": None,
                     "variants": []
                 }
 
-                images = product["images"]["edges"]
+                images = product.get("images", {}).get("edges", [])
 
                 if images:
                     event["image"] = images[0]["node"]["url"]
 
-                variants = product["variants"]["edges"]
+                variants = product.get("variants", {}).get("edges", [])
 
                 for variant in variants:
 
                     v = variant["node"]
 
                     event["variants"].append({
-                        "title": v["title"],
-                        "price": v["price"]["amount"]
+                        "title": v.get("title"),
+                        "price": v.get("price", {}).get("amount")
                     })
 
                 events.append(event)
 
             print("SHOPIFY_EVENTS_FOUND:", len(events))
+            print("SHOPIFY_EVENTS:", events)
 
             return events
 
