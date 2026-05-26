@@ -35,7 +35,6 @@ def init_db():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tickets (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,7 +50,6 @@ def init_db():
         )
     """)
 
-
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,18 +62,14 @@ def init_db():
         )
     """)
 
-
     if not column_exists(cursor, "users", "status"):
         cursor.execute("ALTER TABLE users ADD COLUMN status TEXT DEFAULT 'approved'")
-
 
     if not column_exists(cursor, "users", "created_at"):
         cursor.execute("ALTER TABLE users ADD COLUMN created_at TEXT DEFAULT CURRENT_TIMESTAMP")
 
-
     if not column_exists(cursor, "users", "approved_at"):
         cursor.execute("ALTER TABLE users ADD COLUMN approved_at TEXT")
-
 
     cursor.execute("""
         INSERT OR IGNORE INTO users (
@@ -96,13 +90,11 @@ def init_db():
         )
     """)
 
-
     cursor.execute("""
         UPDATE users
         SET role = 'admin', status = 'approved'
         WHERE username = 'admin'
     """)
-
 
     conn.commit()
     conn.close()
@@ -129,7 +121,6 @@ def fetch_shopify_events():
         print("SHOPIFY_TOKEN_OR_STORE_MISSING")
         return []
 
-
     url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/graphql.json"
     query = """
     query {
@@ -146,12 +137,10 @@ def fetch_shopify_events():
     }
     """
 
-
     payload = json.dumps({"query": query}).encode("utf-8")
     req = urlrequest.Request(url, data=payload, method="POST")
     req.add_header("X-Shopify-Access-Token", SHOPIFY_ADMIN_TOKEN)
     req.add_header("Content-Type", "application/json")
-
 
     try:
         with urlrequest.urlopen(req, timeout=15) as resp:
@@ -167,50 +156,44 @@ def fetch_shopify_events():
         return []
 
 
+init_db()
+print("DB_PATH:", DB_NAME)
+
+
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "").strip()
 
-
         conn = get_db_connection()
         cursor = conn.cursor()
-
 
         cursor.execute("""
             SELECT * FROM users
             WHERE username = ? AND password = ?
         """, (username, password))
 
-
         user = cursor.fetchone()
         conn.close()
-
 
         if not user:
             return render_template("login.html", error="Credenziali non valide")
 
-
         if user["status"] == "pending":
             return render_template("login.html", error="Account in attesa di approvazione")
-
 
         if user["status"] == "rejected":
             return render_template("login.html", error="Account rifiutato dall'amministratore")
 
-
         if user["status"] != "approved":
             return render_template("login.html", error="Account non autorizzato")
-
 
         session["user"] = user["username"]
         session["role"] = user["role"]
         session["user_id"] = user["id"]
 
-
         return redirect(url_for("dashboard"))
-
 
     return render_template("login.html")
 
@@ -222,26 +205,21 @@ def register():
         password = request.form.get("password", "").strip()
         role = request.form.get("role", "").strip().lower()
 
-
         if not username or not password or role not in ["pr", "scanner"]:
             return render_template(
                 "register.html",
                 error="Compila tutti i campi e scegli un ruolo valido"
             )
 
-
         conn = get_db_connection()
         cursor = conn.cursor()
-
 
         cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
         existing_user = cursor.fetchone()
 
-
         if existing_user:
             conn.close()
             return render_template("register.html", error="Username già esistente")
-
 
         cursor.execute("""
             INSERT INTO users (
@@ -254,16 +232,13 @@ def register():
             VALUES (?, ?, ?, 'pending', NULL)
         """, (username, password, role))
 
-
         conn.commit()
         conn.close()
-
 
         return render_template(
             "register.html",
             success="Registrazione inviata. Account in attesa di approvazione admin."
         )
-
 
     return render_template("register.html")
 
@@ -290,14 +265,11 @@ def admin_users():
     if not is_logged_in():
         return redirect(url_for("login"))
 
-
     if not is_admin():
         return redirect(url_for("dashboard"))
 
-
     conn = get_db_connection()
     cursor = conn.cursor()
-
 
     cursor.execute("""
         SELECT * FROM users
@@ -313,7 +285,6 @@ def admin_users():
     users = cursor.fetchall()
     conn.close()
 
-
     return render_template("admin_users.html", users=users)
 
 
@@ -322,14 +293,11 @@ def approve_user(user_id):
     if not is_logged_in():
         return redirect(url_for("login"))
 
-
     if not is_admin():
         return redirect(url_for("dashboard"))
 
-
     conn = get_db_connection()
     cursor = conn.cursor()
-
 
     cursor.execute("""
         UPDATE users
@@ -338,10 +306,8 @@ def approve_user(user_id):
         WHERE id = ? AND username != 'admin'
     """, (user_id,))
 
-
     conn.commit()
     conn.close()
-
 
     return redirect(url_for("admin_users"))
 
@@ -351,14 +317,11 @@ def reject_user(user_id):
     if not is_logged_in():
         return redirect(url_for("login"))
 
-
     if not is_admin():
         return redirect(url_for("dashboard"))
 
-
     conn = get_db_connection()
     cursor = conn.cursor()
-
 
     cursor.execute("""
         UPDATE users
@@ -367,10 +330,8 @@ def reject_user(user_id):
         WHERE id = ? AND username != 'admin'
     """, (user_id,))
 
-
     conn.commit()
     conn.close()
-
 
     return redirect(url_for("admin_users"))
 
@@ -380,24 +341,19 @@ def delete_user(user_id):
     if not is_logged_in():
         return redirect(url_for("login"))
 
-
     if not is_admin():
         return redirect(url_for("dashboard"))
 
-
     conn = get_db_connection()
     cursor = conn.cursor()
-
 
     cursor.execute("""
         DELETE FROM users
         WHERE id = ? AND username != 'admin'
     """, (user_id,))
 
-
     conn.commit()
     conn.close()
-
 
     return redirect(url_for("admin_users"))
 
@@ -407,10 +363,8 @@ def ticket(event_name):
     if not is_logged_in():
         return redirect(url_for("login"))
 
-
     if not can_create_tickets():
         return redirect(url_for("dashboard"))
-
 
     if request.method == "POST":
         rate = request.form.get("rate")
@@ -418,18 +372,14 @@ def ticket(event_name):
         email = request.form.get("email")
         phone = request.form.get("phone")
 
-
         conn = get_db_connection()
         cursor = conn.cursor()
-
 
         cursor.execute("SELECT COUNT(*) FROM tickets")
         total = cursor.fetchone()[0] + 1
 
-
         year = datetime.now().year
         ticket_code = f"BE-{year}-{total:06d}"
-
 
         qr = qrcode.QRCode(
             version=1,
@@ -439,17 +389,14 @@ def ticket(event_name):
         qr.add_data(ticket_code)
         qr.make(fit=True)
 
-
         img = qr.make_image(
             fill_color="black",
             back_color="white"
         ).convert("RGB")
 
-
         os.makedirs("static/qrcodes", exist_ok=True)
         qr_path = f"static/qrcodes/{ticket_code}.png"
         img.save(qr_path)
-
 
         cursor.execute("""
             INSERT INTO tickets (
@@ -472,10 +419,8 @@ def ticket(event_name):
             phone
         ))
 
-
         conn.commit()
         conn.close()
-
 
         return render_template(
             "success.html",
@@ -488,7 +433,6 @@ def ticket(event_name):
             phone=phone
         )
 
-
     return render_template(
         "ticket.html",
         event_name=event_name
@@ -500,10 +444,8 @@ def scan():
     if not is_logged_in():
         return redirect(url_for("login"))
 
-
     if not can_scan_tickets():
         return redirect(url_for("dashboard"))
-
 
     return render_template("scan.html")
 
@@ -516,16 +458,13 @@ def validate_ticket():
             "message": "Non autorizzato"
         }), 401
 
-
     if not can_scan_tickets():
         return jsonify({
             "success": False,
             "message": "Permessi insufficienti"
         }), 403
 
-
     data = request.get_json(silent=True)
-
 
     if not data or "ticket_code" not in data:
         return jsonify({
@@ -533,20 +472,16 @@ def validate_ticket():
             "message": "Codice ticket mancante"
         }), 400
 
-
     ticket_code = data["ticket_code"].strip()
-
 
     conn = get_db_connection()
     cursor = conn.cursor()
-
 
     cursor.execute("""
         SELECT * FROM tickets
         WHERE ticket_code = ?
     """, (ticket_code,))
     ticket = cursor.fetchone()
-
 
     if not ticket:
         conn.close()
@@ -556,9 +491,7 @@ def validate_ticket():
             "message": "Ticket non valido"
         }), 404
 
-
     validated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
 
     cursor.execute("""
         UPDATE tickets
@@ -573,9 +506,7 @@ def validate_ticket():
         ticket_code
     ))
 
-
     conn.commit()
-
 
     if cursor.rowcount == 0:
         cursor.execute("""
@@ -584,7 +515,6 @@ def validate_ticket():
         """, (ticket_code,))
         ticket = cursor.fetchone()
         conn.close()
-
 
         return jsonify({
             "success": False,
@@ -598,16 +528,13 @@ def validate_ticket():
             }
         }), 200
 
-
     cursor.execute("""
         SELECT * FROM tickets
         WHERE ticket_code = ?
     """, (ticket_code,))
     updated_ticket = cursor.fetchone()
 
-
     conn.close()
-
 
     return jsonify({
         "success": True,
