@@ -3,6 +3,9 @@ import sqlite3
 from datetime import datetime
 import qrcode
 import os
+from urllib import request as urlrequest
+from urllib.error import HTTPError, URLError
+import json
 
 app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
@@ -122,15 +125,14 @@ def fetch_shopify_events():
     }
     """
 
-    headers = {
-        "X-Shopify-Access-Token": SHOPIFY_ADMIN_TOKEN,
-        "Content-Type": "application/json"
-    }
+    payload = json.dumps({"query": query}).encode("utf-8")
+    req = urlrequest.Request(url, data=payload, method="POST")
+    req.add_header("X-Shopify-Access-Token", SHOPIFY_ADMIN_TOKEN)
+    req.add_header("Content-Type", "application/json")
 
     try:
-        r = requests.post(url, json={"query": query}, headers=headers, timeout=15)
-        r.raise_for_status()
-        data = r.json()
+        with urlrequest.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
         nodes = data.get("data", {}).get("products", {}).get("nodes", [])
         return [n.get("title") for n in nodes if n.get("title")]
     except Exception:
@@ -225,17 +227,6 @@ def dashboard():
         return redirect(url_for("login"))
 
     events = fetch_shopify_events()
-    if not events:
-        events = [
-            "Boat Party",
-            "White Party",
-            "La French",
-            "Foam Madness",
-            "Pool Party",
-            "Azur Beach Party",
-            "Bona Loca",
-            "Sunset Rooftop"
-        ]
 
     return render_template(
         "events.html",
