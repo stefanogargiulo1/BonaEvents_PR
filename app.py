@@ -107,6 +107,7 @@ def can_scan_tickets():
 
 def fetch_shopify_events():
     if not SHOPIFY_ADMIN_TOKEN or not SHOPIFY_STORE:
+        print("SHOPIFY_TOKEN_OR_STORE_MISSING")
         return []
 
     url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/graphql.json"
@@ -132,13 +133,16 @@ def fetch_shopify_events():
 
     try:
         with urlrequest.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        nodes = data.get("data", {}).get("products", {}).get("nodes", [])
-        return [n.get("title") for n in nodes if n.get("title")]
-    except Exception:
+            raw = resp.read().decode("utf-8")
+            data = json.loads(raw)
+            if "errors" in data:
+                print("SHOPIFY_ERRORS:", data["errors"])
+            nodes = data.get("data", {}).get("products", {}).get("nodes", [])
+            print("SHOPIFY_NODES:", len(nodes))
+            return [n.get("title") for n in nodes if n.get("title")]
+    except Exception as e:
+        print("SHOPIFY_FETCH_ERROR:", type(e).__name__, e)
         return []
-
-init_db()
 
 @app.route("/", methods=["GET", "POST"])
 def login():
