@@ -1,0 +1,169 @@
+Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Option1 Linked To,Option2 Name,Option2 Value,Option2 Linked To,Option3 Name,Option3 Value,Option3 Linked To,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Unit Price Total Measure,Unit Price Total Measure Unit,Unit Price Base Measure,Unit Price Base Measure Unit,Variant Barcode,Image Src,Image Position,Image Alt Text,Gift Card,SEO Title,SEO Description,Tipo di evento (product.metafields.shopify.event-type),Tipo di biglietto (product.metafields.shopify.ticket-type),Variant Image,Variant Weight Unit,Variant Tax Code,Cost per item,Status
+opening-principotes-saturday,Opening Principotes Saturday,<p><img></p>,BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Free List,,,,,,,,,0.0,,0,deny,manual,10.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/inaugu.png?v=1779742010,1,"",false,,,,,,kg,,,active
+opening-principotes-saturday,,,,,,,,,Ticket,,,,,,,,,0.0,,500,deny,manual,10.00,,true,true,,,,,,,,,,,,,,,kg,,,
+la-frenchh,La French,"<h2>La French</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Domenica</p>
+<p>🕒 22:00–04:00</p>
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Female First Rate,,,,,,,,,0.0,shopify,99,deny,manual,10.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/f_694193e1-f81f-45c6-a5e2-fb5878b313d2.png?v=1779733131,1,"",false,,,,,,kg,,,active
+la-frenchh,,,,,,,,,Male First Rate,,,,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
+la-frenchh,,,,,,,,,Female Second Rate  (+ 1 Drink),,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,,,,,,,,,,,kg,,,
+la-frenchh,,,,,,,,,Male Second Rate (+ 1 Drink),,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,,,,,,,,,,,kg,,,
+the-wolf-of-wall-street-night,The Wolf of Wall Street Night,"
+<h2>The Wolf of Wall Street Night</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Sabato</p>
+<p>🕒 22:00–05:00</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Female First Rate,,,,,,,,,0.0,,500,deny,manual,10.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/WolfofWallStreet.png?v=1778697370,1,"",false,,,,,,kg,,,active
+the-wolf-of-wall-street-night,,,,,,,,,Male First Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+the-wolf-of-wall-street-night,,,,,,,,,Female Second Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+the-wolf-of-wall-street-night,,,,,,,,,Male Second Rate,,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+the-wolf-of-wall-street-night,,,,,,,,,Enter with Drink,,,,,,,,,0.0,,0,deny,manual,25.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+the-wolf-of-wall-street-night,,,,,,,,,(VIP +drink),,,,,,,,,0.0,,0,deny,manual,30.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+the-balkan-night-dinner-show,The Balkan Night + Dinner Show,"
+<h2>The Balkan Night + Dinner Show</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Sabato</p>
+<p>🕒 21:30–04:00</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Free List,,,,,,,,,0.0,,500,deny,manual,0.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/TheBalkanNight_499244ea-73c2-49b0-b4a4-8f694e9ebdf4.png?v=1778702200,1,"",false,,,,,,kg,,,active
+the-balkan-night-dinner-show,,,,,,,,,First Rate,,,,,,,,,0.0,,0,deny,manual,10.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+the-balkan-night-dinner-show,,,,,,,,,Enter with Drink First Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+the-balkan-night-dinner-show,,,,,,,,,Enter with Drink Second Rate,,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+rio-de-ksamil,Rio De Ksamil,"",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"",true,Tipo Biglietto,Female First Rate,,,,,,,,,0.0,,100,deny,manual,10.00,,true,false,,,,,,,,,false,,,,,,kg,,,active
+rio-de-ksamil,,,,,,,,,Male First Rate,,,,,,,,,0.0,,100,deny,manual,15.00,,true,false,,,,,,,,,,,,,,,kg,,,
+rio-de-ksamil,,,,,,,,,Female Second Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,false,,,,,"",,,,,,,,,,kg,,,
+rio-de-ksamil,,,,,,,,,Enter with Drink First Rate,,,,,,,,,0.0,,100,deny,manual,20.00,,true,false,,,,,,,,,,,,,,,kg,,,
+rio-de-ksamil,,,,,,,,,Enter with Drink Second Rate,,,,,,,,,0.0,,100,deny,manual,25.00,,true,false,,,,,,,,,,,,,,,kg,,,
+rio-de-ksamil,,,,,,,,,Enter VIP (+ 1 Drink),,,,,,,,,0.0,,100,deny,manual,30.00,,true,false,,,,,,,,,,,,,,,kg,,,
+dinner-show-white-party,White Party + Dinner Show,"<h2>White Party + Dinner Show</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Venerdì</p>
+<p>🕒 21:00–05:00</p>
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Female First Rate,,,,,,,,,0.0,,500,deny,manual,10.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/whiteparty.png?v=1778697146,1,"",false,,,,,,kg,,,active
+dinner-show-white-party,,,,,,,,,Male First Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-white-party,,,,,,,,,Female Second Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-white-party,,,,,,,,,Male Second Rate,,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-white-party,,,,,,,,,Enter With Drink,,,,,,,,,0.0,,0,deny,manual,25.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-white-party,,,,,,,,,VIP (+1 Drink),,,,,,,,,0.0,,0,deny,manual,30.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+azur-afro-party,Azur Afro party,"<p dir=""ltr""><span>All’Azur, dalle 22:00 alle 04:00, si accende una notte diversa da tutto il resto: </span><span>afrobeat, ritmi tribali e vibrazioni primordiali che ti prendono dal primo secondo</span><span>.</span></p>
+<p dir=""ltr""><span>Tamburi, bassi profondi e energia continua trasformano la pista in un viaggio tra Africa e mare, dove si balla senza pensare e si segue solo il ritmo.</span></p>
+<p dir=""ltr""><span>È una di quelle serate che senti nel corpo, non solo nelle orecchie.</span><span><br></span><span> Se vuoi esserci… il ticket è adesso.</span></p>",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"",true,Tipo Biglietto,free list,,,,,,,,,0.0,,100,deny,manual,0.00,,true,false,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/azurafro.png?v=1778702549,1,"",false,,,,,,kg,,,active
+azur-afro-party,,,,,,,,,First Rate,,,,,,,,,0.0,,100,deny,manual,10.00,,true,false,,,,,,,,,,,,,,,kg,,,
+azur-afro-party,,,,,,,,,Second Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,false,,,,,"",,,,,,,,,,kg,,,
+azur-afro-party,,,,,,,,,Enter with Drink,,,,,,,,,0.0,,0,deny,manual,20.00,,true,false,,,,,"",,,,,,,,,,kg,,,
+american-gangster-tattoo-barber,American Gangster + Tattoo + Barber,"
+<h2>American Gangster + Tattoo + Barber</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Mercoledì</p>
+<p>🕒 22:00–05:00</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Female First Rate,,,,,,,,,0.0,,500,deny,manual,10.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/gang.png?v=1778702750,1,"",false,,,,,,kg,,,active
+american-gangster-tattoo-barber,,,,,,,,,Male  First Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+american-gangster-tattoo-barber,,,,,,,,,Enter with Drink,,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+american-gangster-tattoo-barber,,,,,,,,,Drink + Tattoo,,,,,,,,,0.0,,0,deny,manual,25.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+american-gangster-tattoo-barber,,,,,,,,,Male Drink + Tattoo + Barber,,,,,,,,,0.0,,0,deny,manual,30.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+american-gangster-tattoo-barber,,,,,,,,,Premium Tattoo + Barber,,,,,,,,,0.0,,0,deny,manual,35.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+american-gangster-tattoo-barber,,,,,,,,,VIP Tattoo + Barber,,,,,,,,,0.0,,0,deny,manual,40.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+azur-beach-party,azur beach party,"",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"",true,Tipo Biglietto,free list,,,,,,,,,0.0,,100,deny,manual,0.00,,true,false,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/azur_b_party.png?v=1778699040,1,"",false,,,,,,kg,,,active
+azur-beach-party,,,,,,,,,10€,,,,,,,,,0.0,,100,deny,manual,10.00,,true,false,,,,,,,,,,,,,,,kg,,,
+azur-beach-party,,,,,,,,,20€ (+1drink),,,,,,,,,0.0,,100,deny,manual,20.00,,true,false,,,,,,,,,,,,,,,kg,,,
+azur-beach-party,,,,,,,,,35€ (+1drink +5/7min jetski),,,,,,,,,0.0,,100,deny,manual,35.00,,true,false,,,,,,,,,,,,,,,kg,,,
+dinner-show-latino-bona-loca-cupido,Bona Loca + Dinner Show Latino+ Cupido,"<h2>Bona Loca +Dinner Show Latino + Cupido</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Martedì</p>
+<p>🕒 21:00–05:00</p>
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,female First Rate,,,,,,,,,0.0,,500,deny,manual,10.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/lat.png?v=1778704692,1,"",false,,,,,,kg,,,active
+dinner-show-latino-bona-loca-cupido,,,,,,,,,Male First Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-latino-bona-loca-cupido,,,,,,,,,Female Second Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-latino-bona-loca-cupido,,,,,,,,,Male  Second Rate,,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-latino-bona-loca-cupido,,,,,,,,,Enter With Drink Rate,,,,,,,,,0.0,,0,deny,manual,25.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+dinner-show-latino-bona-loca-cupido,,,,,,,,,Enter VIP + Drink,,,,,,,,,0.0,,0,deny,manual,30.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+beach-party,Principotes Beach Party,"<h2>Principotes Beach Party</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Martedì, Venerdì, Domenica</p>
+<p>🕒 15:00–19:00</p>
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>",BonaEventsApp,Uncategorized,Eventi,"bonaevents, eventi, party",true,Ticket,Free List,,,,,,,,,0.0,,500,deny,manual,0.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/bc.png?v=1778703664,1,"",false,,,,,,kg,,,active
+beach-party,,,,,,,,,Enter with Drink,,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+pool-party-bonamania,Pool Party BonaMania,"
+<h2>Pool Party BonaMania</h2>
+<p>📍 Saranda, Albania</p>
+<p>📅 Martedì e Venerdì</p>
+<p>🕒 13:00–18:00</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Uncategorized,Eventi,"bonaevents, eventi, party",true,Ticket,Free List,,,,,,,,,0.0,,500,deny,manual,0.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/bonamania.png?v=1778697574,1,"",false,,,,,,kg,,,active
+pool-party-bonamania,,,,,,,,,First Rate,,,,,,,,,0.0,,0,deny,manual,10.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+pool-party-bonamania,,,,,,,,,enter with drink First Rate,,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+pool-party-bonamania,,,,,,,,,enter with drink Second Rate,,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+la-french-at-la-guerre,La French at La Guerre,"
+<h2>La French at La Guerre</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Lunedì</p>
+<p>🕒 22:30–05:00</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Uncategorized,Eventi,"bonaevents, eventi, party",true,Ticket,Standard,,,,,,,,,0.0,,500,deny,manual,15.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/fr.png?v=1778704502,1,"",false,,,,,,kg,,,active
+la-french-at-la-guerre,,,,,,,,,Standard (+ 1 Drink),,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+italian-night,La Dolce Vita (Italian Night),"
+<h2>Italian Night</h2>
+<p>📍 Ksamil, Albania</p>
+<p>📅 Lunedì</p>
+<p>🕒 22:30–05:00</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Female First Rate,,,,,,,,,0.0,shopify,100,deny,manual,10.00,,false,true,,,,,"",https://cdn.shopify.com/s/files/1/1011/6192/7043/files/ita.png?v=1778702954,1,"",false,,,,,,kg,,,active
+italian-night,,,,,,,,,Male First Rate,,,,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,"",,,,,,,,,,kg,,,
+italian-night,,,,,,,,,Female Second Rate  (+ 1 Drink),,,,,,,,,0.0,,0,deny,manual,15.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+italian-night,,,,,,,,,Male Second Rate (+ 1 Drink),,,,,,,,,0.0,,0,deny,manual,20.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+sunset-boungaville-rooftop,Sunset Boungaville Rooftop,"
+<h2>Sunset Boungaville Rooftop</h2>
+<p>📍 Saranda, Albania</p>
+<p>📅 Lunedì e Venerdì</p>
+<p>🕒 18:00–21:30</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket,Free List,,,,,,,,,0.0,,500,deny,manual,10.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/sun_1b467020-544f-469e-8d17-7761bc81bcc7.png?v=1778704162,1,"",false,,,,,,kg,,,active
+sunset-boungaville-rooftop,,,,,,,,,Ticket,,,,,,,,,0.0,,0,deny,manual,10.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+boat-party,Boat Party,"
+<h2>Boat Party</h2>
+<p>📍 Saranda, Albania</p>
+<p>📅 Lunedì e Giovedì</p>
+<p>🕒 18:00–21:00</p>
+
+<p>🎶 Vivi una delle esperienze più richieste dell’estate con BonaEvents.</p>
+<p>🍹 Drink • 🔥 Party esclusivo • 🌴 Summer vibes</p>
+<p>🎟 Posti limitati • 🍾 VIP disponibili</p>
+",BonaEventsApp,Arts & Entertainment > Event Tickets,Eventi,"bonaevents, eventi, party",true,Ticket (+ 2 drink e 4 shots),Female First Rate,,,,,,,,,0.0,shopify,100,deny,manual,35.00,,false,true,,,,,"",https://cdn.shopify.com/s/files/1/1011/6192/7043/files/BOtparty.png?v=1778695345,1,"",false,,,,,,kg,,,active
+boat-party,,,,,,,,,Female Second Rate,,,,,,,,,0.0,shopify,0,deny,manual,40.00,,false,true,,,,,"",,,,,,,,,,kg,,,
+boat-party,,,,,,,,,Male First Rate,,,,,,,,,0.0,shopify,100,deny,manual,40.00,,false,true,,,,,"",,,,,,,,,,kg,,,
+boat-party,,,,,,,,,Male Second Rate,,,,,,,,,0.0,,0,deny,manual,50.00,,true,true,,,,,"",,,,,,,,,,kg,,,
+foam-madness,FOAM MADNESS,"",BonaEventsApp,Arts & Entertainment > Event Tickets,"","",true,Tipo Biglietto,free list,,,,,,,,,0.0,,100,deny,manual,0.00,,true,false,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/FoamMadness.png?v=1778696043,1,"",false,,,,,,kg,,,active
+foam-madness,,,,,,,,,15€ (+drink),,,,,,,,,0.0,,100,deny,manual,15.00,,true,false,,,,,,,,,,,,,,,kg,,,
+foam-madness,,,,,,,,,20€ (+drink),,,,,,,,,0.0,,100,deny,manual,20.00,,true,false,,,,,,,,,,,,,,,kg,,,
