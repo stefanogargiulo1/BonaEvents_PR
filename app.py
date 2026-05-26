@@ -3,7 +3,6 @@ import sqlite3
 from datetime import datetime
 import qrcode
 import os
-import requests
 
 app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
