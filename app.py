@@ -554,7 +554,7 @@ def ticket(event_name):
             rate,
             customer,
             email,
-            phone
+            phone,
             pr_username
         ))
 
