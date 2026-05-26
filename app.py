@@ -151,10 +151,6 @@ def get_db_connection():
     return conn
 
 
-def column_exists(cursor, table_name, column_name):
-    cursor.execute(f"PRAGMA table_info({table_name})")
-    columns = cursor.fetchall()
-    return any(col[1] == column_name for col in columns)
 
 
 def init_db():
@@ -201,14 +197,6 @@ def init_db():
         )
     """)
 
-    if not column_exists(cursor, "users", "status"):
-        cursor.execute("ALTER TABLE users ADD COLUMN status TEXT DEFAULT 'approved'")
-
-    if not column_exists(cursor, "users", "created_at"):
-        cursor.execute("ALTER TABLE users ADD COLUMN created_at TEXT DEFAULT CURRENT_TIMESTAMP")
-
-    if not column_exists(cursor, "users", "approved_at"):
-        cursor.execute("ALTER TABLE users ADD COLUMN approved_at TEXT")
 
     cursor.execute("""
         INSERT OR IGNORE INTO users (
