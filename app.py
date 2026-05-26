@@ -20,7 +20,7 @@ print("DATABASE_URL:", os.getenv("DATABASE_URL"))
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_NAME = os.getenv("DB_NAME", os.path.join(BASE_DIR, "tickets.db"))
+DB_NAME = "tickets.db"
 SHOPIFY_STORE = os.getenv("SHOPIFY_STORE", "bonaeventsapp.myshopify.com").replace("https://", "").replace("http://", "").strip().strip("/")
 SHOPIFY_ADMIN_TOKEN = os.getenv("SHOPIFY_ADMIN_TOKEN", "")
 SHOPIFY_STOREFRONT_TOKEN = os.getenv("SHOPIFY_STOREFRONT_TOKEN", "")
