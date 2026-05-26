@@ -211,7 +211,6 @@ def init_db():
 
     cursor.execute("""
     INSERT INTO users (
-        id,
         username,
         password,
         role,
@@ -219,7 +218,6 @@ def init_db():
         approved_at
     )
     VALUES (
-        1,
         'admin',
         'admin123',
         'admin',
@@ -227,7 +225,7 @@ def init_db():
         CURRENT_TIMESTAMP
     )
     ON CONFLICT (username) DO NOTHING
-""")
+    """)
 
     cursor.execute("""
         UPDATE users
