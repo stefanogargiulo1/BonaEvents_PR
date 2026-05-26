@@ -19,6 +19,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_NAME = os.getenv("DB_NAME", os.path.join(BASE_DIR, "tickets.db"))
 SHOPIFY_STORE = os.getenv("SHOPIFY_STORE", "bonaeventsapp.myshopify.com").replace("https://", "").replace("http://", "").strip().strip("/")
 SHOPIFY_ADMIN_TOKEN = os.getenv("SHOPIFY_ADMIN_TOKEN", "")
+SHOPIFY_STOREFRONT_TOKEN = os.getenv("SHOPIFY_STOREFRONT_TOKEN", "")
 SHOPIFY_API_VERSION = os.getenv("SHOPIFY_API_VERSION", "2026-04")
 
 SHOPIFY_WEBHOOK_SECRET = os.getenv("SHOPIFY_WEBHOOK_SECRET", "")
@@ -144,17 +145,62 @@ def can_scan_tickets():
 
 def fetch_shopify_events():
 
-    if not SHOPIFY_ADMIN_TOKEN or not SHOPIFY_STORE:
-        print("SHOPIFY_TOKEN_OR_STORE_MISSING")
+    if not SHOPIFY_STOREFRONT_TOKEN or not SHOPIFY_STORE:
+        print("SHOPIFY_STOREFRONT_TOKEN_MISSING")
         return []
 
-    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/products.json?limit=250"
+    url = f"https://{SHOPIFY_STORE}/api/{SHOPIFY_API_VERSION}/graphql.json"
 
-    req = urlrequest.Request(url, method="GET")
+    query = """
+    {
+      products(first: 20) {
+        edges {
+          node {
+            title
+            handle
+
+            images(first: 1) {
+              edges {
+                node {
+                  url
+                }
+              }
+            }
+
+            variants(first: 20) {
+              edges {
+                node {
+                  title
+                  price {
+                    amount
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    """
+
+    payload = json.dumps({
+        "query": query
+    }).encode("utf-8")
+
+    req = urlrequest.Request(
+        url,
+        data=payload,
+        method="POST"
+    )
 
     req.add_header(
-        "X-Shopify-Access-Token",
-        SHOPIFY_ADMIN_TOKEN
+        "X-Shopify-Storefront-Access-Token",
+        SHOPIFY_STOREFRONT_TOKEN
+    )
+
+    req.add_header(
+        "Content-Type",
+        "application/json"
     )
 
     try:
@@ -165,28 +211,35 @@ def fetch_shopify_events():
 
             data = json.loads(raw)
 
-            products = data.get("products", [])
-
             events = []
 
-            for product in products:
+            products = data["data"]["products"]["edges"]
+
+            for item in products:
+
+                product = item["node"]
 
                 event = {
-                    "title": product.get("title"),
-                    "handle": product.get("handle"),
+                    "title": product["title"],
+                    "handle": product["handle"],
                     "image": None,
                     "variants": []
                 }
 
-                if product.get("image"):
-                    event["image"] = product["image"].get("src")
+                images = product["images"]["edges"]
 
-                for variant in product.get("variants", []):
+                if images:
+                    event["image"] = images[0]["node"]["url"]
+
+                variants = product["variants"]["edges"]
+
+                for variant in variants:
+
+                    v = variant["node"]
 
                     event["variants"].append({
-                        "title": variant.get("title"),
-                        "price": variant.get("price"),
-                        "inventory": variant.get("inventory_quantity")
+                        "title": v["title"],
+                        "price": v["price"]["amount"]
                     })
 
                 events.append(event)
@@ -197,7 +250,7 @@ def fetch_shopify_events():
 
     except Exception as e:
 
-        print("SHOPIFY_FETCH_ERROR:", type(e).__name__, e)
+        print("SHOPIFY_STOREFRONT_ERROR:", type(e).__name__, e)
 
         return []
 
