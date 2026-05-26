@@ -6,6 +6,9 @@ import os
 from urllib import request as urlrequest
 from urllib.error import HTTPError, URLError
 import json
+import hmac
+import hashlib
+import base64
 
 
 app = Flask(__name__)
@@ -18,6 +21,29 @@ SHOPIFY_STORE = os.getenv("SHOPIFY_STORE", "bonaeventsapp.myshopify.com").replac
 SHOPIFY_ADMIN_TOKEN = os.getenv("SHOPIFY_ADMIN_TOKEN", "")
 SHOPIFY_API_VERSION = os.getenv("SHOPIFY_API_VERSION", "2026-04")
 
+SHOPIFY_WEBHOOK_SECRET = os.getenv("SHOPIFY_WEBHOOK_SECRET", "")
+
+def verify_shopify_webhook(raw_data, hmac_header):
+    digest = hmac.new(
+        SHOPIFY_WEBHOOK_SECRET.encode("utf-8"),
+        raw_data,
+        hashlib.sha256
+    ).digest()
+    computed_hmac = base64.b64encode(digest)
+    return hmac.compare_digest(computed_hmac, hmac_header.encode("utf-8"))
+
+@app.route("/webhooks/products-create", methods=["POST"])
+def products_create_webhook():
+    raw_data = request.get_data()
+    hmac_header = request.headers.get("X-Shopify-Hmac-Sha256", "")
+
+    if not verify_shopify_webhook(raw_data, hmac_header):
+        print("WEBHOOK_INVALID_HMAC")
+        return "Invalid HMAC", 401
+
+    payload = request.get_json(silent=True) or {}
+    print("WEBHOOK_PRODUCTS_CREATE:", payload)
+    return "OK", 200
 
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
@@ -117,11 +143,65 @@ def can_scan_tickets():
 
 
 def fetch_shopify_events():
+
     if not SHOPIFY_ADMIN_TOKEN or not SHOPIFY_STORE:
         print("SHOPIFY_TOKEN_OR_STORE_MISSING")
         return []
 
-    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/shop.json"
+    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/products.json?limit=250"
+
+    req = urlrequest.Request(url, method="GET")
+
+    req.add_header(
+        "X-Shopify-Access-Token",
+        SHOPIFY_ADMIN_TOKEN
+    )
+
+    try:
+
+        with urlrequest.urlopen(req, timeout=15) as resp:
+
+            raw = resp.read().decode("utf-8")
+
+            data = json.loads(raw)
+
+            products = data.get("products", [])
+
+            events = []
+
+            for product in products:
+
+                event = {
+                    "title": product.get("title"),
+                    "handle": product.get("handle"),
+                    "image": None,
+                    "variants": []
+                }
+
+                if product.get("image"):
+                    event["image"] = product["image"].get("src")
+
+                for variant in product.get("variants", []):
+
+                    event["variants"].append({
+                        "title": variant.get("title"),
+                        "price": variant.get("price"),
+                        "inventory": variant.get("inventory_quantity")
+                    })
+
+                events.append(event)
+
+            print("SHOPIFY_EVENTS_FOUND:", len(events))
+
+            return events
+
+    except Exception as e:
+
+        print("SHOPIFY_FETCH_ERROR:", type(e).__name__, e)
+
+        return []
+
+    url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/products.json?limit=250"
     req = urlrequest.Request(url, method="GET")
     req.add_header("X-Shopify-Access-Token", SHOPIFY_ADMIN_TOKEN)
 
