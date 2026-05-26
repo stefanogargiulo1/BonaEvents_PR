@@ -569,6 +569,32 @@ def ticket(event_name):
         event_name=event_name
     )
 
+@app.route("/tickets")
+def tickets():
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM tickets
+        ORDER BY created_at DESC
+    """)
+
+    tickets = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "tickets.html",
+        tickets=tickets
+    )
 
 @app.route("/scan")
 def scan():
