@@ -1,30 +1,142 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket creato</title>
+    <title>Ticket Creato</title>
+
     <style>
-        body{font-family:Arial,sans-serif;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:20px}
-        .box{background:#1e293b;padding:30px;border-radius:18px;width:100%;max-width:560px;text-align:center}
-        img{max-width:280px;background:#fff;padding:12px;border-radius:12px;margin:18px auto}
-        .info{text-align:left;background:#0f172a;padding:16px;border-radius:12px}
-        a{display:inline-block;margin-top:16px;padding:12px 16px;border-radius:10px;background:#2563eb;color:#fff;text-decoration:none;font-weight:bold}
+
+        body{
+            margin:0;
+            background:#0f0f0f;
+            font-family:Arial;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            padding:20px;
+        }
+
+        .box{
+            width:100%;
+            max-width:550px;
+            background:#1a1a1a;
+            border-radius:20px;
+            overflow:hidden;
+            border:1px solid #2a2a2a;
+            text-align:center;
+        }
+
+        .header{
+            background:#ff1e1e;
+            padding:30px;
+        }
+
+        .content{
+            padding:40px;
+        }
+
+        .success{
+            font-size:26px;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .ticket-code{
+            margin-top:20px;
+            font-size:22px;
+            font-weight:bold;
+            color:#ff1e1e;
+        }
+
+        .qr{
+            margin-top:30px;
+        }
+
+        .qr img{
+            width:220px;
+            background:white;
+            padding:10px;
+            border-radius:14px;
+        }
+
+        .btn{
+            display:inline-block;
+            margin-top:35px;
+            background:#ff1e1e;
+            color:white;
+            padding:16px 28px;
+            border-radius:10px;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .btn:hover{
+            opacity:0.9;
+        }
+
+        .info{
+            margin-top:25px;
+            color:#999;
+            line-height:26px;
+        }
+
     </style>
+
 </head>
+
 <body>
+
     <div class="box">
-        <h1>Ticket creato con successo</h1>
-        <p>Codice ticket: <strong>{{ ticket_code }}</strong></p>
-        <img src="{{ url_for('static', filename=qr_image) }}" alt="QR Ticket">
-        <div class="info">
-            <p><strong>Evento:</strong> {{ event }}</p>
-            <p><strong>Tariffa:</strong> {{ rate }}</p>
-            <p><strong>Cliente:</strong> {{ customer }}</p>
-            <p><strong>Email:</strong> {{ email or '-' }}</p>
-            <p><strong>Telefono:</strong> {{ phone or '-' }}</p>
+
+        <div class="header">
+
+            <h1>BonaEvents</h1>
+
         </div>
-        <a href="{{ url_for('dashboard') }}">Torna dashboard</a>
+
+        <div class="content">
+
+            <div class="success">
+                Ticket creato correttamente 🎟️
+            </div>
+
+            <div class="info">
+
+                Cliente:
+                <b>{{ customer }}</b>
+
+                <br><br>
+
+                Evento:
+                <b>{{ event }}</b>
+
+            </div>
+
+            <div class="ticket-code">
+
+                {{ ticket_code }}
+
+            </div>
+
+            <div class="qr">
+
+                <img src="{{ url_for('static', filename=qr_image) }}">
+
+            </div>
+
+            <a
+                class="btn"
+                href="{{ ticket_url }}"
+                target="_blank"
+            >
+                VISUALIZZA TICKET
+            </a>
+
+        </div>
+
     </div>
+
 </body>
 </html>

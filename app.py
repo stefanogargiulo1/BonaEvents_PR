@@ -654,6 +654,12 @@ def ticket(event_name):
         conn.commit()
         conn.close()
 
+        ticket_url = url_for(
+            "view_ticket",
+            ticket_code=ticket_code,
+            _external=True
+        )
+
         return render_template(
             "success.html",
             ticket_code=ticket_code,
@@ -662,7 +668,8 @@ def ticket(event_name):
             rate=rate,
             customer=customer,
             email=email,
-            phone=phone
+            phone=phone,
+            ticket_url=ticket_url
         )
 
     conn = get_db_connection()
