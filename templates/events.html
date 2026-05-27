@@ -15,6 +15,10 @@
             padding:24px
         }
 
+        .blue{
+            background:#2563eb;
+        }
+        
         .top{
             display:flex;
             justify-content:space-between;
@@ -137,15 +141,35 @@
         <div class="actions">
 
             {% if role == 'admin' %}
+
             <a class="btn amber" href="{{ url_for('admin_users') }}">
-                Gestione utenti
+                👥 Gestione utenti
             </a>
+
+            <a class="btn blue" href="{{ url_for('tickets') }}">
+                🎟️ Tickets
+            </a>
+
+            <a class="btn green" href="{{ url_for('scan') }}">
+                📷 Scanner
+            </a>
+
             {% endif %}
 
-            {% if role in ['admin','scanner'] %}
-            <a class="btn green" href="{{ url_for('scan') }}">
-                Apri scanner
+            {% if role == 'pr' %}
+
+            <a class="btn green" href="{{ url_for('pr_dashboard') }}">
+                💸 PR Dashboard
             </a>
+
+            {% endif %}
+
+            {% if role == 'scanner' %}
+
+            <a class="btn green" href="{{ url_for('scan') }}">
+                📷 Scanner
+            </a>
+
             {% endif %}
 
             <a class="btn red" href="{{ url_for('logout') }}">
