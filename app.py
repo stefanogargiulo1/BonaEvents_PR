@@ -651,6 +651,41 @@ def tickets():
         tickets=tickets
     )
 
+@app.route("/pr-dashboard")
+def pr_dashboard():
+
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+    cursor.execute("""
+        SELECT *
+        FROM tickets
+        WHERE pr_username = %s
+        ORDER BY id DESC
+    """, (session.get("user"),))
+
+    tickets = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT
+            COUNT(*) as total_tickets,
+            COALESCE(SUM(commission_amount), 0) as total_commissions
+        FROM tickets
+        WHERE pr_username = %s
+    """, (session.get("user"),))
+
+    stats = cursor.fetchone()
+
+    conn.close()
+
+    return render_template(
+        "pr_dashboard.html",
+        tickets=tickets,
+        stats=stats
+    )
 
 @app.route("/scan")
 def scan():
@@ -860,6 +895,44 @@ def ticket_details(ticket_code):
     return render_template(
         "ticket_details.html",
         ticket=ticket
+    )
+
+@app.route("/pr-dashboard")
+def pr_dashboard():
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    username = session.get("user")
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM tickets
+        WHERE pr_username = %s
+        ORDER BY created_at DESC
+    """, (username,))
+
+    tickets = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT
+            COUNT(*) as total_tickets,
+            COALESCE(SUM(commission_amount), 0) as total_commissions
+        FROM tickets
+        WHERE pr_username = %s
+    """, (username,))
+
+    stats = cursor.fetchone()
+
+    conn.close()
+
+    return render_template(
+        "pr_dashboard.html",
+        tickets=tickets,
+        stats=stats
     )
 
 @app.route("/logout")
