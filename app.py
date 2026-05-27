@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from datetime import datetime
+from flask_mail import Mail, Message
+from flask import render_template_string
 import qrcode
 import os
 import hmac
@@ -65,6 +67,48 @@ def get_commission(event_name, rate_name):
     return 0
 
 app = Flask(__name__)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+
+app.config['MAIL_USERNAME'] = 'bonaeventsapp@gmail.com'
+app.config['MAIL_PASSWORD'] = 'jfjv xhut fxgb jckk'
+
+mail = Mail(app)
+def send_ticket_email(
+    customer,
+    email,
+    event,
+    rate,
+    ticket_code
+):
+
+    ticket_url = url_for(
+        "view_ticket",
+        ticket_code=ticket_code,
+        _external=True
+    )
+
+    html = render_template(
+        "email_ticket.html",
+        customer=customer,
+        event=event,
+        rate=rate,
+        ticket_code=ticket_code,
+        ticket_url=ticket_url
+    )
+
+    msg = Message(
+        subject=f"BonaEvents Ticket - {event}",
+        sender=app.config['MAIL_USERNAME'],
+        recipients=[email]
+    )
+
+    msg.html = html
+
+    mail.send(msg)
+
+    print("EMAIL_SENT:", email)
 app.secret_key = "bonaevents_secret"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
@@ -653,6 +697,15 @@ def ticket(event_name):
 
         conn.commit()
         conn.close()
+        if email:
+
+            send_ticket_email(
+                customer,
+                email,
+                event_name,
+                rate,
+                ticket_code
+            )
 
         ticket_url = url_for(
             "view_ticket",
