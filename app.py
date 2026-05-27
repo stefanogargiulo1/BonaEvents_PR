@@ -18,26 +18,34 @@ def get_commission(event_name, rate_name):
         with open("percPR.csv", newline='', encoding='utf-8') as csvfile:
 
             reader = csv.DictReader(csvfile)
-            print(reader.fieldnames)
 
             for row in reader:
 
-                event_csv = row.get("event", "").strip().lower()
-                rate_csv = row.get("rate", "").strip().lower()
-                print("EVENT_NAME:", event_name)
-                print("RATE_NAME:", rate_name)
-                print("CSV_EVENT:", event_csv)
-                print("CSV_RATE:", rate_csv)
+                product_name = row.get("nome_del_prodotto", "").strip().lower()
+
+                full_search = f"{event_name} {rate_name}".strip().lower()
+
+                print("CSV_PRODUCT:", product_name)
+                print("SEARCH:", full_search)
 
                 if (
-                    event_csv == event_name.strip().lower()
+                    event_name.lower() in product_name
                     and
-                    rate_csv == rate_name.strip().lower()
+                    rate_name.lower() in product_name
                 ):
 
                     try:
-                        return float(row.get("commission", 0))
+
+                        commission = float(
+                            row.get("importo_della_commissione", 0)
+                        )
+
+                        print("COMMISSION FOUND:", commission)
+
+                        return commission
+
                     except:
+
                         return 0
 
     except Exception as e:
