@@ -453,6 +453,38 @@ def dashboard():
         username=session.get("user")
     )
 
+@app.route("/ticket-view/<ticket_code>")
+def view_ticket(ticket_code):
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM tickets
+        WHERE ticket_code = %s
+    """, (ticket_code,))
+
+    ticket = cursor.fetchone()
+
+    conn.close()
+
+    if not ticket:
+        return "Ticket non trovato"
+
+    qr_url = url_for(
+        "static",
+        filename=f"qrcodes/{ticket['ticket_code']}.png"
+    )
+
+    return render_template(
+        "view_ticket.html",
+        event=ticket["event"],
+        customer=ticket["customer"],
+        rate=ticket["rate"],
+        ticket_code=ticket["ticket_code"],
+        qr_url=qr_url
+    )
 
 @app.route("/admin/users")
 def admin_users():

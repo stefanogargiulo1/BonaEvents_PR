@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ event }}</title>
+
+    <style>
+
+        body{
+            margin:0;
+            background:#0f0f0f;
+            font-family:Arial;
+            color:white;
+        }
+
+        .container{
+            max-width:500px;
+            margin:40px auto;
+            background:#1a1a1a;
+            border-radius:20px;
+            overflow:hidden;
+            border:1px solid #2a2a2a;
+        }
+
+        .header{
+            background:#ff1e1e;
+            padding:30px;
+            text-align:center;
+        }
+
+        .content{
+            padding:40px;
+        }
+
+        .label{
+            color:#888;
+            margin-top:20px;
+        }
+
+        .value{
+            font-size:22px;
+            font-weight:bold;
+            margin-top:5px;
+        }
+
+        .qr{
+            margin-top:40px;
+            text-align:center;
+        }
+
+        .qr img{
+            width:220px;
+            background:white;
+            padding:10px;
+            border-radius:12px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>BonaEvents</h1>
+
+        </div>
+
+        <div class="content">
+
+            <div class="label">
+                Evento
+            </div>
+
+            <div class="value">
+                {{ event }}
+            </div>
+
+            <div class="label">
+                Cliente
+            </div>
+
+            <div class="value">
+                {{ customer }}
+            </div>
+
+            <div class="label">
+                Ticket
+            </div>
+
+            <div class="value">
+                {{ rate }}
+            </div>
+
+            <div class="label">
+                Codice
+            </div>
+
+            <div class="value">
+                {{ ticket_code }}
+            </div>
+
+            <div class="qr">
+
+                <img src="{{ qr_url }}">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
