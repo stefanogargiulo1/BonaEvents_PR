@@ -23,6 +23,10 @@ def get_commission(event_name, rate_name):
 
                 event_csv = row.get("event", "").strip().lower()
                 rate_csv = row.get("rate", "").strip().lower()
+                print("EVENT_NAME:", event_name)
+                print("RATE_NAME:", rate_name)
+                print("CSV_EVENT:", event_csv)
+                print("CSV_RATE:", rate_csv)
 
                 if (
                     event_csv == event_name.strip().lower()
