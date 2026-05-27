@@ -44,6 +44,11 @@
             border-radius:10px;
             text-decoration:none;
             font-weight:bold;
+            transition:0.2s;
+        }
+
+        .back-btn:hover{
+            background:#1d4ed8;
         }
 
         .stats{
@@ -76,6 +81,7 @@
             background:#1e293b;
             border-radius:18px;
             padding:20px;
+            box-shadow:0 0 25px rgba(0,0,0,0.3);
         }
 
         table{
@@ -125,7 +131,20 @@
             color:#94a3b8;
         }
 
+        .ticket-link{
+            color:#60a5fa;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.2s;
+        }
+
+        .ticket-link:hover{
+            color:white;
+            text-shadow:0 0 12px #3b82f6;
+        }
+
     </style>
+
 </head>
 
 <body>
@@ -133,10 +152,15 @@
     <div class="topbar">
 
         <div>
-            <div class="title">🎟️ Tickets Dashboard</div>
+
+            <div class="title">
+                🎟️ Tickets Dashboard
+            </div>
+
             <div class="subtitle">
                 Gestione completa tickets BonaEvents
             </div>
+
         </div>
 
         <a href="{{ url_for('dashboard') }}" class="back-btn">
@@ -148,24 +172,39 @@
     <div class="stats">
 
         <div class="card">
-            <h2>Totale Tickets</h2>
+
+            <h2>
+                Totale Tickets
+            </h2>
+
             <div class="value">
                 {{ tickets|length }}
             </div>
+
         </div>
 
         <div class="card">
-            <h2>Tickets Utilizzati</h2>
+
+            <h2>
+                Tickets Utilizzati
+            </h2>
+
             <div class="value">
                 {{ tickets | selectattr('used', 'equalto', 1) | list | length }}
             </div>
+
         </div>
 
         <div class="card">
-            <h2>Tickets Attivi</h2>
+
+            <h2>
+                Tickets Attivi
+            </h2>
+
             <div class="value">
                 {{ tickets | selectattr('used', 'equalto', 0) | list | length }}
             </div>
+
         </div>
 
     </div>
@@ -177,7 +216,9 @@
         <table>
 
             <thead>
+
                 <tr>
+
                     <th>Codice</th>
                     <th>Evento</th>
                     <th>Cliente</th>
@@ -187,7 +228,9 @@
                     <th>Telefono</th>
                     <th>Stato</th>
                     <th>Creato</th>
+
                 </tr>
+
             </thead>
 
             <tbody>
@@ -197,7 +240,14 @@
                 <tr>
 
                     <td>
-                        <strong>{{ ticket.ticket_code }}</strong>
+
+                        <a
+                            href="{{ url_for('ticket_details', ticket_code=ticket.ticket_code) }}"
+                            class="ticket-link"
+                        >
+                            {{ ticket.ticket_code }}
+                        </a>
+
                     </td>
 
                     <td>
