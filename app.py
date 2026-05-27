@@ -147,17 +147,21 @@ def orders_create_webhook():
                     customer,
                     email,
                     phone,
+                    pr_username,
+                    commission_amount,
                     used,
                     validated_at
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, 0, NULL)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
             """, (
                 ticket_code,
                 event_name,
-                variant_name,
-                customer_name,
+                rate,
+                customer,
                 email,
-                phone
+                phone,
+                session.get("user"),
+                commission_amount
             ))
 
             generated.append(ticket_code)
