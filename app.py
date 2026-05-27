@@ -592,7 +592,8 @@ def ticket(event_name):
             customer,
             email,
             phone,
-            pr_username
+            pr_username,
+            commission_amount
         ))
 
         conn.commit()
