@@ -11,6 +11,36 @@ import base64
 import csv
 
 
+def get_commission(event_name, rate_name):
+
+    try:
+
+        with open("percPR.csv", newline='', encoding='utf-8') as csvfile:
+
+            reader = csv.DictReader(csvfile)
+
+            for row in reader:
+
+                event_csv = row.get("event", "").strip().lower()
+                rate_csv = row.get("rate", "").strip().lower()
+
+                if (
+                    event_csv == event_name.strip().lower()
+                    and
+                    rate_csv == rate_name.strip().lower()
+                ):
+
+                    try:
+                        return float(row.get("commission", 0))
+                    except:
+                        return 0
+
+    except Exception as e:
+
+        print("COMMISSION_ERROR:", e)
+
+    return 0
+
 app = Flask(__name__)
 app.secret_key = "bonaevents_secret"
 
@@ -167,6 +197,7 @@ def init_db():
             email TEXT,
             phone TEXT,
             pr_username TEXT,
+            commission_amount REAL DEFAULT 0,
             used INTEGER DEFAULT 0,
             validated_at TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
@@ -504,6 +535,7 @@ def ticket(event_name):
 
     if request.method == "POST":
         rate = request.form.get("rate")
+        commission_amount = get_commission(event_name, rate)
         customer = request.form.get("customer")
         email = request.form.get("email")
         phone = request.form.get("phone")
@@ -544,10 +576,11 @@ def ticket(event_name):
                 email,
                 phone,
                 pr_username,
+                commission_amount,
                 used,
                 validated_at
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, 0, NULL)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
         """, (
             ticket_code,
             event_name,
