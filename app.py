@@ -823,6 +823,7 @@ def import_shopify_csv():
             handle = row.get("Handle", "").strip()
             variant = row.get("Option1 Value", "").strip()
             price = row.get("Variant Price", "0").strip()
+            commission = row.get("importo_della_commissione", "0").strip()
             image = row.get("Image Src", "").strip()
 
             if title:
@@ -846,21 +847,28 @@ def import_shopify_csv():
             except:
                 price = 0
 
+            try:
+                commission = float(commission)
+            except:
+                commission = 0
+
             cursor.execute("""
                 INSERT INTO events (
                     title,
                     handle,
                     image,
                     variant,
-                    price
+                    price,
+                    commission_amount     
                 )
-                VALUES (%s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s)
             """, (
                 title,
                 handle,
                 image,
                 variant,
-                price
+                price,
+                commission
             ))
 
             imported += 1
