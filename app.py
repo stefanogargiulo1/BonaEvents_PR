@@ -828,6 +828,33 @@ def import_shopify_csv():
 
     return f"Import completato. Eventi importati: {imported}"
 
+@app.route("/ticket-details/<ticket_code>")
+def ticket_details(ticket_code):
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM tickets
+        WHERE ticket_code = %s
+    """, (ticket_code,))
+
+    ticket = cursor.fetchone()
+
+    conn.close()
+
+    if not ticket:
+        return "Ticket non trovato", 404
+
+    return render_template(
+        "ticket_details.html",
+        ticket=ticket
+    )
+
 @app.route("/logout")
 def logout():
     session.clear()
