@@ -36,9 +36,19 @@ def get_commission(event_name, rate_name):
 
                     try:
 
-                        commission = float(
-                            row.get("importo_della_commissione", 0)
+                        commission_raw = row.get(
+                            "importo_della_commissione",
+                            "0"
                         )
+
+                        commission_raw = (
+                            commission_raw
+                            .replace("€", "")
+                            .replace(",", ".")
+                            .strip()
+                        )
+
+                        commission = float(commission_raw)
 
                         print("COMMISSION FOUND:", commission)
 
