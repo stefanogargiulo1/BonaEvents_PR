@@ -18,6 +18,7 @@ def get_commission(event_name, rate_name):
         with open("percPR.csv", newline='', encoding='utf-8') as csvfile:
 
             reader = csv.DictReader(csvfile)
+            print(reader.fieldnames)
 
             for row in reader:
 
