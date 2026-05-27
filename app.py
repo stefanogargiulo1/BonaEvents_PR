@@ -572,9 +572,23 @@ def ticket(event_name):
             phone=phone
         )
 
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT variant, price
+        FROM events
+        WHERE title = %s
+    """, (event_name,))
+
+    variants = cursor.fetchall()
+
+    conn.close()
+
     return render_template(
         "ticket.html",
-        event_name=event_name
+        event_name=event_name,
+        variants=variants
     )
 
 @app.route("/tickets")
@@ -730,6 +744,10 @@ def import_shopify_csv():
 
         reader = csv.DictReader(csvfile)
 
+        last_title = ""
+        last_handle = ""
+        last_image = ""
+
         for row in reader:
 
             title = row.get("Title", "").strip()
@@ -737,6 +755,19 @@ def import_shopify_csv():
             variant = row.get("Option1 Value", "").strip()
             price = row.get("Variant Price", "0").strip()
             image = row.get("Image Src", "").strip()
+
+            if title:
+                last_title = title
+
+            if handle:
+                last_handle = handle
+
+            if image:
+                last_image = image
+
+            title = last_title
+            handle = last_handle
+            image = last_image
 
             if not title:
                 continue
