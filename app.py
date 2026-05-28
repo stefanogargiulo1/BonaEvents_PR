@@ -10,6 +10,7 @@ import hmac
 import hashlib
 import base64
 import base64
+import io
 import csv
 import requests
 import resend
@@ -633,10 +634,15 @@ def view_ticket(ticket_code):
     if not ticket:
         return "Ticket non trovato"
 
-    qr_url = url_for(
-        "static",
-        filename=f"qrcodes/{ticket['ticket_code']}.png"
-    )
+    qr = qrcode.make(ticket["ticket_code"])
+
+    buffer = io.BytesIO()
+
+    qr.save(buffer, format="PNG")
+
+    qr_base64 = base64.b64encode(
+        buffer.getvalue()
+    ).decode("utf-8")
 
     return render_template(
         "view_ticket.html",
@@ -644,7 +650,7 @@ def view_ticket(ticket_code):
         customer=ticket["customer"],
         rate=ticket["rate"],
         ticket_code=ticket["ticket_code"],
-        qr_url=qr_url
+        qr_base64=qr_base64
     )
 
 @app.route("/admin/users")
@@ -1136,7 +1142,14 @@ def ticket_details(ticket_code):
 
     if not ticket:
         return "Ticket non trovato", 404
-
+    
+    qr = qrcode.make(ticket["ticket_code"])
+    buffer = io.BytesIO()
+    qr.save(buffer, format="PNG")
+    qr_base64 = base64.b64encode(
+        buffer.getvalue()
+    ).decode("utf-8")
+    
     return render_template(
         "ticket_details.html",
         ticket=ticket
