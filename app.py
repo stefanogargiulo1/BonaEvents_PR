@@ -1149,10 +1149,11 @@ def ticket_details(ticket_code):
     qr_base64 = base64.b64encode(
         buffer.getvalue()
     ).decode("utf-8")
-    
+
     return render_template(
         "ticket_details.html",
-        ticket=ticket
+        ticket=ticket,
+        qr_base64=qr_base64
     )
 
 
