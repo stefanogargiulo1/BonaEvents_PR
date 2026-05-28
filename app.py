@@ -119,7 +119,6 @@ def send_ticket_email(
     ticket_code
 ):
 
-    ```python
     ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket-view/{ticket_code}"
 
     html = f"""
@@ -184,7 +183,7 @@ def send_ticket_email(
     })
 
     print("EMAIL_READY:", email)
-```
+
 
 app.secret_key = "bonaevents_secret"
 
