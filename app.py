@@ -119,7 +119,7 @@ def send_ticket_email(
     ticket_code
 ):
     print("SEND_EMAIL_FUNCTION_CALLED")
-    ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket-view/{ticket_code}"
+    ticket_url = f"https://staff.bonaevents.site/ticket-view/{ticket_code}"
 
     html = f"""
     <div style="background:#0f0f0f;padding:40px;font-family:Arial;color:white;text-align:center;">
@@ -318,7 +318,7 @@ def orders_create_webhook():
                 ticket_code
             )
                 
-            ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket-view/{ticket_code}"
+            ticket_url = f"https://staff.bonaevents.site/ticket-view/{ticket_code}"
             order_id = payload.get("id")
 
             update_shopify_order_note(
