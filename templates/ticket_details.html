@@ -262,7 +262,8 @@
             <div class="qr-box">
 
                 <img
-                    src="{{ url_for('static', filename='qrcodes/' + ticket.ticket_code + '.png') }}"
+                    src="data:image/png;base64,{{ qr_base64 }}"
+                    alt="QR Code"
                 >
 
             </div>
@@ -320,11 +321,11 @@
             <div class="actions">
 
                 <a
-                    href="{{ url_for('static', filename='qrcodes/' + ticket.ticket_code + '.png') }}"
-                    download
+                    href="data:image/png;base64,{{ qr_base64 }}"
+                    download="{{ ticket.ticket_code }}.png"
                     class="btn btn-download"
                 >
-                    Download QR
+                    📥 Download Ticket
                 </a>
 
                 <a
