@@ -11,6 +11,38 @@ import hashlib
 import base64
 import base64
 import csv
+import requests
+
+SHOPIFY_WEBHOOK_SECRET = ...
+def update_shopify_order_note(order_id, ticket_url):
+
+    try:
+
+        url = f"https://{SHOPIFY_STORE}/admin/api/{SHOPIFY_API_VERSION}/orders/{order_id}.json"
+
+        headers = {
+            "X-Shopify-Access-Token": SHOPIFY_ADMIN_TOKEN,
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "order": {
+                "id": order_id,
+                "note": f"TICKET_URL: {ticket_url}"
+            }
+        }
+
+        response = requests.put(
+            url,
+            json=payload,
+            headers=headers
+        )
+
+        print("SHOPIFY_NOTE_UPDATED:", response.status_code)
+
+    except Exception as e:
+
+        print("SHOPIFY_NOTE_ERROR:", e)
 
 
 def get_commission(event_name, rate_name):
@@ -235,6 +267,13 @@ def orders_create_webhook():
 
             generated.append(ticket_code)
             ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket-view/{ticket_code}"
+            order_id = payload.get("id")
+
+            update_shopify_order_note(
+                order_id,
+                ticket_url
+            )
+
 
             # msg = Message(
              #   subject=f"BonaEvents Ticket - {event_name}",
