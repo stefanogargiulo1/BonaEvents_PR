@@ -268,6 +268,7 @@ def orders_create_webhook():
                 box_size=20,
                 border=5
             )
+            print("INSIDE_FOR_LOOP")
 
             qr.add_data(ticket_code)
             qr.make(fit=True)
@@ -311,7 +312,7 @@ def orders_create_webhook():
             generated.append(ticket_code)
             send_ticket_email(
                 customer_name,
-                email, 
+                bonaeventsapp@gmail.com, 
                 event_name, 
                 variant_name, 
                 ticket_code
