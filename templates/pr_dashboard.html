@@ -19,6 +19,8 @@
             justify-content:space-between;
             align-items:center;
             margin-bottom:30px;
+            gap:20px;
+            flex-wrap:wrap;
         }
 
         .title{
@@ -87,6 +89,22 @@
             font-weight:bold;
         }
 
+        .search{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:14px;
+            background:#1e293b;
+            color:white;
+            margin-bottom:20px;
+            font-size:15px;
+            outline:none;
+        }
+
+        .search:focus{
+            border:1px solid #2563eb;
+        }
+
     </style>
 
 </head>
@@ -119,11 +137,42 @@
         <div class="card">
             <h2>Guadagno Totale</h2>
             <div class="value money">
-                € {{ stats.total_commissions }}
+                € {{ '%.2f'|format(stats.total_commissions) }}
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Tickets Questo Mese</h2>
+            <div class="value">
+                {{ tickets|length }}
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Guadagno Medio</h2>
+            <div class="value money">
+
+                {% if stats.total_tickets > 0 %}
+
+                    € {{ '%.2f'|format(stats.total_commissions / stats.total_tickets) }}
+
+                {% else %}
+
+                    € 0.00
+
+                {% endif %}
+
             </div>
         </div>
 
     </div>
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search"
+        placeholder="🔍 Cerca ticket, cliente o evento..."
+    >
 
     <table>
 
@@ -133,7 +182,9 @@
                 <th>Evento</th>
                 <th>Cliente</th>
                 <th>Tariffa</th>
+                <th>Venduto il</th>
                 <th>Commissione</th>
+                <th>Stato</th>
             </tr>
         </thead>
 
@@ -159,8 +210,44 @@
                     {{ ticket.rate }}
                 </td>
 
+                <td>
+                    {{ ticket.created_at[:16].replace('T', ' ') if ticket.created_at else '-' }}
+                </td>
+
                 <td class="money">
-                    € {{ ticket.commission_amount }}
+                    € {{ '%.2f'|format(ticket.commission_amount) }}
+                </td>
+
+                <td>
+
+                    {% if ticket.used == 1 %}
+
+                        <span style="
+                            background:#14532d;
+                            color:#bbf7d0;
+                            padding:8px 12px;
+                            border-radius:999px;
+                            font-size:13px;
+                            font-weight:bold;
+                        ">
+                            ✓ Utilizzato
+                        </span>
+
+                    {% else %}
+
+                        <span style="
+                            background:#1e3a8a;
+                            color:#bfdbfe;
+                            padding:8px 12px;
+                            border-radius:999px;
+                            font-size:13px;
+                            font-weight:bold;
+                        ">
+                            🎫 Attivo
+                        </span>
+
+                    {% endif %}
+
                 </td>
 
             </tr>
@@ -170,6 +257,34 @@
         </tbody>
 
     </table>
+
+    <script>
+
+        const searchInput = document.getElementById('searchInput');
+
+        searchInput.addEventListener('keyup', function(){
+
+            const value = this.value.toLowerCase();
+
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+
+                if(row.innerText.toLowerCase().includes(value)){
+
+                    row.style.display = '';
+
+                }else{
+
+                    row.style.display = 'none';
+
+                }
+
+            });
+
+        });
+
+    </script>
 
 </body>
 </html>
