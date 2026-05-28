@@ -75,6 +75,21 @@
         .btn:hover{
             opacity:0.9;
         }
+        .whatsapp{
+            background:#25D366;
+        }
+
+        .whatsapp:hover{
+            background:#1ebe5d;
+        }
+
+        .download{
+            background:#2563eb;
+        }
+
+        .download:hover{
+            background:#1d4ed8;
+        }
 
         .info{
             margin-top:25px;
@@ -133,7 +148,25 @@
             >
                 VISUALIZZA TICKET
             </a>
+            <br>
 
+            <a
+                class="btn whatsapp"
+                target="_blank"
+                href="https://wa.me/?text=🎫%20BonaEvents%0A%0AEvento:%20{{ event }}%0ACodice:%20{{ ticket_code }}%0A%0AVisualizza%20ticket:%0A{{ ticket_url }}"
+            >
+                📲 INVIA SU WHATSAPP
+            </a>
+
+            <br>
+
+            <a
+                class="btn download"
+                href="{{ url_for('static', filename=qr_image) }}"
+                download
+            >
+                📥 SCARICA QR
+            </a>
         </div>
 
     </div>
