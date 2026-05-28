@@ -106,7 +106,7 @@ def send_ticket_email(
 
     msg.html = html
 
-    # mail.send(msg)
+    mail.send(msg)
 
     print("EMAIL_READY:", email)
 app.secret_key = "bonaevents_secret"
