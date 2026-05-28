@@ -308,6 +308,14 @@ def orders_create_webhook():
                 ))
 
             generated.append(ticket_code)
+            send_ticket_email(
+                customer_name,
+                email, 
+                event_name, 
+                variant_name, 
+                ticket_code
+            )
+                
             ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket-view/{ticket_code}"
             order_id = payload.get("id")
 
