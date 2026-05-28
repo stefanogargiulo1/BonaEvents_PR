@@ -172,7 +172,7 @@ def send_ticket_email(
     print("SENDING_RESEND_EMAIL")
     resend.Emails.send({
 
-        "from": "BonaEvents <onboarding@resend.dev>",
+        "from": "BonaEvents <tickets@bonaevents.site>",
 
         "to": [email],
 
