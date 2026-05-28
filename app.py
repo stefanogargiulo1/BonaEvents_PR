@@ -220,16 +220,16 @@ def orders_create_webhook():
                     validated_at
                 )
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
-            """, (
-                ticket_code,
-                event_name,
-                rate,
-                customer,
-                email,
-                phone,
-                session.get("user"),
-                commission_amount
-            ))
+                """, (
+                    ticket_code,
+                    event_name,
+                    variant_name,
+                    customer_name,
+                    email,
+                    phone,
+                    "SHOPIFY",
+                    0
+                ))
 
             generated.append(ticket_code)
 
