@@ -256,7 +256,9 @@ def orders_create_webhook():
             <img src="https://stellar-courtesy-production-5954.up.railway.app/static/qrcodes/{ticket_code}.png" width="250">
             """
 
+            print("SENDING_EMAIL_TO:", email)
             mail.send(msg)
+            print("EMAIL_SENT")
 
     conn.commit()
     conn.close()
