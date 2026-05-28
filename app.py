@@ -12,6 +12,7 @@ import base64
 import base64
 import csv
 import requests
+import resend
 
 SHOPIFY_WEBHOOK_SECRET = ...
 def update_shopify_order_note(order_id, ticket_url):
@@ -99,6 +100,7 @@ def get_commission(event_name, rate_name):
     return 0
 
 app = Flask(__name__)
+resend.api_key = os.getenv("RESEND_API_KEY")
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -117,32 +119,73 @@ def send_ticket_email(
     ticket_code
 ):
 
-    ticket_url = url_for(
-        "view_ticket",
-        ticket_code=ticket_code,
-        _external=True
-    )
+    ```python
+    ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket-view/{ticket_code}"
 
-    html = render_template(
-        "email_ticket.html",
-        customer=customer,
-        event=event,
-        rate=rate,
-        ticket_code=ticket_code,
-        ticket_url=ticket_url
-    )
+    html = f"""
+    <div style="background:#0f0f0f;padding:40px;font-family:Arial;color:white;text-align:center;">
 
-    msg = Message(
-        subject=f"BonaEvents Ticket - {event}",
-        sender=app.config['MAIL_USERNAME'],
-        recipients=[email]
-    )
+        <h1 style="color:#ff1e1e;">
+            🎫 BonaEvents Ticket
+        </h1>
 
-    msg.html = html
+        <p>
+            Il tuo ticket è stato confermato.
+        </p>
 
-    mail.send(msg)
+        <div style="
+            background:#1a1a1a;
+            padding:25px;
+            border-radius:15px;
+            max-width:500px;
+            margin:auto;
+            margin-top:30px;
+        ">
+
+            <h2>{event}</h2>
+
+            <p>
+                <b>Ticket:</b> {rate}
+            </p>
+
+            <p>
+                <b>Codice:</b> {ticket_code}
+            </p>
+
+            <a href="{ticket_url}"
+               style="
+               display:inline-block;
+               margin-top:20px;
+               padding:15px 25px;
+               background:#ff1e1e;
+               color:white;
+               text-decoration:none;
+               border-radius:10px;
+               font-weight:bold;
+               ">
+               VISUALIZZA TICKET
+            </a>
+
+        </div>
+
+    </div>
+    """
+
+    resend.Emails.send({
+
+        "from": "BonaEvents <onboarding@resend.dev>",
+
+        "to": [email],
+
+        "subject": f"🎫 Ticket {event}",
+
+        "html": html
+
+    })
 
     print("EMAIL_READY:", email)
+```
+
 app.secret_key = "bonaevents_secret"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
