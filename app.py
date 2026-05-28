@@ -312,7 +312,7 @@ def orders_create_webhook():
             generated.append(ticket_code)
             send_ticket_email(
                 customer_name,
-                "bonaeventsapp@gmail.com", 
+                email, 
                 event_name, 
                 variant_name, 
                 ticket_code
