@@ -337,11 +337,11 @@
                     </td>
 
                     <td>
-                        {{ user.created_at.strftime('%d/%m/%Y %H:%M') if user.created_at else '-' }}
+                        {{ user.created_at[:16].replace('T', ' ') if user.created_at else '-' }}
                     </td>
 
                     <td>
-                        {{ user.approved_at.strftime('%d/%m/%Y %H:%M') if user.approved_at else '-' }}
+                        {{ user.approved_at[:16].replace('T', ' ') if user.approved_at else '-' }}
                     </td>
 
                     <td>
