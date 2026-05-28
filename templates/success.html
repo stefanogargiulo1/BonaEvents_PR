@@ -75,6 +75,7 @@
         .btn:hover{
             opacity:0.9;
         }
+
         .whatsapp{
             background:#25D366;
         }
@@ -89,6 +90,26 @@
 
         .download:hover{
             background:#1d4ed8;
+        }
+
+        .back-btn{
+
+            display:inline-block;
+
+            margin-top:25px;
+
+            color:#999;
+
+            text-decoration:none;
+
+            font-weight:bold;
+
+            transition:0.2s;
+        }
+
+        .back-btn:hover{
+
+            color:white;
         }
 
         .info{
@@ -148,6 +169,7 @@
             >
                 VISUALIZZA TICKET
             </a>
+
             <br>
 
             <a
@@ -167,6 +189,16 @@
             >
                 📥 SCARICA QR
             </a>
+
+            <br>
+
+            <a
+                class="back-btn"
+                href="{{ url_for('dashboard') }}"
+            >
+                ← TORNA DASHBOARD
+            </a>
+
         </div>
 
     </div>
