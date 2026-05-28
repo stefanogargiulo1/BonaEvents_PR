@@ -232,6 +232,31 @@ def orders_create_webhook():
                 ))
 
             generated.append(ticket_code)
+            ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket/{ticket_code}"
+
+            msg = Message(
+                subject=f"BonaEvents Ticket - {event_name}",
+                sender=app.config['MAIL_USERNAME'],
+                recipients=[email]
+            )
+
+            msg.html = f"""
+            <h2>🎟️ Ticket Confermato</h2>
+
+            <p><b>Evento:</b> {event_name}</p>
+            <p><b>Cliente:</b> {customer_name}</p>
+            <p><b>Codice Ticket:</b> {ticket_code}</p>
+
+            <p>
+            <a href="{ticket_url}">
+            Visualizza Ticket
+            </a>
+            </p>
+
+            <img src="https://stellar-courtesy-production-5954.up.railway.app/static/qrcodes/{ticket_code}.png" width="250">
+            """
+
+            mail.send(msg)
 
     conn.commit()
     conn.close()
