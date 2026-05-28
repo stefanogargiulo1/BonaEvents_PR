@@ -118,7 +118,7 @@ def send_ticket_email(
     rate,
     ticket_code
 ):
-
+    print("SEND_EMAIL_FUNCTION_CALLED")
     ticket_url = f"https://stellar-courtesy-production-5954.up.railway.app/ticket-view/{ticket_code}"
 
     html = f"""
@@ -169,7 +169,7 @@ def send_ticket_email(
 
     </div>
     """
-
+    print("SENDING_RESEND_EMAIL")
     resend.Emails.send({
 
         "from": "BonaEvents <onboarding@resend.dev>",
@@ -182,6 +182,7 @@ def send_ticket_email(
 
     })
 
+    print("RESEND_EMAIL_SENT")
     print("EMAIL_READY:", email)
 
 
