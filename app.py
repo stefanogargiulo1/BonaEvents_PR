@@ -240,20 +240,17 @@ def orders_create_webhook():
                 recipients=[email]
             )
 
-            msg.html = f"""
-            <h2>🎟️ Ticket Confermato</h2>
+            msg.body = f"""
+            TICKET BONAEVENTS
 
-            <p><b>Evento:</b> {event_name}</p>
-            <p><b>Cliente:</b> {customer_name}</p>
-            <p><b>Codice Ticket:</b> {ticket_code}</p>
+            Evento: {event_name}
 
-            <p>
-            <a href="{ticket_url}">
-            Visualizza Ticket
-            </a>
-            </p>
+            Cliente: {customer_name}
 
-            <img src="https://stellar-courtesy-production-5954.up.railway.app/static/qrcodes/{ticket_code}.png" width="250">
+            Codice Ticket: {ticket_code}
+
+            Visualizza Ticket:
+            {ticket_url}
             """
 
             print("SENDING_EMAIL_TO:", email)
