@@ -195,7 +195,17 @@
             <tr>
 
                 <td>
-                    {{ ticket.ticket_code }}
+                    <a
+                        href="/ticket-details/{{ ticket.ticket_code }}"
+                        style="
+                            color:#93c5fd;
+                            text-decoration:none;
+                            font-weight:bold;
+                        "
+                    >
+                        {{ ticket.ticket_code }}
+                    </a>
+
                 </td>
 
                 <td>
