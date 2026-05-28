@@ -321,11 +321,11 @@
             <div class="actions">
 
                 <a
-                    href="data:image/png;base64,{{ qr_base64 }}"
-                    download="{{ ticket.ticket_code }}.png"
+                    href="{{ url_for('view_ticket', ticket_code=ticket.ticket_code) }}"
+                    target="_blank"
                     class="btn btn-download"
                 >
-                    📥 Download Ticket
+                    📥 Scarica Ticket
                 </a>
 
                 <a
