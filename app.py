@@ -253,6 +253,16 @@ def orders_create_webhook():
 
         event_name = item.get("title", "Evento")
         variant_name = item.get("variant_title", "Standard")
+        event_date = ""
+
+        for prop in item.get("properties", []):
+
+            if prop.get("name") == "Data Evento":
+
+                event_date = prop.get("value", "")
+                break
+
+        print("EVENT_DATE:", event_date)
 
         quantity = int(item.get("quantity", 1))
 
