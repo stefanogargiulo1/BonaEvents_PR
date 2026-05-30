@@ -295,6 +295,7 @@ def orders_create_webhook():
 
             img.save(qr_path)
 
+            print("EVENT_DATE_BEFORE_SAVE:", event_date)
             cursor.execute("""
                 INSERT INTO tickets (
                     ticket_code,
@@ -309,6 +310,7 @@ def orders_create_webhook():
                     used,
                     validated_at
                 )
+
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
                 """, (
                     ticket_code,
@@ -321,6 +323,8 @@ def orders_create_webhook():
                     "SHOPIFY",
                     0
                 ))
+
+            print("TICKET_SAVED:", ticket_code)
 
             generated.append(ticket_code)
             send_ticket_email(
@@ -673,6 +677,7 @@ def view_ticket(ticket_code):
         customer=ticket["customer"],
         rate=ticket["rate"],
         ticket_code=ticket["ticket_code"],
+        event_date=ticket["event_date"],
         qr_base64=qr_base64
     )
 
@@ -838,6 +843,7 @@ def ticket(event_name):
             customer,
             email,
             phone,
+            None,
             pr_username,
             commission_amount
         ))
