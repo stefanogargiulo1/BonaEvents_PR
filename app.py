@@ -32,7 +32,7 @@ def update_shopify_order_note(order_id, ticket_url):
                 "id": order_id,
                 "note": f"TICKET_URL: {ticket_url}"
             }
-        }
+        }  
 
         response = requests.put(
             url,
@@ -303,12 +303,13 @@ def orders_create_webhook():
                     customer,
                     email,
                     phone,
+                    event_date,
                     pr_username,
                     commission_amount,
                     used,
                     validated_at
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
                 """, (
                     ticket_code,
                     event_name,
@@ -316,6 +317,7 @@ def orders_create_webhook():
                     customer_name,
                     email,
                     phone,
+                    event_date,
                     "SHOPIFY",
                     0
                 ))
@@ -395,6 +397,7 @@ def init_db():
             customer TEXT,
             email TEXT,
             phone TEXT,
+            event_date TEXT,
             pr_username TEXT,
             commission_amount REAL DEFAULT 0,
             used INTEGER DEFAULT 0,
@@ -407,6 +410,16 @@ def init_db():
         cursor.execute("""
             ALTER TABLE tickets
             ADD COLUMN pr_username TEXT
+        """)
+        conn.commit()
+
+    except:
+        conn.rollback()
+
+    try:
+        cursor.execute("""
+            ALTER TABLE tickets
+            ADD COLUMN event_date TEXT
         """)
         conn.commit()
 
@@ -811,12 +824,13 @@ def ticket(event_name):
                 customer,
                 email,
                 phone,
+                event_date,
                 pr_username,
                 commission_amount,
                 used,
                 validated_at
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
         """, (
             ticket_code,
             event_name,
