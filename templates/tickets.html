@@ -221,6 +221,7 @@
 
                     <th>Codice</th>
                     <th>Evento</th>
+                    <th>Data Evento</th>
                     <th>Cliente</th>
                     <th>PR</th>
                     <th>Tariffa</th>
@@ -252,6 +253,10 @@
 
                     <td>
                         {{ ticket.event }}
+                    </td>
+
+                    <td>
+                        {{ ticket.event_date or '-' }}
                     </td>
 
                     <td>
