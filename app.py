@@ -917,6 +917,16 @@ def tickets():
 
     tickets = cursor.fetchall()
 
+    for ticket in tickets:
+
+        if ticket.get("created_at"):
+
+            ticket["created_at_formatted"] = (
+                str(ticket["created_at"])
+                .replace("+00:00", "")
+                [:16]
+            )
+
     conn.close()
 
     return render_template(
