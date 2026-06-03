@@ -11,6 +11,9 @@ import hashlib
 import base64
 import base64
 import io
+import pandas as pd
+from flask import send_file
+from io import BytesIO
 import csv
 import requests
 import resend
@@ -1206,8 +1209,42 @@ def export_sales():
     if not is_admin():
         return redirect(url_for("dashboard"))
 
-    return "EXPORT SALES WORKING"
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
+    cursor.execute("""
+        SELECT *
+        FROM tickets
+        ORDER BY created_at DESC
+    """)
+
+    tickets = cursor.fetchall()
+
+    conn.close()
+
+    df = pd.DataFrame(tickets)
+
+    output = BytesIO()
+
+    with pd.ExcelWriter(
+        output,
+        engine="openpyxl"
+    ) as writer:
+
+        df.to_excel(
+            writer,
+            index=False,
+            sheet_name="Vendite"
+        )
+
+    output.seek(0)
+
+    return send_file(
+        output,
+        as_attachment=True,
+        download_name=f"vendite_{datetime.now().strftime('%d-%m-%Y')}.xlsx",
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 @app.route("/logout")
 def logout():
