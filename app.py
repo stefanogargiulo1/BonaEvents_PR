@@ -1246,6 +1246,28 @@ def export_sales():
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
+
+@app.route("/reset-sales")
+def reset_sales():
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM tickets
+    """)
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("tickets"))
+
 @app.route("/confirm-reset-sales")
 def confirm_reset_sales():
 
