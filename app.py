@@ -433,6 +433,16 @@ def init_db():
     except:
         conn.rollback()
 
+    try:
+        cursor.execute("""
+            ALTER TABLE tickets
+            ADD COLUMN sale_source TEXT
+        """)
+        conn.commit()
+
+    except:
+        conn.rollback()
+
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
