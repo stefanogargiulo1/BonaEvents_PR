@@ -309,6 +309,7 @@ def orders_create_webhook():
                     phone,
                     event_date,
                     pr_username,
+                    sale_source,
                     commission_amount,
                     used,
                     validated_at
@@ -324,6 +325,7 @@ def orders_create_webhook():
                     phone,
                     event_date,
                     "SHOPIFY",
+                    "SHOPIFY_DIRECT"
                     0
                 ))
 
