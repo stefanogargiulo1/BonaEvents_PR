@@ -247,6 +247,24 @@ def orders_create_webhook():
 
     line_items = payload.get("line_items", [])
 
+    pr_username = "SHOPIFY"
+    sale_source = "SHOPIFY_DIRECT"
+
+    for attr in payload.get("note_attributes", []):
+
+        if attr.get("name") == "_ref_pr":
+
+            ref_pr = attr.get("value", "").strip()
+
+            if ref_pr:
+
+                pr_username = ref_pr
+                sale_source = "SHOPIFY_REF"
+
+                print("REFERRAL_FOUND:", ref_pr)
+
+                break
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -324,9 +342,8 @@ def orders_create_webhook():
                     email,
                     phone,
                     event_date,
-                    "SHOPIFY",
-                    "SHOPIFY_DIRECT",
-                    0
+                    pr_username,
+                    sale_source,
                 ))
 
             print("TICKET_SAVED:", ticket_code)
