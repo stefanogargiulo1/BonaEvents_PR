@@ -333,7 +333,7 @@ def orders_create_webhook():
                     validated_at
                 )
 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, 0, NULL)
                 """, (
                     ticket_code,
                     event_name,
