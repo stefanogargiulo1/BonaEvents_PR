@@ -1246,6 +1246,83 @@ def export_sales():
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
+@app.route("/confirm-reset-sales")
+def confirm_reset_sales():
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    return """
+    <html>
+    <head>
+        <title>Conferma Azzeramento</title>
+    </head>
+
+    <body style="
+        background:#0f172a;
+        color:white;
+        font-family:Arial;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+    ">
+
+        <div style="
+            background:#1e293b;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+            max-width:500px;
+        ">
+
+            <h1>⚠️ Attenzione</h1>
+
+            <p style="margin-top:20px;">
+                Verrà scaricato il file Excel con tutte le vendite.
+            </p>
+
+            <p>
+                Successivamente tutti i ticket verranno eliminati.
+            </p>
+
+            <div style="margin-top:30px;">
+
+                <a href="/reset-sales"
+                   style="
+                   background:#dc2626;
+                   color:white;
+                   padding:12px 20px;
+                   text-decoration:none;
+                   border-radius:10px;
+                   margin-right:10px;
+                   ">
+                   CONFERMA
+                </a>
+
+                <a href="/tickets"
+                   style="
+                   background:#334155;
+                   color:white;
+                   padding:12px 20px;
+                   text-decoration:none;
+                   border-radius:10px;
+                   ">
+                   ANNULLA
+                </a>
+
+            </div>
+
+        </div>
+
+    </body>
+    </html>
+    """
+
+
 @app.route("/logout")
 def logout():
     session.clear()
