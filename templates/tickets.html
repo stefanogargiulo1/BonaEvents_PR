@@ -298,7 +298,7 @@
                     </td>
 
                     <td>
-                        {{ ticket.created_at }}
+                        {{ ticket.created_at.strftime('%d/%m/%Y %H:%M') if ticket.created_at else '-' }}
                     </td>
 
                 </tr>
