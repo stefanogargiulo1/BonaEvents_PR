@@ -51,6 +51,21 @@
             background:#1d4ed8;
         }
 
+        .reset-btn{
+            display:inline-block;
+            background:#dc2626;
+            color:white;
+            padding:12px 18px;
+            border-radius:10px;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.2s;
+        }
+
+        .reset-btn:hover{
+            background:#b91c1c;
+        }
+
         .stats{
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -209,8 +224,16 @@
 
     </div>
 
-    <div class="table-container">
+    <div style="margin-bottom:20px; display:flex; justify-content:flex-end;">
 
+        <a href="#" class="reset-btn">
+            📊 Esporta e Azzera Vendite
+        </a>
+
+    </div>
+
+    <div class="table-container">
+        
         {% if tickets %}
 
         <table>
