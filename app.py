@@ -1291,7 +1291,7 @@ def confirm_reset_sales():
 
             <div style="margin-top:30px;">
 
-                <a href="/reset-sales"
+                <a href="/export-sales"
                    style="
                    background:#dc2626;
                    color:white;
