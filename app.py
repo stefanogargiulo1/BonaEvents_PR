@@ -1197,6 +1197,17 @@ def ticket_details(ticket_code):
     )
 
 
+@app.route("/export-sales")
+def export_sales():
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    return "EXPORT SALES WORKING"
+
 
 @app.route("/logout")
 def logout():

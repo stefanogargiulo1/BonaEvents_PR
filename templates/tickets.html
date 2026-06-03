@@ -226,14 +226,14 @@
 
     <div style="margin-bottom:20px; display:flex; justify-content:flex-end;">
 
-        <a href="#" class="reset-btn">
+        <a href="{{ url_for('export_sales') }}" class="reset-btn">
             📊 Esporta e Azzera Vendite
         </a>
 
     </div>
 
     <div class="table-container">
-        
+
         {% if tickets %}
 
         <table>
