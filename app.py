@@ -1313,17 +1313,20 @@ def confirm_reset_sales():
 
             <div style="margin-top:30px;">
 
-                <a href="/export-sales"
-                   style="
-                   background:#dc2626;
-                   color:white;
-                   padding:12px 20px;
-                   text-decoration:none;
-                   border-radius:10px;
-                   margin-right:10px;
-                   ">
-                   CONFERMA
-                </a>
+                <button
+                    onclick="exportAndReset()"
+                    style="
+                    background:#dc2626;
+                    color:white;
+                    padding:12px 20px;
+                    border:none;
+                    border-radius:10px;
+                    cursor:pointer;
+                    margin-right:10px;
+                    font-weight:bold;
+                    ">
+                    CONFERMA
+                </button>
 
                 <a href="/tickets"
                    style="
@@ -1339,6 +1342,17 @@ def confirm_reset_sales():
             </div>
 
         </div>
+        
+        <script>
+
+        function exportAndReset() {
+            window.open("/export-sales", "_blank");
+            setTimeout(function() {
+                window.location.href = "/reset-sales";
+            }, 1500);
+        }
+
+        </script>
 
     </body>
     </html>
