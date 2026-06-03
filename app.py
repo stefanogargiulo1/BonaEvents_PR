@@ -844,6 +844,7 @@ def ticket(event_name):
                 phone,
                 event_date,
                 pr_username,
+                sale_source,
                 commission_amount,
                 used,
                 validated_at
@@ -858,6 +859,7 @@ def ticket(event_name):
             phone,
             None,
             pr_username,
+            "CASH",
             commission_amount
         ))
 
