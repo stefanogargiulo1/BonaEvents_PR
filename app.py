@@ -250,20 +250,24 @@ def orders_create_webhook():
     pr_username = "SHOPIFY"
     sale_source = "SHOPIFY_DIRECT"
 
-    for attr in payload.get("note_attributes", []):
+    for item in line_items:
 
-        if attr.get("name") == "_ref_pr":
+        print("ITEM_PROPERTIES:", item.get("properties", []))
 
-            ref_pr = attr.get("value", "").strip()
+        for prop in item.get("properties", []):
 
-            if ref_pr:
+            if prop.get("name") == "_ref_pr":
 
-                pr_username = ref_pr
-                sale_source = "SHOPIFY_REF"
+                ref_pr = prop.get("value", "").strip()
 
-                print("REFERRAL_FOUND:", ref_pr)
+                if ref_pr:
 
-                break
+                    pr_username = ref_pr
+                    sale_source = "SHOPIFY_REF"
+
+                    print("REFERRAL_FOUND:", ref_pr)
+
+                    break
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -271,7 +275,7 @@ def orders_create_webhook():
     generated = []
 
     for item in line_items:
-
+        
         event_name = item.get("title", "Evento")
         variant_name = item.get("variant_title", "Standard")
         event_date = ""
