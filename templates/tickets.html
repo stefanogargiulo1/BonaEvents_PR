@@ -247,6 +247,7 @@
                     <th>Data Evento</th>
                     <th>Cliente</th>
                     <th>PR</th>
+                    <th>Fonte</th>
                     <th>Tariffa</th>
                     <th>Email</th>
                     <th>Telefono</th>
@@ -289,6 +290,28 @@
                     <td>
                         {{ ticket.pr_username or '-' }}
                     </td>
+
+                    <td>
+
+                        {% if ticket.sale_source == 'CASH' %}
+
+                            💵 CASH
+
+                        {% elif ticket.sale_source == 'SHOPIFY_DIRECT' %}
+
+                            🌐 SHOPIFY
+
+                        {% elif ticket.sale_source == 'SHOPIFY_REF' %}
+
+                            🔗 REF LINK
+
+                        {% else %}
+
+                            -
+
+                        {% endif %}
+
+                    </td>    
 
                     <td>
                         {{ ticket.rate or '-' }}
