@@ -235,6 +235,10 @@ def orders_create_webhook():
 
     print("NEW_ORDER_WEBHOOK:", payload)
 
+    shopify_order_id = str(payload.get("id"))
+
+    print("SHOPIFY_ORDER_ID:", shopify_order_id)
+
     customer = payload.get("customer", {}) or {}
 
     customer_name = (
@@ -271,6 +275,23 @@ def orders_create_webhook():
 
     conn = get_db_connection()
     cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id
+        FROM tickets
+        WHERE shopify_order_id = %s
+        LIMIT 1
+    """, (shopify_order_id,))
+
+    existing_ticket = cursor.fetchone()
+
+    if existing_ticket:
+
+        print("ORDER_ALREADY_PROCESSED:", shopify_order_id)
+
+        conn.close()
+
+        return "already processed", 200
 
     generated = []
 
@@ -329,6 +350,7 @@ def orders_create_webhook():
                     customer,
                     email,
                     phone,
+                    shopify_order_id,
                     event_date,
                     pr_username,
                     sale_source,
@@ -337,7 +359,7 @@ def orders_create_webhook():
                     validated_at
                 )
 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, 0, NULL)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, 0, NULL)
                 """, (
                     ticket_code,
                     event_name,
@@ -345,6 +367,7 @@ def orders_create_webhook():
                     customer_name,
                     email,
                     phone,
+                    shopify_order_id,
                     event_date,
                     pr_username,
                     sale_source,
@@ -427,14 +450,24 @@ def init_db():
             customer TEXT,
             email TEXT,
             phone TEXT,
+            shopify_order_id TEXT,
             event_date TEXT,
             pr_username TEXT,
+            sale_source TEXT,
             commission_amount REAL DEFAULT 0,
             used INTEGER DEFAULT 0,
             validated_at TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
     """)
+
+    try:
+        cursor.execute("""
+            ALTER TABLE tickets
+            ADD COLUMN shopify_order_id TEXT
+        """)
+    except:
+        pass
     
     try:
         cursor.execute("""
