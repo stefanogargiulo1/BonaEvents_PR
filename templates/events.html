@@ -180,6 +180,47 @@
 
     </div>
 
+    {% if top_pr %}
+
+<div class="card" style="margin-top:20px;">
+
+    <h2>🏆 PR DELLA SETTIMANA</h2>
+
+    {% for pr in top_pr %}
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            padding:10px 0;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+        ">
+
+            <div>
+
+                {% if loop.index == 1 %}
+                    🥇
+                {% elif loop.index == 2 %}
+                    🥈
+                {% elif loop.index == 3 %}
+                    🥉
+                {% endif %}
+
+                {{ pr.pr_username }}
+
+            </div>
+
+            <div>
+                {{ pr.vendite }} vendite
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
     {% if role in ['admin','pr'] %}
 
         {% if events and events|length > 0 %}
