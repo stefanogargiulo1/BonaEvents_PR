@@ -701,6 +701,27 @@ def dashboard():
         return redirect(url_for("login"))
 
     events = fetch_shopify_events()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT
+            pr_username,
+            COUNT(*) as vendite
+        FROM tickets
+        WHERE
+            pr_username IS NOT NULL
+            AND pr_username != 'SHOPIFY'
+            AND sale_source IN ('CASH', 'SHOPIFY_REF')
+        GROUP BY pr_username
+        ORDER BY vendite DESC
+        LIMIT 3
+    """)
+
+    top_pr = cursor.fetchall()
+
+    conn.close()
+    print("TOP_PR:", top_pr)
     print("DASHBOARD_EVENTS:", events)
     print("DASHBOARD_EVENTS_COUNT:", len(events))
 
@@ -708,7 +729,8 @@ def dashboard():
         "events.html",
         events=events,
         role=session.get("role"),
-        username=session.get("user")
+        username=session.get("user"),
+        top_pr=top_pr
     )
 
 @app.route("/ticket-view/<ticket_code>")
