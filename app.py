@@ -297,6 +297,7 @@ def orders_create_webhook():
 
     for item in line_items:
         
+        print("LINE_ITEM:", item)
         event_name = item.get("title", "Evento")
         variant_name = item.get("variant_title", "Standard")
         event_date = ""
