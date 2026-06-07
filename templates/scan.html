@@ -110,6 +110,25 @@
     <div class="container">
         <h1>BonaEvents Scanner 🎟️</h1>
         <p class="subtitle">Scannerizza il QR del ticket</p>
+        <div style="margin-bottom:20px;">
+
+    <select id="eventSelect" style="
+        width:100%;
+        padding:12px;
+        border-radius:10px;
+        margin-bottom:10px;
+    ">
+
+        {% for row in events %}
+        <option
+            value="{{ row.event }}||{{ row.event_date }}">
+            {{ row.event }} - {{ row.event_date }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+</div>
 
         <div class="buttons">
             <button id="startBtn" type="button">Avvia scanner</button>
@@ -191,13 +210,20 @@
                 await stopScanner();
                 setResult("Controllo ticket in corso...", "waiting");
 
+                const selected = document
+                    .getElementById("eventSelect")
+                    .value
+                    .split("||");
+
                 const response = await fetch("/validate-ticket", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        ticket_code: decodedText
+                        ticket_code: decodedText,
+                        selected_event: selected[0],
+                        selected_date: selected[1]
                     })
                 });
 

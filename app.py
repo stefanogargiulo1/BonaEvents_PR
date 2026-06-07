@@ -1070,13 +1070,31 @@ def pr_dashboard():
 
 @app.route("/scan")
 def scan():
+
     if not is_logged_in():
         return redirect(url_for("login"))
 
     if not can_scan_tickets():
         return redirect(url_for("dashboard"))
 
-    return render_template("scan.html")
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT DISTINCT event, event_date
+        FROM tickets
+        WHERE event_date IS NOT NULL
+        ORDER BY event, event_date
+    """)
+
+    events = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "scan.html",
+        events=events
+    )
 
 
 @app.route("/validate-ticket", methods=["POST"])
@@ -1111,7 +1129,6 @@ def validate_ticket():
         WHERE ticket_code = %s
     """, (ticket_code,))
     ticket = cursor.fetchone()
-
     if not ticket:
         conn.close()
         return jsonify({
@@ -1119,6 +1136,32 @@ def validate_ticket():
             "status": "invalid",
             "message": "Ticket non valido"
         }), 404
+
+    selected_event = data.get("selected_event", "")
+    selected_date = data.get("selected_date", "")
+
+    if ticket["event"] != selected_event:
+
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "status": "wrong_event",
+            "message":
+                f"Ticket valido ma per evento diverso: {ticket['event']}"
+        }), 200
+
+    if ticket["event_date"] != selected_date:
+
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "status": "wrong_date",
+            "message":
+                f"Ticket valido ma per data diversa: {ticket['event_date']}"
+        }), 200
+
 
     validated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
