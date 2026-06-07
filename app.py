@@ -299,17 +299,21 @@ def orders_create_webhook():
         
         print("LINE_ITEM:", item)
         event_name = item.get("title", "Evento")
-        variant_name = item.get("variant_title", "Standard")
+
+        variant_title = item.get("variant_title", "Standard")
+
         event_date = ""
+        variant_name = variant_title
 
-        for prop in item.get("properties", []):
+        if " / " in variant_title:
 
-            if prop.get("name") == "Data Evento":
+            parts = variant_title.split(" / ", 1)
 
-                event_date = prop.get("value", "")
-                break
+            event_date = parts[0].strip()
+            variant_name = parts[1].strip()
 
         print("EVENT_DATE:", event_date)
+        print("RATE:", variant_name)
 
         quantity = int(item.get("quantity", 1))
 
