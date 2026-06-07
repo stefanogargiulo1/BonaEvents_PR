@@ -1,193 +1,60 @@
-﻿data,id_prodotto,variant_id,sku,nome_del_prodotto,tipo_di_commissione,importo_della_commissione,collezione,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.80375E+13,,"Bona Loca + Dinner Show Latino+ Cupido
-(Bona Loca + Dinner Show Latino+ Cupido - female First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81269E+13,,"Bona Loca + Dinner Show Latino+ Cupido
-(Bona Loca + Dinner Show Latino+ Cupido - Male First Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81269E+13,,"Bona Loca + Dinner Show Latino+ Cupido
-(Bona Loca + Dinner Show Latino+ Cupido - Female Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81269E+13,,"Bona Loca + Dinner Show Latino+ Cupido
-(Bona Loca + Dinner Show Latino+ Cupido - Male  Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81269E+13,,"Bona Loca + Dinner Show Latino+ Cupido
-(Bona Loca + Dinner Show Latino+ Cupido - Enter With Drink Rate)",Tariffa fissa per articolo,"€5,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81269E+13,,"Bona Loca + Dinner Show Latino+ Cupido
-(Bona Loca + Dinner Show Latino+ Cupido - Enter VIP + Drink)",Tariffa fissa per articolo,"€6,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.80375E+13,,"Sunset Boungaville Rooftop
-(Sunset Boungaville Rooftop - Free List)",Tariffa fissa per articolo,"€0,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.80722E+13,,"Sunset Boungaville Rooftop
-(Sunset Boungaville Rooftop - Ticket)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.80375E+13,,"The Wolf of Wall Street Night
-(The Wolf of Wall Street Night - Female First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81264E+13,,"The Wolf of Wall Street Night
-(The Wolf of Wall Street Night - Male First Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81264E+13,,"The Wolf of Wall Street Night
-(The Wolf of Wall Street Night - Female Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81264E+13,,"The Wolf of Wall Street Night
-(The Wolf of Wall Street Night - Male Second Rate)",Tariffa fissa per articolo,"€5,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81264E+13,,"The Wolf of Wall Street Night
-(The Wolf of Wall Street Night - Enter with Drink)",Tariffa fissa per articolo,"€5,00",,
-"Jan 21, 1970
-03:22 PM",1.59651E+13,5.81264E+13,,"The Wolf of Wall Street Night
-(The Wolf of Wall Street Night - (VIP +drink))",Tariffa fissa per articolo,"€7,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"Rio De Ksamil
-(Rio De Ksamil - Female First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"Rio De Ksamil
-(Rio De Ksamil - Male First Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81178E+13,,"Rio De Ksamil
-(Rio De Ksamil - Female Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"Rio De Ksamil
-(Rio De Ksamil - Enter with Drink First Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"Rio De Ksamil
-(Rio De Ksamil - Enter with Drink Second Rate)",Tariffa fissa per articolo,"€5,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"Rio De Ksamil
-(Rio De Ksamil - Enter VIP (+ 1 Drink))",Tariffa fissa per articolo,"€6,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80375E+13,,"White Party + Dinner Show
-(White Party + Dinner Show - Female First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81178E+13,,"White Party + Dinner Show
-(White Party + Dinner Show - Male First Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81178E+13,,"White Party + Dinner Show
-(White Party + Dinner Show - Female Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81178E+13,,"White Party + Dinner Show
-(White Party + Dinner Show - Male Second Rate)",Tariffa fissa per articolo,"€5,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81178E+13,,"White Party + Dinner Show
-(White Party + Dinner Show - Enter With Drink)",Tariffa fissa per articolo,"€6,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81178E+13,,"White Party + Dinner Show
-(White Party + Dinner Show - VIP (+1 Drink))",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80375E+13,,"The Balkan Night + Dinner Show
-(The Balkan Night + Dinner Show - Free List)",Tariffa fissa per articolo,"€0,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"The Balkan Night + Dinner Show
-(The Balkan Night + Dinner Show - First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"The Balkan Night + Dinner Show
-(The Balkan Night + Dinner Show - Enter with Drink First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"The Balkan Night + Dinner Show
-(The Balkan Night + Dinner Show - Enter with Drink Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"Azur Afro party
-(Azur Afro party - free list)",Tariffa fissa per articolo,"€0,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"Azur Afro party
-(Azur Afro party - First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"Azur Afro party
-(Azur Afro party - Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"Azur Afro party
-(Azur Afro party - Enter with Drink)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80375E+13,,"American Gangster + Tattoo + Barber
-(American Gangster + Tattoo + Barber - Female First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"American Gangster + Tattoo + Barber
-(American Gangster + Tattoo + Barber - Male  First Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"American Gangster + Tattoo + Barber
-(American Gangster + Tattoo + Barber - Enter with Drink)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"American Gangster + Tattoo + Barber
-(American Gangster + Tattoo + Barber - Drink + Tattoo)",Tariffa fissa per articolo,"€5,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"American Gangster + Tattoo + Barber
-(American Gangster + Tattoo + Barber - Male Drink + Tattoo + Barber)",Tariffa fissa per articolo,"€6,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"American Gangster + Tattoo + Barber
-(American Gangster + Tattoo + Barber - Premium Tattoo + Barber)",Tariffa fissa per articolo,"€7,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81177E+13,,"American Gangster + Tattoo + Barber
-(American Gangster + Tattoo + Barber - VIP Tattoo + Barber)",Tariffa fissa per articolo,"€8,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"azur beach party
-(azur beach party - free list)",Tariffa fissa per articolo,"€0,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"azur beach party
-(azur beach party - 10€)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"azur beach party
-(azur beach party - 20€ (+1drink))",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80722E+13,,"azur beach party
-(azur beach party - 35€ (+1drink +5/7min jetski))",Tariffa fissa per articolo,"€7,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80375E+13,,"Principotes Beach Party
-(Principotes Beach Party - Free List)",Tariffa fissa per articolo,"€0,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81176E+13,,"Principotes Beach Party
-(Principotes Beach Party - Enter with Drink)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.80375E+13,,"Pool Party BonaMania
-(Pool Party BonaMania - Free List)",Tariffa fissa per articolo,"€0,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81173E+13,,"Pool Party BonaMania
-(Pool Party BonaMania - First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81173E+13,,"Pool Party BonaMania
-(Pool Party BonaMania - enter with drink First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:20 PM",1.59651E+13,5.81173E+13,,"Pool Party BonaMania
-(Pool Party BonaMania - enter with drink Second Rate)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80375E+13,,"La French at La Guerre
-(La French at La Guerre - Standard)",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.81117E+13,,"La French at La Guerre
-(La French at La Guerre - Standard (+ 1 Drink))",Tariffa fissa per articolo,"€5,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80375E+13,,"La Dolce Vita (Italian Night)
-(La Dolce Vita (Italian Night) - Female First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80723E+13,,"La Dolce Vita (Italian Night)
-(La Dolce Vita (Italian Night) - Male First Rate)",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80723E+13,,"La Dolce Vita (Italian Night)
-(La Dolce Vita (Italian Night) - Female Second Rate  (+ 1 Drink))",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80723E+13,,"La Dolce Vita (Italian Night)
-(La Dolce Vita (Italian Night) - Male Second Rate (+ 1 Drink))",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:19 PM",1.59617E+13,5.80722E+13,,"FOAM MADNESS
-(FOAM MADNESS - free list)",Tariffa fissa per articolo,"€0,00",,
-"Jan 21, 1970
-03:19 PM",1.59617E+13,5.80722E+13,,"FOAM MADNESS
-(FOAM MADNESS - 15€ (+drink))",Tariffa fissa per articolo,"€3,00",,
-"Jan 21, 1970
-03:19 PM",1.59617E+13,5.80722E+13,,"FOAM MADNESS
-(FOAM MADNESS - 20€ (+drink))",Tariffa fissa per articolo,"€4,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80375E+13,,"Boat Party
-(Boat Party - Female First Rate)",Tariffa fissa per articolo,"€6,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80722E+13,,"Boat Party
-(Boat Party - Female Second Rate)",Tariffa fissa per articolo,"€7,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80722E+13,,"Boat Party
-(Boat Party - Male First Rate)",Tariffa fissa per articolo,"€7,00",,
-"Jan 21, 1970
-03:19 PM",1.59651E+13,5.80722E+13,,"Boat Party
-(Boat Party - Male Second Rate)",Tariffa fissa per articolo,"€9,00",,
+﻿data,id_prodotto,variant_id,sku,nome_del_prodotto,tipo_di_commissione,importo_della_commissione,collezione
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Boat party Open Bar Collaborazione (First Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Boat party Open Bar Collaborazione (Second Rate),Tariffa fissa per articolo,"€8,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French principotes (Early Bird),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French principotes (Standard Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French principotes (VIP Rate),Tariffa fissa per articolo,"€8,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Cupido Night (ITA) Greg (Early Bird),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Cupido Night (ITA) Greg (Standard Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Cupido Night (ITA) Greg (VIP Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Beach party Principotes (First Rate),Tariffa fissa per articolo,"€3,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Beach party Principotes (Second Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Flamingo pool party mercury hotel (First Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Flamingo pool party mercury hotel (Second Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Flamingo pool party mercury hotel (General Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,BonaLoca raggaeton Greg (Early Bird),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,BonaLoca raggaeton Greg (Standard Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,BonaLoca raggaeton Greg (VIP Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,la bella vita foam party greg (1 DRINK) (First Rate),Tariffa fissa per articolo,"€3,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,la bella vita foam party greg (1 DRINK) (Second Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (Early Bird),Tariffa fissa per articolo,"€3,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (General Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (Early Bird + 1 Drink),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (General Rate + 1 Drink),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (Early Bird + Tattoo & Barber),Tariffa fissa per articolo,"€6,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (General Rate + Tattoo & Barber),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (Early Bird + Tattoo & Barber + 1 Drink),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,American Gangster greg (General Rate + Tattoo & Barber + 1 Drink),Tariffa fissa per articolo,"€8,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,BlueBarrymoon boungaville (First Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,BlueBarrymoon boungaville (Second Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Boat party sunset vikingen (boat party nostro) (First Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Boat party sunset vikingen (boat party nostro) (General Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Boat party sunset vikingen (boat party nostro) (VIP Rate),Tariffa fissa per articolo,"€8,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La guerre Principotes (ita vs Francia) (Early Bird),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La guerre Principotes (ita vs Francia) (Standard Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La guerre Principotes (ita vs Francia) (VIP Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La french Greg (Early Bird),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La french Greg (Standard Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La french Greg (VIP Rate),Tariffa fissa per articolo,"€8,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French pool party (First Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French pool party (General Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French pool party (VIP Rate),Tariffa fissa per articolo,"€8,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Cookies and cream mango (First Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Cookies and cream mango (Second Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Sant Angelo beach party + jetski (collab) (First Rate),Tariffa fissa per articolo,"€3,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Sant Angelo beach party + jetski (collab) (Second Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,The wolf of wall street Principotes (Early Bird),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,The wolf of wall street Principotes (Standard Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,The wolf of wall street Principotes (VIP Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Rio de ksamil foam party greg (First Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Rio de ksamil foam party greg (Second Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Mulino pool party sunset (collab) (First Rate),Tariffa fissa per articolo,"€3,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Mulino pool party sunset (collab) (Second Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,White party greg (Early Bird),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,White party greg (Standard Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,White party greg (VIP Rate),Tariffa fissa per articolo,"€7,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Balkan night greg (Early Bird),Tariffa fissa per articolo,"€3,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Balkan night greg (Standard Rate),Tariffa fissa per articolo,"€4,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,Balkan night greg (VIP Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French bluebarry moon (First Rate),Tariffa fissa per articolo,"€5,00",
+"Jan 21, 1970 03:22 PM",1.59651E+13,5.80375E+13,,La French bluebarry moon (Second Rate),Tariffa fissa per articolo,"€7,00",
