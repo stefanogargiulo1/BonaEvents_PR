@@ -1245,7 +1245,12 @@ def import_shopify_csv():
 
             title = row.get("Title", "").strip()
             handle = row.get("Handle", "").strip()
-            variant = row.get("Option1 Value", "").strip()
+
+            event_date = row.get("Option1 Value", "").strip()
+            rate = row.get("Option2 Value", "").strip()
+
+            variant = f"{event_date} / {rate}"
+
             price = row.get("Variant Price", "0").strip()
             commission = row.get("importo_della_commissione", "0").strip()
             image = row.get("Image Src", "").strip()
