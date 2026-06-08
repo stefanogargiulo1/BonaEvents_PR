@@ -314,6 +314,12 @@ def orders_create_webhook():
 
         print("EVENT_DATE:", event_date)
         print("RATE:", variant_name)
+        commission_amount = get_commission(
+            event_name,
+            variant_name
+        )
+
+        print("COMMISSION:", commission_amount)
 
         quantity = int(item.get("quantity", 1))
 
@@ -364,7 +370,7 @@ def orders_create_webhook():
                     validated_at
                 )
 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, 0, NULL)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
                 """, (
                     ticket_code,
                     event_name,
@@ -376,6 +382,7 @@ def orders_create_webhook():
                     event_date,
                     pr_username,
                     sale_source,
+                    commission_amount
                 ))
 
             print("TICKET_SAVED:", ticket_code)
