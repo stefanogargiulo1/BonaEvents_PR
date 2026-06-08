@@ -386,6 +386,22 @@ def orders_create_webhook():
                     commission_amount
                 ))
 
+            cursor.execute("""
+                UPDATE events
+                SET inventory = inventory - 1
+                WHERE lower(title) = lower(%s)
+                AND variant = %s
+            """, (
+                event_name,
+                variant_title
+            ))
+
+            print(
+                "SHOPIFY_STOCK_DECREASED:",
+                event_name,
+                variant_title
+            )
+            
             print("TICKET_SAVED:", ticket_code)
 
             generated.append(ticket_code)
