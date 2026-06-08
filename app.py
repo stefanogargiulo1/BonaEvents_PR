@@ -929,7 +929,15 @@ def ticket(event_name):
 
     if request.method == "POST":
         rate = request.form.get("rate")
-        commission_amount = get_commission(event_name, rate)
+
+        commission_amount = get_commission(
+            event_name,
+            rate
+        )
+
+        print("EVENT:", event_name)
+        print("RATE:", rate)
+        print("COMMISSION_RESULT:", commission_amount)
         customer = request.form.get("customer")
         email = request.form.get("email")
         phone = request.form.get("phone")
