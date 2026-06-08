@@ -241,41 +241,29 @@
 
                 <h2>{{ event.title }}</h2>
 
-                <p class="muted">
-                    Varianti disponibili:
-                </p>
+                <div class="variant">
 
-                {% if event.variants and event.variants|length > 0 %}
-
-                    {% for variant in event.variants %}
-
-                    <div class="variant">
-
-                        <div class="variant-title">
-                            {{ variant.title }}
-                        </div>
-
-                        <div class="variant-price">
-                            € {{ variant.price }}
-                        </div>
-
-                        {% if variant.inventory %}
-                        <div class="variant-stock">
-                            {{ variant.inventory }} disponibili
-                        </div>
-                        {% endif %}
-
+                    <div class="variant-title">
+                        📅 {{ event.dates_count }} date disponibili
                     </div>
 
-                    {% endfor %}
+                </div>
 
-                {% else %}
+                <div class="variant">
 
-                    <div class="variant">
-                        Nessuna variante trovata
+                    <div class="variant-title">
+                        🎟 {{ event.variants_count }} varianti
                     </div>
 
-                {% endif %}
+                </div>
+
+                <div class="variant">
+
+                    <div class="variant-title">
+                        💰 Da € {{ event.min_price }}
+                    </div>
+
+                </div>
 
                 <a
                     class="btn blue"
