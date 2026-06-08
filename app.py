@@ -601,6 +601,7 @@ def fetch_shopify_events():
     for row in rows:
 
         title = row["title"]
+        print("FIRST_VARIANT:", row["variant"])
 
         if title not in grouped:
 
@@ -615,6 +616,26 @@ def fetch_shopify_events():
             "title": row["variant"],
             "price": row["price"]
         })
+
+        grouped[title]["min_price"] = min(
+            grouped[title].get("min_price", row["price"]),
+            row["price"]
+        )
+    
+    for event in grouped.values():
+
+        dates = set()
+
+        for v in event["variants"]:
+
+            if " / " in v["title"]:
+
+                date_part = v["title"].split(" / ")[0]
+
+                dates.add(date_part)
+
+        event["dates_count"] = len(dates)
+        event["variants_count"] = len(event["variants"])
 
     return list(grouped.values())
 
