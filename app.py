@@ -1367,7 +1367,7 @@ def import_shopify_csv():
                     inventory,
                     commission_amount     
                 )
-                VALUES (%s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
             """, (
                 title,
                 handle,
