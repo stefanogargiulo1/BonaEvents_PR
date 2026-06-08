@@ -610,13 +610,16 @@ def fetch_shopify_events():
                 "title": row["title"],
                 "handle": row["handle"],
                 "image": row["image"],
-                "variants": []
+                "variants": [],
+                "stock": 0
             }
 
         grouped[title]["variants"].append({
             "title": row["variant"],
             "price": row["price"]
         })
+
+        grouped[title]["stock"] += int(row["inventory"] or 0)
 
         grouped[title]["min_price"] = min(
             grouped[title].get("min_price", row["price"]),
