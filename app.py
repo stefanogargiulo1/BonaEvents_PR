@@ -1308,6 +1308,15 @@ def import_shopify_csv():
             variant = f"{event_date} / {rate}"
 
             price = row.get("Variant Price", "0").strip()
+            inventory = row.get(
+                "Variant Inventory Qty",
+                "0"
+            ).strip()
+
+            try:
+                inventory = int(inventory)
+            except:
+                inventory = 0
             commission = row.get("importo_della_commissione", "0").strip()
             image = row.get("Image Src", "").strip()
 
@@ -1353,6 +1362,7 @@ def import_shopify_csv():
                     image,
                     variant,
                     price,
+                    inventory,
                     commission_amount     
                 )
                 VALUES (%s, %s, %s, %s, %s, %s)
@@ -1362,6 +1372,7 @@ def import_shopify_csv():
                 image,
                 variant,
                 price,
+                inventory,
                 commission
             ))
 
