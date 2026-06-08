@@ -249,13 +249,6 @@
 
                 </div>
 
-                <div class="variant">
-
-                    <div class="variant-title">
-                        🎟️ {{ event.stock }} biglietti disponibili
-                    </div>
-
-                </div>
 
                 <div class="variant">
 
@@ -267,11 +260,34 @@
 
                 <div class="variant">
 
+                    {% if event.stock > 0 %}
+
+                    <div class="variant-title">
+                        🎟️ {{ event.stock }} biglietti disponibili
+                    </div>
+
+                    {% else %}
+
+                    <div
+                        class="variant-title"
+                        style="color:#ef4444;"
+                    >
+                        🔴 SOLD OUT
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="variant">
+
                     <div class="variant-title">
                         💰 Da € {{ event.min_price }}
                     </div>
 
                 </div>
+
+                {% if event.stock > 0 %}
 
                 <a
                     class="btn blue"
@@ -279,7 +295,24 @@
                 >
                     Crea ticket
                 </a>
+                
+                {% else %}
 
+                <div
+                    style="
+                        background:#dc2626;
+                        color:white;
+                        padding:12px;
+                        border-radius:10px;
+                        text-align:center;
+                        font-weight:bold;
+                        margin-top:10px;
+                    "
+                >
+                    🔴 SOLD OUT
+                </div>
+
+                {% endif %}
             </div>
 
             {% endfor %}
