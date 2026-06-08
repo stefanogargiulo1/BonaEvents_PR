@@ -953,6 +953,30 @@ def ticket(event_name):
         cursor.execute("SELECT COUNT(*) AS count FROM tickets")
         total = cursor.fetchone()["count"] + 1
 
+        cursor.execute("""
+            SELECT inventory
+            FROM events
+            WHERE title = %s
+            AND variant = %s
+        """, (
+            event_name,
+            rate
+        ))
+
+        stock_row = cursor.fetchone()
+
+        if not stock_row:
+
+            conn.close()
+
+            return "Variante non trovata", 400
+
+        if stock_row["inventory"] <= 0:
+
+            conn.close()
+
+            return "BIGLIETTO ESAURITO", 400
+
         year = datetime.now().year
         ticket_code = f"BE-{year}-{total:06d}"
 
@@ -1002,6 +1026,16 @@ def ticket(event_name):
             commission_amount
         ))
 
+        cursor.execute("""
+            UPDATE events
+            SET inventory = inventory - 1
+            WHERE title = %s
+            AND variant = %s
+        """, (
+            event_name,
+            rate
+        ))
+
         conn.commit()
         conn.close()
         if email:
@@ -1036,9 +1070,10 @@ def ticket(event_name):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT variant, price
+        SELECT variant, price, inventory
         FROM events
         WHERE title = %s
+        ORDER BY variant
     """, (event_name,))
 
     variants = cursor.fetchall()

@@ -107,9 +107,18 @@
 
                 {% for variant in variants %}
 
-                <option value="{{ variant.variant }}">
+                <option
+                    value="{{ variant.variant }}"
+                    {% if variant.inventory <= 0 %}disabled{% endif %}
+                >
 
-                    {{ variant.variant }} - €{{ variant.price }}
+                    {{ variant.variant }}
+                    - €{{ variant.price }}
+                    (Disponibili: {{ variant.inventory }})
+
+                    {% if variant.inventory <= 0 %}
+                        - SOLD OUT
+                    {% endif %}
 
                 </option>
 
