@@ -1282,6 +1282,8 @@ def import_shopify_csv():
 
     conn = get_db_connection()
     cursor = conn.cursor()
+    cursor.execute("DELETE FROM events")
+    conn.commit()
 
     csv_path = "PRODOTTI.csv"
 
