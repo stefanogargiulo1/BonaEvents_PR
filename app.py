@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, make_response
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from datetime import datetime
@@ -645,6 +645,22 @@ init_db()
 print("DB_PATH:", DB_NAME)
 
 
+@app.route("/r/<pr_username>")
+def referral_redirect(pr_username):
+
+    response = make_response(
+        redirect("https://bonaevents.site")
+    )
+
+    response.set_cookie(
+        "ref_pr",
+        pr_username,
+        max_age=43200
+    )
+
+    return response
+
+
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -1093,7 +1109,8 @@ def pr_dashboard():
     return render_template(
         "pr_dashboard.html",
         tickets=tickets,
-        stats=stats
+        stats=stats,
+        referral_link=f"https://bonaevents.site/?ref={session.get('user')}"
     )
 
 @app.route("/scan")

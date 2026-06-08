@@ -128,6 +128,44 @@
     <div class="stats">
 
         <div class="card">
+
+    <h2>🔗 Link Referral</h2>
+
+    <input
+        id="referralLink"
+        value="{{ referral_link }}"
+        readonly
+        style="
+            width:100%;
+            background:#0f172a;
+            color:white;
+            border:none;
+            padding:12px;
+            border-radius:10px;
+            margin-top:10px;
+            margin-bottom:15px;
+        "
+    >
+
+    <button
+        onclick="copyReferral()"
+        style="
+            background:#16a34a;
+            color:white;
+            border:none;
+            padding:12px 16px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+            width:100%;
+        "
+    >
+        📋 Copia Link
+    </button>
+
+</div>
+
+        <div class="card">
             <h2>Tickets Venduti</h2>
             <div class="value">
                 {{ stats.total_tickets }}
@@ -294,6 +332,24 @@
 
         });
 
+
+        function copyReferral(){
+
+    const input =
+        document.getElementById(
+            "referralLink"
+        );
+
+    input.select();
+
+    navigator.clipboard.writeText(
+        input.value
+    );
+
+    alert(
+        "Link referral copiato!"
+    );
+}
     </script>
 
 </body>
