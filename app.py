@@ -1243,6 +1243,8 @@ def import_shopify_csv():
 
         for row in reader:
 
+            print("ROW:", row)
+
             title = row.get("Title", "").strip()
             handle = row.get("Handle", "").strip()
 
@@ -1280,6 +1282,15 @@ def import_shopify_csv():
                 commission = float(commission)
             except:
                 commission = 0
+
+
+            print(
+                "IMPORTING:",
+                title,
+                variant,
+                price
+            )
+            
 
             cursor.execute("""
                 INSERT INTO events (
