@@ -54,48 +54,49 @@ def get_commission(event_name, rate_name):
 
     try:
 
+        rate_clean = rate_name.lower()
+
+        if " / " in rate_clean:
+            rate_clean = rate_clean.split(" / ", 1)[1].strip()
+
+        print("RATE_CLEAN:", rate_clean)
+
         with open("percPR.csv", newline='', encoding='utf-8') as csvfile:
 
             reader = csv.DictReader(csvfile)
 
             for row in reader:
 
-                product_name = row.get("nome_del_prodotto", "").strip().lower()
-
-                full_search = f"{event_name} {rate_name}".strip().lower()
+                product_name = row.get(
+                    "nome_del_prodotto",
+                    ""
+                ).strip().lower()
 
                 print("CSV_PRODUCT:", product_name)
-                print("SEARCH:", full_search)
 
                 if (
                     event_name.lower() in product_name
                     and
-                    rate_name.lower() in product_name
+                    rate_clean in product_name
                 ):
 
-                    try:
+                    commission_raw = row.get(
+                        "importo_della_commissione",
+                        "0"
+                    )
 
-                        commission_raw = row.get(
-                            "importo_della_commissione",
-                            "0"
-                        )
+                    commission_raw = (
+                        commission_raw
+                        .replace("€", "")
+                        .replace(",", ".")
+                        .strip()
+                    )
 
-                        commission_raw = (
-                            commission_raw
-                            .replace("€", "")
-                            .replace(",", ".")
-                            .strip()
-                        )
+                    commission = float(commission_raw)
 
-                        commission = float(commission_raw)
+                    print("COMMISSION FOUND:", commission)
 
-                        print("COMMISSION FOUND:", commission)
-
-                        return commission
-
-                    except:
-
-                        return 0
+                    return commission
 
     except Exception as e:
 
