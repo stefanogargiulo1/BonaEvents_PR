@@ -1190,10 +1190,9 @@ def scan():
 
     cursor.execute("""
         SELECT DISTINCT
-            title AS event,
-            split_part(variant, ' / ', 1) AS event_date
+            title AS event
         FROM events
-        ORDER BY title, event_date
+        ORDER BY event
     """)
 
     events = cursor.fetchall()
