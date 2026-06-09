@@ -1189,13 +1189,41 @@ def scan():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT
-            title AS event
+        SELECT
+            title,
+            split_part(variant, ' / ', 1) AS event_date,
+            inventory
         FROM events
-        ORDER BY event
+        ORDER BY title, event_date
     """)
 
-    events = cursor.fetchall()
+    rows = cursor.fetchall()
+
+    events = {}
+
+    for row in rows:
+
+        title = row["title"]
+
+        if title not in events:
+
+            events[title] = []
+
+        exists = False
+
+        for d in events[title]:
+
+            if d["date"] == row["event_date"]:
+
+                exists = True
+                break
+
+        if not exists:
+
+            events[title].append({
+                "date": row["event_date"],
+                "inventory": row["inventory"]
+            })
 
     conn.close()
 

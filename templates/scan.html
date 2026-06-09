@@ -124,9 +124,9 @@
 
     <option value="">Seleziona evento</option>
 
-    {% for row in events %}
-        <option value="{{ row.event }}">
-            {{ row.event }}
+    {% for event_name in events.keys() %}
+        <option value="{{ event_name }}">
+            {{ event_name }}
         </option>
     {% endfor %}
 
