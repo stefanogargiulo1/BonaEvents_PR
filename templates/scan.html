@@ -134,17 +134,20 @@
 
 <h3 style="text-align:left;">Data</h3>
 
-<select id="dateSelect"
-        style="
-        width:100%;
-        padding:12px;
-        border-radius:10px;
+<div id="dateButtons"
+     style="
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
         margin-bottom:15px;
 ">
+</div>
 
-    <option value="">Seleziona data</option>
-
-</select>
+<input
+    type="hidden"
+    id="dateSelect"
+    value=""
+>
 
 </div>
 
@@ -196,16 +199,47 @@
 
             const dates = EVENTS_DATA[selectedEvent] || [];
 
+            const dateButtons =
+                document.getElementById("dateButtons");
+
+            dateButtons.innerHTML = "";
+
             dates.forEach(d => {
 
-                const option = document.createElement("option");
+                const btn = document.createElement("button");
 
-                option.value = d.date;
+                btn.type = "button";
 
-                option.textContent =
-                    `${d.date} (${d.inventory} disponibili)`;
+                btn.innerHTML =
+                    `<strong>${d.date}</strong><br>
+                     ${d.inventory} disponibili`;
 
-                dateSelect.appendChild(option);
+                btn.style.padding = "12px";
+                btn.style.borderRadius = "10px";
+                btn.style.border = "2px solid #475569";
+                btn.style.background = "#1e293b";
+                btn.style.color = "white";
+                btn.style.cursor = "pointer";
+
+                btn.addEventListener("click", () => {
+
+                    document
+                        .querySelectorAll("#dateButtons button")
+                        .forEach(b => {
+
+                            b.style.background = "#1e293b";
+                            b.style.border = "2px solid #475569";
+
+                        });
+
+                    btn.style.background = "#2563eb";
+                    btn.style.border = "2px solid #60a5fa";
+
+                    dateSelect.value = d.date;
+
+                });
+
+                dateButtons.appendChild(btn);
 
             });
 
