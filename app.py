@@ -949,6 +949,8 @@ def ticket(event_name):
 
     if request.method == "POST":
         rate = request.form.get("rate")
+        if " / " in rate:
+            event_date = rate.split(" / ")[0].strip()
 
         commission_amount = get_commission(
             event_name,
@@ -1036,7 +1038,7 @@ def ticket(event_name):
             customer,
             email,
             phone,
-            None,
+            event_date,
             pr_username,
             "CASH",
             commission_amount
@@ -1360,10 +1362,13 @@ def validate_ticket():
         "ticket": {
             "ticket_code": updated_ticket["ticket_code"],
             "event": updated_ticket["event"],
+            "event_date": updated_ticket["event_date"],
             "customer": updated_ticket["customer"],
             "rate": updated_ticket["rate"],
             "email": updated_ticket["email"],
             "phone": updated_ticket["phone"],
+            "pr_username": updated_ticket["pr_username"],
+            "sale_source": updated_ticket["sale_source"],
             "validated_at": updated_ticket["validated_at"]
         }
     }), 200
