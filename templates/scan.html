@@ -326,15 +326,52 @@
                 }
 
                 if (data.status === "valid") {
+
                     playSuccessSound();
+
+                    let sellerInfo = "";
+
+                    if (data.ticket.sale_source === "SHOPIFY_DIRECT") {
+
+                        sellerInfo = "🌐 Acquisto: Shopify Diretto";
+
+                    } else if (data.ticket.sale_source === "SHOPIFY_REF") {
+
+                        sellerInfo =
+                            "🔗 Referral: " +
+                            (data.ticket.pr_username || "-");
+
+                    } else {
+
+                        sellerInfo =
+                            "🤝 Venduto da: " +
+                            (data.ticket.pr_username || "-");
+
+                    }
+
                     setResult(
                         "✅ TICKET VALIDO\n\n" +
-                        "Codice: " + data.ticket.ticket_code + "\n" +
-                        "Cliente: " + (data.ticket.customer || "-") + "\n" +
-                        "Evento: " + data.ticket.event + "\n" +
-                        "Validato alle: " + data.ticket.validated_at,
+
+                        "👤 Cliente: " +
+                        (data.ticket.customer || "-") + "\n\n" +
+
+                        "🎉 Evento: " +
+                        data.ticket.event + "\n\n" +
+
+                        "📅 Data: " +
+                        (data.ticket.event_date || "-") + "\n\n" +
+
+                        "🎫 Rate: " +
+                        (data.ticket.rate || "-") + "\n\n" +
+
+                        sellerInfo + "\n\n" +
+
+                        "🕒 Entrato alle: " +
+                        data.ticket.validated_at,
+
                         "success"
                     );
+
                 } else if (data.status === "already_used") {
                     playErrorSound();
                     setResult(
