@@ -1225,6 +1225,15 @@ def scan():
                 "inventory": row["inventory"]
             })
 
+    for event_name in events:
+
+        events[event_name].sort(
+            key=lambda x: datetime.strptime(
+                x["date"],
+                "%d/%m/%Y"
+            )
+        )
+
     conn.close()
 
     return render_template(
