@@ -1189,10 +1189,11 @@ def scan():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT event, event_date
-        FROM tickets
-        WHERE event_date IS NOT NULL
-        ORDER BY event, event_date
+        SELECT DISTINCT
+            title AS event,
+            split_part(variant, ' / ', 1) AS event_date
+        FROM events
+        ORDER BY title, event_date
     """)
 
     events = cursor.fetchall()
