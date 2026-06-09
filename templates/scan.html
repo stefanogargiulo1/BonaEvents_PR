@@ -112,21 +112,39 @@
         <p class="subtitle">Scannerizza il QR del ticket</p>
         <div style="margin-bottom:20px;">
 
-    <select id="eventSelect" style="
+    <h3 style="text-align:left;">Evento</h3>
+
+<select id="eventSelect"
+        style="
         width:100%;
         padding:12px;
         border-radius:10px;
-        margin-bottom:10px;
-    ">
+        margin-bottom:15px;
+">
 
-        {% for row in events %}
-        <option
-            value="{{ row.event }}||{{ row.event_date }}">
-            {{ row.event }} - {{ row.event_date }}
+    <option value="">Seleziona evento</option>
+
+    {% for row in events %}
+        <option value="{{ row.event }}">
+            {{ row.event }}
         </option>
-        {% endfor %}
+    {% endfor %}
 
-    </select>
+</select>
+
+<h3 style="text-align:left;">Data</h3>
+
+<select id="dateSelect"
+        style="
+        width:100%;
+        padding:12px;
+        border-radius:10px;
+        margin-bottom:15px;
+">
+
+    <option value="">Seleziona data</option>
+
+</select>
 
 </div>
 
