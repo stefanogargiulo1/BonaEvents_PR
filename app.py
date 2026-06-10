@@ -828,12 +828,26 @@ def event_stats(event_name):
 
     sold = cursor.fetchone()["sold"]
 
+    cursor.execute("""
+        SELECT COALESCE(SUM(inventory),0) as available
+        FROM events
+        WHERE title = %s
+    """, (event_name,))
+
+    available = cursor.fetchone()["available"]
+
     conn.close()
 
     return f"""
-    Evento: {event_name}
+    <h1>{event_name}</h1>
+
+    <br>
+
+    🎟️ Venduti: {sold}
+
     <br><br>
-    Biglietti venduti: {sold}
+
+    📦 Disponibili: {available}
     """
 
 @app.route("/ticket-view/<ticket_code>")
