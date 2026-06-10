@@ -82,6 +82,34 @@
         .back{
             margin-top:18px;
         }
+        
+        .dates-grid,
+        #ratesGrid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+            margin-top:10px;
+        }
+
+        .date-card,
+        .rate-card{
+            border:1px solid #475569;
+            border-radius:12px;
+            padding:15px;
+            text-align:center;
+            cursor:pointer;
+            background:#0f172a;
+        }
+
+        .date-card:hover,
+        .rate-card:hover{
+            border-color:#3b82f6;
+        }
+
+        .date-card.active,
+        .rate-card.active{
+            background:#2563eb;
+        }
 
     </style>
 
@@ -97,34 +125,37 @@
             Inserisci i dati del cliente per generare il ticket.
         </p>
 
-        <form method="POST">
+        <form method="POST" onsubmit="return validateForm()">
 
-            <select name="rate" required>
+            <input
+                type="hidden"
+                name="rate"
+                id="selectedRate"
+                required
+            >
 
-                <option value="">
-                    Seleziona tariffa
-                </option>
+            <h3>📅 Data Evento</h3>
 
-                {% for variant in variants %}
+            <div id="datesGrid" class="dates-grid">
 
-                <option
-                    value="{{ variant.variant }}"
-                    {% if variant.inventory <= 0 %}disabled{% endif %}
-                >
+            {% for date, rates in dates.items() %}
 
-                    {{ variant.variant }}
-                    - €{{ variant.price }}
-                    (Disponibili: {{ variant.inventory }})
+            <div
+                class="date-card"
+                onclick="selectDate(this,'{{ date }}')"
+            >
+                <strong>{{ date }}</strong>
+            </div>
 
-                    {% if variant.inventory <= 0 %}
-                        - SOLD OUT
-                    {% endif %}
+            {% endfor %}
 
-                </option>
+            </div>
 
-                {% endfor %}
+            <h3 style="margin-top:20px;">
+                🎟️ Rate
+            </h3>
 
-            </select>
+            <div id="ratesGrid"></div>
 
             <input
                 type="text"
@@ -158,6 +189,75 @@
         </p>
 
     </div>
+
+    <script>
+
+    const datesData = {{ dates|tojson }};
+
+    function selectDate(el,date){
+
+        document
+            .querySelectorAll(".date-card")
+            .forEach(c=>c.classList.remove("active"));
+
+        el.classList.add("active");
+
+        const ratesGrid =
+            document.getElementById("ratesGrid");
+
+        ratesGrid.innerHTML = "";
+
+        datesData[date].forEach(rate=>{
+
+            ratesGrid.innerHTML += `
+                <div
+                    class="rate-card"
+                    onclick="selectRate(this,'${rate.full_variant}')"
+                >
+                    <strong>${rate.rate}</strong>
+                    <br>
+                    €${rate.price}
+                    <br>
+                    ${rate.inventory} disponibili
+                </div>
+            `;
+
+        });
+
+    }
+
+    function selectRate(el,variant){
+
+        document
+            .querySelectorAll(".rate-card")
+            .forEach(c=>c.classList.remove("active"));
+
+        el.classList.add("active");
+
+        document.getElementById(
+            "selectedRate"
+        ).value = variant;
+
+    }
+
+    function validateForm(){
+
+        if(
+            !document.getElementById(
+                "selectedRate"
+            ).value
+        ){
+            alert(
+                "Seleziona una data e una rate"
+            );
+            return false;
+        }
+
+        return true;
+
+    }
+
+    </script>
 
 </body>
 </html>

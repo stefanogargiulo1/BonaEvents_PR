@@ -1110,14 +1110,51 @@ def ticket(event_name):
         ORDER BY variant
     """, (event_name,))
 
-    variants = cursor.fetchall()
+    rows = cursor.fetchall()
+
+    dates = {}
+
+    for row in rows:
+
+        parts = row["variant"].split(" / ")
+
+        if len(parts) < 2:
+            continue
+
+        event_date = parts[0]
+        rate = parts[1]
+
+        if event_date not in dates:
+            dates[event_date] = []
+
+        dates[event_date].append({
+            "rate": rate,
+            "price": row["price"],
+            "inventory": row["inventory"],
+            "full_variant": row["variant"]
+        })
+
+    for event_date in dates:
+        dates[event_date].sort(
+            key=lambda x: x["rate"]
+        )
+
+    dates = dict(
+        sorted(
+            dates.items(),
+            key=lambda x: datetime.strptime(
+                x[0],
+                "%d/%m/%Y"
+            )
+        )
+    )
 
     conn.close()
 
     return render_template(
         "ticket.html",
         event_name=event_name,
-        variants=variants
+        dates=dates
     )
 
 @app.route("/tickets")
