@@ -836,6 +836,15 @@ def event_stats(event_name):
 
     available = cursor.fetchone()["available"]
 
+    cursor.execute("""
+        SELECT COUNT(*) as checked
+        FROM tickets
+        WHERE event = %s
+        AND used = 1
+    """, (event_name,))
+
+    checked = cursor.fetchone()["checked"]
+
     total_capacity = sold + available
 
     fill_percentage = 0
@@ -853,7 +862,9 @@ def event_stats(event_name):
         event_name=event_name,
         sold=sold,
         available=available,
-        fill_percentage=fill_percentage
+        fill_percentage=fill_percentage,
+        checked=checked
+
     )
 
 @app.route("/ticket-view/<ticket_code>")
