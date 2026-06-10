@@ -817,7 +817,24 @@ def event_stats(event_name):
     if not is_admin():
         return redirect(url_for("dashboard"))
 
-    return f"Statistiche evento: {event_name}"
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT COUNT(*) as sold
+        FROM tickets
+        WHERE event = %s
+    """, (event_name,))
+
+    sold = cursor.fetchone()["sold"]
+
+    conn.close()
+
+    return f"""
+    Evento: {event_name}
+    <br><br>
+    Biglietti venduti: {sold}
+    """
 
 @app.route("/ticket-view/<ticket_code>")
 def view_ticket(ticket_code):
