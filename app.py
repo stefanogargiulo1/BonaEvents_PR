@@ -302,6 +302,9 @@ def orders_create_webhook():
         event_name = item.get("title", "Evento")
 
         variant_title = item.get("variant_title", "Standard")
+        ticket_price = float(
+            item.get("price", 0)
+        )
 
         event_date = ""
         variant_name = variant_title
@@ -373,11 +376,12 @@ def orders_create_webhook():
                     pr_username,
                     sale_source,
                     commission_amount,
+                    ticket_price,
                     used,
                     validated_at
                 )
 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
                 """, (
                     ticket_code,
                     event_name,
@@ -389,7 +393,8 @@ def orders_create_webhook():
                     event_date,
                     pr_username,
                     sale_source,
-                    commission_amount
+                    commission_amount,
+                    ticket_price
                 ))
 
             cursor.execute("""
