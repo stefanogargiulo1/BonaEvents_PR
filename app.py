@@ -885,6 +885,18 @@ def event_stats(event_name):
 
     sources = cursor.fetchall()
 
+    cursor.execute("""
+        SELECT
+            rate,
+            COUNT(*) as total
+        FROM tickets
+        WHERE event = %s
+        GROUP BY rate
+        ORDER BY total DESC
+    """, (event_name,))
+
+    rates = cursor.fetchall()
+
     total_capacity = sold + available
 
     fill_percentage = 0
@@ -906,7 +918,8 @@ def event_stats(event_name):
         checked=checked,
         top_pr=top_pr,
         revenue=revenue,
-        sources=sources
+        sources=sources,
+        rates=rates
 
     )
 

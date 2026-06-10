@@ -184,6 +184,35 @@
 
     </div>
 
+        </div>
+
+    <div class="card">
+
+        <h2>🎟️ Vendite per Rate</h2>
+
+        {% for rate in rates %}
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            padding:10px 0;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+        ">
+
+            <div>
+                {{ rate.rate }}
+            </div>
+
+            <div>
+                {{ rate.total }} ticket
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
 </div>
 
 </body>
