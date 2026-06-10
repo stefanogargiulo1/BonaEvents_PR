@@ -1437,7 +1437,9 @@ def import_shopify_csv():
             commission = row.get("importo_della_commissione", "0").strip()
             image = row.get("Image Src", "").strip()
 
-            print("IMAGE:", image)
+            if title:
+                print("TITLE:", title)
+                print("IMAGE:", image)
 
             if title:
                 last_title = title
