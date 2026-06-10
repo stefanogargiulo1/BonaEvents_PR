@@ -1077,7 +1077,7 @@ def ticket(event_name):
         total = cursor.fetchone()["count"] + 1
 
         cursor.execute("""
-            SELECT inventory
+            SELECT inventory, price
             FROM events
             WHERE title = %s
             AND variant = %s
@@ -1087,6 +1087,10 @@ def ticket(event_name):
         ))
 
         stock_row = cursor.fetchone()
+
+        ticket_price = float(
+            stock_row["price"] or 0
+        )
 
         if not stock_row:
 
@@ -1142,10 +1146,11 @@ def ticket(event_name):
                         pr_username,
                         sale_source,
                         commission_amount,
+                        ticket_price,
                         used,
                         validated_at
                     )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
                 """, (
                     ticket_code,
                     event_name,
@@ -1156,7 +1161,8 @@ def ticket(event_name):
                     event_date,
                     pr_username,
                     "CASH",
-                    commission_amount
+                    commission_amount,
+                    ticket_price
                 ))
 
                 generated_tickets.append({
