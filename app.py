@@ -1084,7 +1084,15 @@ def ticket(event_name):
                     commission_amount
                 ))
 
-                generated_tickets.append(ticket_code)
+                generated_tickets.append({
+                    "ticket_code": ticket_code,
+                    "qr_image": f"qrcodes/{ticket_code}.png",
+                    "ticket_url": url_for(
+                        "view_ticket",
+                        ticket_code=ticket_code,
+                        _external=True
+                    )
+                })
                 if email:
 
                     send_ticket_email(
@@ -1115,16 +1123,17 @@ def ticket(event_name):
             _external=True
         )
 
+        print("GENERATED_TICKETS =", generated_tickets)
+        print("COUNT =", len(generated_tickets))
+
         return render_template(
             "success.html",
-            ticket_code=ticket_code,
-            qr_image=f"qrcodes/{ticket_code}.png",
+            generated_tickets=generated_tickets,
             event=event_name,
             rate=rate,
             customer=customer,
             email=email,
-            phone=phone,
-            ticket_url=ticket_url
+            phone=phone
         )
 
     conn = get_db_connection()
