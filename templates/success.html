@@ -150,45 +150,37 @@
 
             </div>
 
-            <div class="ticket-code">
+            {% for ticket in generated_tickets %}
 
-                {{ ticket_code }}
+            <div style="
+                margin-top:40px;
+                border-top:1px solid #333;
+                padding-top:30px;
+            ">
+
+                <div class="ticket-code">
+                    🎟️ Ticket {{ loop.index }}
+                    <br><br>
+                    {{ ticket.ticket_code }}
+                </div>
+
+                <div class="qr">
+
+                    <img src="{{ url_for('static', filename=ticket.qr_image) }}">
+
+                </div>
+
+                <a
+                    class="btn"
+                    href="{{ ticket.ticket_url }}"
+                    target="_blank"
+                >
+                    VISUALIZZA TICKET
+                </a>
 
             </div>
 
-            <div class="qr">
-
-                <img src="{{ url_for('static', filename=qr_image) }}">
-
-            </div>
-
-            <a
-                class="btn"
-                href="{{ ticket_url }}"
-                target="_blank"
-            >
-                VISUALIZZA TICKET
-            </a>
-
-            <br>
-
-            <a
-                class="btn whatsapp"
-                target="_blank"
-                href="https://wa.me/?text=🎫%20BonaEvents%0A%0AEvento:%20{{ event }}%0ACodice:%20{{ ticket_code }}%0A%0AVisualizza%20ticket:%0A{{ ticket_url }}"
-            >
-                📲 INVIA SU WHATSAPP
-            </a>
-
-            <br>
-
-            <a
-                class="btn download"
-                href="{{ url_for('static', filename=qr_image) }}"
-                download
-            >
-                📥 SCARICA QR
-            </a>
+            {% endfor %}
 
             <br>
 
