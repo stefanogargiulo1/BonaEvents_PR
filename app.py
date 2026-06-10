@@ -1442,6 +1442,9 @@ def import_shopify_csv():
                 print("IMAGE:", image)
 
             if title:
+                print("TITLE FOUND:", title)
+                print("IMAGE FOUND:", image)
+
                 last_title = title
 
             if handle:
