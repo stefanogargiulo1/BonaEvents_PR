@@ -1405,6 +1405,9 @@ def import_shopify_csv():
 
         reader = csv.DictReader(csvfile)
 
+        print("COLONNE CSV:")
+        print(reader.fieldnames)
+
         last_title = ""
         last_handle = ""
         last_image = ""
@@ -1433,6 +1436,8 @@ def import_shopify_csv():
                 inventory = 0
             commission = row.get("importo_della_commissione", "0").strip()
             image = row.get("Image Src", "").strip()
+
+            print("IMAGE:", image)
 
             if title:
                 last_title = title
