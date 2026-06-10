@@ -147,6 +147,43 @@
         </div>
     </div>
 
+    <div class="card">
+
+        <h2>💵 Provenienza Vendite</h2>
+
+        {% for source in sources %}
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            padding:10px 0;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+        ">
+
+            <div>
+
+                {% if source.sale_source == "CASH" %}
+                    💵 Cash
+                {% elif source.sale_source == "SHOPIFY_DIRECT" %}
+                    🛒 Shopify Diretto
+                {% elif source.sale_source == "SHOPIFY_REF" %}
+                    🔗 Shopify Referral
+                {% else %}
+                    {{ source.sale_source }}
+                {% endif %}
+
+            </div>
+
+            <div>
+                € {{ "%.2f"|format(source.revenue or 0) }}
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
 </div>
 
 </body>
