@@ -845,6 +845,21 @@ def event_stats(event_name):
 
     checked = cursor.fetchone()["checked"]
 
+    cursor.execute("""
+        SELECT
+            pr_username,
+            COUNT(*) as vendite
+        FROM tickets
+        WHERE event = %s
+        AND pr_username IS NOT NULL
+        AND pr_username != 'SHOPIFY'
+        GROUP BY pr_username
+        ORDER BY vendite DESC
+        LIMIT 10
+    """, (event_name,))
+
+    top_pr = cursor.fetchall()
+
     total_capacity = sold + available
 
     fill_percentage = 0
@@ -863,7 +878,8 @@ def event_stats(event_name):
         sold=sold,
         available=available,
         fill_percentage=fill_percentage,
-        checked=checked
+        checked=checked,
+        top_pr=top_pr
 
     )
 
