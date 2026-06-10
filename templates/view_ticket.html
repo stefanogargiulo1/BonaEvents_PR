@@ -71,6 +71,24 @@
 
         <div class="content">
 
+            {% if image_url %}
+
+            <div style="margin-bottom:25px;">
+
+                <img
+                    src="{{ image_url }}"
+                    alt="{{ event }}"
+                    style="
+                        width:100%;
+                        border-radius:15px;
+                        display:block;
+                    "
+                >
+
+            </div>
+
+            {% endif %}
+
             <div class="label">
                 Evento
             </div>

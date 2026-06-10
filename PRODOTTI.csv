@@ -1,5 +1,5 @@
 Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Option1 Linked To,Option2 Name,Option2 Value,Option2 Linked To,Option3 Name,Option3 Value,Option3 Linked To,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Unit Price Total Measure,Unit Price Total Measure Unit,Unit Price Base Measure,Unit Price Base Measure Unit,Variant Barcode,Image Src,Image Position,Image Alt Text,Gift Card,SEO Title,SEO Description,Tipo di evento (product.metafields.shopify.event-type),Tipo di biglietto (product.metafields.shopify.ticket-type),Variant Image,Variant Weight Unit,Variant Tax Code,Cost per item,Status
-balkan-night-greg,Balkan night greg,,BonaEventsApp,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,11/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+balkan-night-greg,Balkan night greg,,BonaEventsApp,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,11/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-09_21-43-22.jpg?v=1781034271,1,"",false,,,,,,kg,,,active
 balkan-night-greg,,,,,,,,,11/06/2026,,,Standard Rate,,,,,,0.0,shopify,400,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 balkan-night-greg,,,,,,,,,11/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 balkan-night-greg,,,,,,,,,13/06/2026,,,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -71,9 +71,9 @@ balkan-night-greg,,,,,,,,,27/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual
 balkan-night-greg,,,,,,,,,29/08/2026,,,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,"",,,,,,,,,,kg,,,
 balkan-night-greg,,,,,,,,,29/08/2026,,,Standard Rate,,,,,,0.0,shopify,400,deny,manual,15.00,,false,true,,,,,"",,,,,,,,,,kg,,,
 balkan-night-greg,,,,,,,,,29/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,"",,,,,,,,,,kg,,,
-white-party-greg,White party greg,,BonaEventsApp,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,14/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+white-party-greg,White party greg,,BonaEventsApp,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,14/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,196,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_3_2026-06-05_22-50-21_d46e10c4-48d6-47b8-851c-0e163d0dfebb.jpg?v=1781032376,1,"",false,,,,,,kg,,,active
 white-party-greg,,,,,,,,,14/06/2026,,,Standard Rate,,,,,,0.0,shopify,400,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
-white-party-greg,,,,,,,,,14/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
+white-party-greg,,,,,,,,,14/06/2026,,,VIP Rate,,,,,,0.0,shopify,99,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 white-party-greg,,,,,,,,,21/06/2026,,,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 white-party-greg,,,,,,,,,21/06/2026,,,Standard Rate,,,,,,0.0,shopify,400,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 white-party-greg,,,,,,,,,21/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -107,7 +107,7 @@ white-party-greg,,,,,,,,,23/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,
 white-party-greg,,,,,,,,,30/08/2026,,,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 white-party-greg,,,,,,,,,30/08/2026,,,Standard Rate,,,,,,0.0,shopify,400,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 white-party-greg,,,,,,,,,30/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
-vikingen-boat-party-open-bar-collab,Vikingen Boat Party Open Bar (collab),<p>Vikingen Boat Party Open Bar (collab) - L'esclusivo party a bordo della nave Vikingen con formula Open Bar. Seleziona la data e la tariffa desiderata.</p>,BOAT PARTY VIKING,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,06/06/2026,,Rate,First Rate,,,,,,0.0,shopify,100,deny,manual,40.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+vikingen-boat-party-open-bar-collab,Vikingen Boat Party Open Bar (collab),<p>Vikingen Boat Party Open Bar (collab) - L'esclusivo party a bordo della nave Vikingen con formula Open Bar. Seleziona la data e la tariffa desiderata.</p>,BOAT PARTY VIKING,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,06/06/2026,,Rate,First Rate,,,,,,0.0,shopify,100,deny,manual,40.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-09_21-39-57.jpg?v=1781034065,1,"",false,,,,,,kg,,,active
 vikingen-boat-party-open-bar-collab,,,,,,,,,06/06/2026,,,Second Rate,,,,,,0.0,shopify,100,deny,manual,45.00,,false,true,,,,,,,,,,,,,,,kg,,,
 vikingen-boat-party-open-bar-collab,,,,,,,,,13/06/2026,,,First Rate,,,,,,0.0,shopify,100,deny,manual,40.00,,false,true,,,,,,,,,,,,,,,kg,,,
 vikingen-boat-party-open-bar-collab,,,,,,,,,13/06/2026,,,Second Rate,,,,,,0.0,shopify,100,deny,manual,45.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -133,7 +133,7 @@ vikingen-boat-party-open-bar-collab,,,,,,,,,22/08/2026,,,First Rate,,,,,,0.0,sho
 vikingen-boat-party-open-bar-collab,,,,,,,,,22/08/2026,,,Second Rate,,,,,,0.0,shopify,100,deny,manual,45.00,,false,true,,,,,,,,,,,,,,,kg,,,
 vikingen-boat-party-open-bar-collab,,,,,,,,,29/08/2026,,,First Rate,,,,,,0.0,shopify,100,deny,manual,40.00,,false,true,,,,,,,,,,,,,,,kg,,,
 vikingen-boat-party-open-bar-collab,,,,,,,,,29/08/2026,,,Second Rate,,,,,,0.0,shopify,100,deny,manual,45.00,,false,true,,,,,,,,,,,,,,,kg,,,
-the-wolf-of-wall-street-principotes,The wolf of wall street Principotes,<p>The wolf of wall street Principotes - Serata Tematica Speciale ed Esclusiva. Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,04/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+the-wolf-of-wall-street-principotes,The wolf of wall street Principotes,<p>The wolf of wall street Principotes - Serata Tematica Speciale ed Esclusiva. Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,04/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_5_2026-06-05_22-50-21.jpg?v=1781032433,1,"",false,,,,,,kg,,,active
 the-wolf-of-wall-street-principotes,,,,,,,,,04/06/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 the-wolf-of-wall-street-principotes,,,,,,,,,04/06/2026,,,VIP Rate,,,,,,0.0,shopify,200,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 the-wolf-of-wall-street-principotes,,,,,,,,,18/06/2026,,,Early Bird,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -154,7 +154,7 @@ the-wolf-of-wall-street-principotes,,,,,,,,,13/08/2026,,,VIP Rate,,,,,,0.0,shopi
 the-wolf-of-wall-street-principotes,,,,,,,,,27/08/2026,,,Early Bird,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 the-wolf-of-wall-street-principotes,,,,,,,,,27/08/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 the-wolf-of-wall-street-principotes,,,,,,,,,27/08/2026,,,VIP Rate,,,,,,0.0,shopify,200,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
-sant-angelo-beach-party-jetski-collab,Sant Angelo beach party + jetski (collab),<p>Sant Angelo beach party + jetski (collab) - Maxiparty pomeridiano in spiaggia con attività incluse. Seleziona la data e la tariffa desiderata.</p>,SANT ANGELO RESORT,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,13/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+sant-angelo-beach-party-jetski-collab,Sant Angelo beach party + jetski (collab),<p>Sant Angelo beach party + jetski (collab) - Maxiparty pomeridiano in spiaggia con attività incluse. Seleziona la data e la tariffa desiderata.</p>,SANT ANGELO RESORT,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,13/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_9_2026-06-05_22-50-21_7d30cade-3fd6-4ad0-90e5-c512665d497f.jpg?v=1781032517,1,"",false,,,,,,kg,,,active
 sant-angelo-beach-party-jetski-collab,,,,,,,,,13/06/2026,,,Second Rate (+ 1 Drink) (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 sant-angelo-beach-party-jetski-collab,,,,,,,,,20/06/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 sant-angelo-beach-party-jetski-collab,,,,,,,,,20/06/2026,,,Second Rate (+ 1 Drink) (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -178,7 +178,7 @@ sant-angelo-beach-party-jetski-collab,,,,,,,,,22/08/2026,,,First Rate (Pomeridia
 sant-angelo-beach-party-jetski-collab,,,,,,,,,22/08/2026,,,Second Rate (+ 1 Drink) (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 sant-angelo-beach-party-jetski-collab,,,,,,,,,29/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 sant-angelo-beach-party-jetski-collab,,,,,,,,,29/08/2026,,,Second Rate (+ 1 Drink) (Pomeridiano),,,,,,0.0,shopify,1000,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
-rio-de-ksamil-foam-party-greg,Rio de ksamil foam party greg,<p>Rio de ksamil foam party greg - Grande evento Schiuma Party pomeridiano (14:00 - 18:00). Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,03/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+rio-de-ksamil-foam-party-greg,Rio de ksamil foam party greg,<p>Rio de ksamil foam party greg - Grande evento Schiuma Party pomeridiano (14:00 - 18:00). Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,03/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_11_2026-06-05_22-50-21.jpg?v=1781032565,1,"",false,,,,,,kg,,,active
 rio-de-ksamil-foam-party-greg,,,,,,,,,03/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 rio-de-ksamil-foam-party-greg,,,,,,,,,10/06/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 rio-de-ksamil-foam-party-greg,,,,,,,,,10/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -204,7 +204,7 @@ rio-de-ksamil-foam-party-greg,,,,,,,,,19/08/2026,,,First Rate (Pomeridiano),,,,,
 rio-de-ksamil-foam-party-greg,,,,,,,,,19/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 rio-de-ksamil-foam-party-greg,,,,,,,,,26/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 rio-de-ksamil-foam-party-greg,,,,,,,,,26/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
-mulino-pool-party-sunset-collab,Mulino pool party sunset (collab),<p>Mulino pool party sunset (collab) - Evento pomeridiano esclusivo in piscina al tramonto. Seleziona la data e la tariffa desiderata.</p>,MERCURY HOTEL,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,05/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+mulino-pool-party-sunset-collab,Mulino pool party sunset (collab),<p>Mulino pool party sunset (collab) - Evento pomeridiano esclusivo in piscina al tramonto. Seleziona la data e la tariffa desiderata.</p>,MERCURY HOTEL,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,05/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_4_2026-06-05_22-50-21.jpg?v=1781032592,1,"",false,,,,,,kg,,,active
 mulino-pool-party-sunset-collab,,,,,,,,,05/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 mulino-pool-party-sunset-collab,,,,,,,,,12/06/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 mulino-pool-party-sunset-collab,,,,,,,,,12/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -230,7 +230,7 @@ mulino-pool-party-sunset-collab,,,,,,,,,21/08/2026,,,First Rate (Pomeridiano),,,
 mulino-pool-party-sunset-collab,,,,,,,,,21/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 mulino-pool-party-sunset-collab,,,,,,,,,28/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 mulino-pool-party-sunset-collab,,,,,,,,,28/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,200,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
-la-guerre-principotes-ita-vs-francia,La guerre Principotes (ita vs Francia),<p>La guerre Principotes (ita vs Francia) - Serata Internazionale. Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,01/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+la-guerre-principotes-ita-vs-francia,La guerre Principotes (ita vs Francia),<p>La guerre Principotes (ita vs Francia) - Serata Internazionale. Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,01/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2_2026-06-05_22-50-21_a9235151-561a-4dee-958d-d8ff8960832d.jpg?v=1781032622,1,"",false,,,,,,kg,,,active
 la-guerre-principotes-ita-vs-francia,,,,,,,,,01/06/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-guerre-principotes-ita-vs-francia,,,,,,,,,01/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-guerre-principotes-ita-vs-francia,,,,,,,,,08/06/2026,,,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -269,7 +269,7 @@ la-guerre-principotes-ita-vs-francia,,,,,,,,,17/08/2026,,,VIP Rate,,,,,,0.0,shop
 la-guerre-principotes-ita-vs-francia,,,,,,,,,24/08/2026,,,Early Bird,,,,,,0.0,shopify,200,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-guerre-principotes-ita-vs-francia,,,,,,,,,24/08/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-guerre-principotes-ita-vs-francia,,,,,,,,,24/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
-la-french-principotes,La French principotes,<p>La French principotes - Ingresso Digitale. Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,08/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+la-french-principotes,La French principotes,<p>La French principotes - Ingresso Digitale. Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,08/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-09_21-16-58.jpg?v=1781032693,1,"",false,,,,,,kg,,,active
 la-french-principotes,,,,,,,,,08/06/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-principotes,,,,,,,,,08/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-principotes,,,,,,,,,15/06/2026,,,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -308,7 +308,7 @@ la-french-principotes,,,,,,,,,24/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,ma
 la-french-principotes,,,,,,,,,31/08/2026,,,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-principotes,,,,,,,,,31/08/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-principotes,,,,,,,,,31/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
-la-french-pool-party-mercury-hotel,La French pool party,<p>La French pool party mercury hotel - Esclusivo party diurno in piscina. Seleziona la data e la tariffa desiderata.</p>,MERCURY HOTEL,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,18/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+la-french-pool-party-mercury-hotel,La French pool party,<p>La French pool party mercury hotel - Esclusivo party diurno in piscina. Seleziona la data e la tariffa desiderata.</p>,MERCURY HOTEL,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,18/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-09_21-17-37.jpg?v=1781032725,1,"",false,,,,,,kg,,,active
 la-french-pool-party-mercury-hotel,,,,,,,,,18/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,150,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-pool-party-mercury-hotel,,,,,,,,,18/06/2026,,,VIP Rate (Pomeridiano),,,,,,0.0,shopify,50,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-pool-party-mercury-hotel,,,,,,,,,25/06/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -341,7 +341,7 @@ la-french-pool-party-mercury-hotel,,,,,,,,,20/08/2026,,,VIP Rate (Pomeridiano),,
 la-french-pool-party-mercury-hotel,,,,,,,,,27/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-pool-party-mercury-hotel,,,,,,,,,27/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,150,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-pool-party-mercury-hotel,,,,,,,,,27/08/2026,,,VIP Rate (Pomeridiano),,,,,,0.0,shopify,50,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
-la-french-greg,La french Greg,<p>La french Greg - Serata Tematica Esclusiva. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,21/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+la-french-greg,La french Greg,<p>La french Greg - Serata Tematica Esclusiva. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,21/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-10_03-42-59.jpg?v=1781055848,1,"",false,,,,,,kg,,,active
 la-french-greg,,,,,,,,,21/06/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-greg,,,,,,,,,21/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-greg,,,,,,,,,28/06/2026,,,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -374,7 +374,7 @@ la-french-greg,,,,,,,,,23/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,35
 la-french-greg,,,,,,,,,30/08/2026,,,Early Bird,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-greg,,,,,,,,,30/08/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-french-greg,,,,,,,,,30/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
-la-bella-vita-foam-party-greg,La Bella Vita Foam Party Greg (1 DRINK),<p>La Bella Vita Foam Party Greg - Schiuma Party Pomeridiano con 1 Drink incluso. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,03/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+la-bella-vita-foam-party-greg,La Bella Vita Foam Party Greg (1 DRINK),<p>La Bella Vita Foam Party Greg - Schiuma Party Pomeridiano con 1 Drink incluso. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,03/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-10_03-44-06_d4db1cac-7c1a-4a8d-9be1-e9454e6e4ca9.jpg?v=1781055932,1,"",false,,,,,,kg,,,active
 la-bella-vita-foam-party-greg,,,,,,,,,03/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-bella-vita-foam-party-greg,,,,,,,,,10/06/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-bella-vita-foam-party-greg,,,,,,,,,10/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -400,7 +400,7 @@ la-bella-vita-foam-party-greg,,,,,,,,,19/08/2026,,,First Rate (Pomeridiano),,,,,
 la-bella-vita-foam-party-greg,,,,,,,,,19/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-bella-vita-foam-party-greg,,,,,,,,,26/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 la-bella-vita-foam-party-greg,,,,,,,,,26/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
-flamingo-pool-party-mercury-hotel,Flamingo pool party mercury hotel,<p>Flamingo pool party mercury hotel - Evento Pomeridiano in piscina (14:00 - 18:00). Seleziona la data e la tariffa desiderata.</p>,MERCURY HOTEL,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,13/06/2026,,Rate,Second Rate (Pomeridiano),,,,,,0.0,shopify,60,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+flamingo-pool-party-mercury-hotel,Flamingo pool party mercury hotel,<p>Flamingo pool party mercury hotel - Evento Pomeridiano in piscina (14:00 - 18:00). Seleziona la data e la tariffa desiderata.</p>,MERCURY HOTEL,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,13/06/2026,,Rate,Second Rate (Pomeridiano),,,,,,0.0,shopify,60,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_12_2026-06-05_22-50-21.jpg?v=1781032842,1,"",false,,,,,,kg,,,active
 flamingo-pool-party-mercury-hotel,,,,,,,,,13/06/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,100,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 flamingo-pool-party-mercury-hotel,,,,,,,,,13/06/2026,,,VIP Rate (Pomeridiano),,,,,,0.0,shopify,40,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 flamingo-pool-party-mercury-hotel,,,,,,,,,20/06/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,60,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -436,7 +436,7 @@ flamingo-pool-party-mercury-hotel,,,,,,,,,22/08/2026,,,VIP Rate (Pomeridiano),,,
 flamingo-pool-party-mercury-hotel,,,,,,,,,29/08/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,60,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 flamingo-pool-party-mercury-hotel,,,,,,,,,29/08/2026,,,General Rate (Pomeridiano),,,,,,0.0,shopify,100,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 flamingo-pool-party-mercury-hotel,,,,,,,,,29/08/2026,,,VIP Rate (Pomeridiano),,,,,,0.0,shopify,40,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
-cupido-night-ita-greg,Cupido Night (ITA) Greg,<p>Cupido Night (ITA) Greg - Ingresso Digitale. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,23/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,300,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+cupido-night-ita-greg,Cupido Night (ITA) Greg,<p>Cupido Night (ITA) Greg - Ingresso Digitale. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,23/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,300,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_6_2026-06-05_22-50-21.jpg?v=1781032864,1,"",false,,,,,,kg,,,active
 cupido-night-ita-greg,,,,,,,,,23/06/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cupido-night-ita-greg,,,,,,,,,23/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cupido-night-ita-greg,,,,,,,,,30/06/2026,,,Early Bird,,,,,,0.0,shopify,300,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -469,7 +469,7 @@ cupido-night-ita-greg,,,,,,,,,25/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,ma
 cupido-night-ita-greg,,,,,,,,,01/09/2026,,,Early Bird,,,,,,0.0,shopify,300,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cupido-night-ita-greg,,,,,,,,,01/09/2026,,,Standard Rate,,,,,,0.0,shopify,300,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cupido-night-ita-greg,,,,,,,,,01/09/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
-cookies-and-cream-mango,Cookies and cream mango,<p>Cookies and cream mango - Evento diurno esclusivo sulla spiaggia. Seleziona la data e la tariffa desiderata.</p>,MANGO BEACH CLUB,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,14/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,150,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+cookies-and-cream-mango,Cookies and cream mango,<p>Cookies and cream mango - Evento diurno esclusivo sulla spiaggia. Seleziona la data e la tariffa desiderata.</p>,MANGO BEACH CLUB,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,14/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,150,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_8_2026-06-05_22-50-21.jpg?v=1781032898,1,"",false,,,,,,kg,,,active
 cookies-and-cream-mango,,,,,,,,,14/06/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,350,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cookies-and-cream-mango,,,,,,,,,21/06/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,150,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cookies-and-cream-mango,,,,,,,,,21/06/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,350,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -493,7 +493,7 @@ cookies-and-cream-mango,,,,,,,,,23/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,s
 cookies-and-cream-mango,,,,,,,,,23/08/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,350,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cookies-and-cream-mango,,,,,,,,,30/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,150,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 cookies-and-cream-mango,,,,,,,,,30/08/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,350,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
-bonaloca-raggaeton-greg,BonaLoca raggaeton Greg,<p>BonaLoca raggaeton Greg - Ingresso Digitale. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,04/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,250,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+bonaloca-raggaeton-greg,BonaLoca raggaeton Greg,<p>BonaLoca raggaeton Greg - Ingresso Digitale. Seleziona la data e la tariffa desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,04/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,250,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-09_21-21-11.jpg?v=1781032941,1,"",false,,,,,,kg,,,active
 bonaloca-raggaeton-greg,,,,,,,,,04/06/2026,,,Standard Rate,,,,,,0.0,shopify,650,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 bonaloca-raggaeton-greg,,,,,,,,,04/06/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 bonaloca-raggaeton-greg,,,,,,,,,11/06/2026,,,Early Bird,,,,,,0.0,shopify,250,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -532,7 +532,7 @@ bonaloca-raggaeton-greg,,,,,,,,,20/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,
 bonaloca-raggaeton-greg,,,,,,,,,27/08/2026,,,Early Bird,,,,,,0.0,shopify,250,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 bonaloca-raggaeton-greg,,,,,,,,,27/08/2026,,,Standard Rate,,,,,,0.0,shopify,650,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 bonaloca-raggaeton-greg,,,,,,,,,27/08/2026,,,VIP Rate,,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
-boat-party-sunset-vikingen,Boat party sunset vikingen (boat party nostro),<p>Boat party sunset vikingen - Il nostro esclusivo party in barca al tramonto (17:30 - 20:30). Seleziona la data e la tariffa desiderata.</p>,BOAT PARTY VIKING,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,13/06/2026,,Rate,First Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+boat-party-sunset-vikingen,Boat party sunset vikingen (boat party nostro),<p>Boat party sunset vikingen - Il nostro esclusivo party in barca al tramonto (17:30 - 20:30). Seleziona la data e la tariffa desiderata.</p>,BOAT PARTY VIKING,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,13/06/2026,,Rate,First Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/BOt_party.png?v=1781034190,1,"",false,,,,,,kg,,,active
 boat-party-sunset-vikingen,,,,,,,,,13/06/2026,,,General Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-sunset-vikingen,,,,,,,,,13/06/2026,,,VIP Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,40.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-sunset-vikingen,,,,,,,,,20/06/2026,,,First Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -568,7 +568,7 @@ boat-party-sunset-vikingen,,,,,,,,,22/08/2026,,,VIP Rate (Tramonto),,,,,,0.0,sho
 boat-party-sunset-vikingen,,,,,,,,,29/08/2026,,,First Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-sunset-vikingen,,,,,,,,,29/08/2026,,,General Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,35.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-sunset-vikingen,,,,,,,,,29/08/2026,,,VIP Rate (Tramonto),,,,,,0.0,shopify,100,deny,manual,40.00,,false,true,,,,,,,,,,,,,,,kg,,,
-boat-party-open-bar-collab,Boat party Open Bar Collaborazione,<p>Boat party Open Bar Collaborazione - Biglietto Digitale per l'evento in barca Open Bar (17:00 - 20:00). Seleziona la data e la tariffa desiderata.</p>,COLLAB,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,20/06/2026,,Rate,First Rate,,,,,,0.0,shopify,50,deny,manual,45.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+boat-party-open-bar-collab,Boat party Open Bar Collaborazione,<p>Boat party Open Bar Collaborazione - Biglietto Digitale per l'evento in barca Open Bar (17:00 - 20:00). Seleziona la data e la tariffa desiderata.</p>,COLLAB,Arts & Entertainment > Event Tickets,Biglietto Evento,"",false,Data,20/06/2026,,Rate,First Rate,,,,,,0.0,shopify,50,deny,manual,45.00,,false,true,,,,,,,,,false,,,,,,kg,,,draft
 boat-party-open-bar-collab,,,,,,,,,20/06/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,50.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-open-bar-collab,,,,,,,,,27/06/2026,,,First Rate,,,,,,0.0,shopify,50,deny,manual,45.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-open-bar-collab,,,,,,,,,27/06/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,50.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -590,7 +590,7 @@ boat-party-open-bar-collab,,,,,,,,,22/08/2026,,,First Rate,,,,,,0.0,shopify,50,d
 boat-party-open-bar-collab,,,,,,,,,22/08/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,50.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-open-bar-collab,,,,,,,,,29/08/2026,,,First Rate,,,,,,0.0,shopify,50,deny,manual,45.00,,false,true,,,,,,,,,,,,,,,kg,,,
 boat-party-open-bar-collab,,,,,,,,,29/08/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,50.00,,false,true,,,,,,,,,,,,,,,kg,,,
-blueberrymoon-boungaville,La French bluebarry moon,<p>BlueBarrymoon boungaville - Aperitivo al tramonto (16:00 - 20:00). Seleziona la data e la tariffa desiderata.</p>,BOUNGAVILLE,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,24/06/2026,,Rate,First Rate,,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+blueberrymoon-boungaville,La French bluebarry moon,<p>BlueBarrymoon boungaville - Aperitivo al tramonto (16:00 - 20:00). Seleziona la data e la tariffa desiderata.</p>,BOUNGAVILLE,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,24/06/2026,,Rate,First Rate,,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-10_03-45-24.jpg?v=1781055988,1,"",false,,,,,,kg,,,active
 blueberrymoon-boungaville,,,,,,,,,24/06/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 blueberrymoon-boungaville,,,,,,,,,01/07/2026,,,First Rate,,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 blueberrymoon-boungaville,,,,,,,,,01/07/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -610,7 +610,7 @@ blueberrymoon-boungaville,,,,,,,,,19/08/2026,,,First Rate,,,,,,0.0,shopify,50,de
 blueberrymoon-boungaville,,,,,,,,,19/08/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
 blueberrymoon-boungaville,,,,,,,,,26/08/2026,,,First Rate,,,,,,0.0,shopify,50,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 blueberrymoon-boungaville,,,,,,,,,26/08/2026,,,Second Rate,,,,,,0.0,shopify,50,deny,manual,30.00,,false,true,,,,,,,,,,,,,,,kg,,,
-beach-party-principotes,Beach party Principotes,<p>Beach party Principotes - Ingresso Pomeridiano (14:00 - 18:00). Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,01/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,10.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+beach-party-principotes,Beach party Principotes,<p>Beach party Principotes - Ingresso Pomeridiano (14:00 - 18:00). Seleziona la data e la tariffa desiderata.</p>,PRINCIPOTES,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,01/06/2026,,Rate,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,10.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_2026-06-10_03-41-27.jpg?v=1781055757,1,"",false,,,,,,kg,,,active
 beach-party-principotes,,,,,,,,,01/06/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 beach-party-principotes,,,,,,,,,08/06/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,10.00,,false,true,,,,,,,,,,,,,,,kg,,,
 beach-party-principotes,,,,,,,,,08/06/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
@@ -636,7 +636,7 @@ beach-party-principotes,,,,,,,,,17/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,s
 beach-party-principotes,,,,,,,,,17/08/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
 beach-party-principotes,,,,,,,,,24/08/2026,,,First Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,10.00,,false,true,,,,,,,,,,,,,,,kg,,,
 beach-party-principotes,,,,,,,,,24/08/2026,,,Second Rate (Pomeridiano),,,,,,0.0,shopify,500,deny,manual,15.00,,false,true,,,,,,,,,,,,,,,kg,,,
-american-gangster-greg,American Gangster greg,<p>American Gangster greg - Evento Esclusivo. Seleziona la data e la combinazione di servizi/tariffe desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,26/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,,,,,false,,,,,,kg,,,active
+american-gangster-greg,American Gangster greg,<p>American Gangster greg - Evento Esclusivo. Seleziona la data e la combinazione di servizi/tariffe desiderata.</p>,GREG,Arts & Entertainment > Event Tickets,Biglietto Evento,"",true,Data,26/06/2026,,Rate,Early Bird,,,,,,0.0,shopify,100,deny,manual,15.00,,false,true,,,,,,https://cdn.shopify.com/s/files/1/1011/6192/7043/files/photo_1_2026-06-05_22-50-21.jpg?v=1781033064,1,"",false,,,,,,kg,,,active
 american-gangster-greg,,,,,,,,,26/06/2026,,,General Rate,,,,,,0.0,shopify,100,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 american-gangster-greg,,,,,,,,,26/06/2026,,,Early Bird + 1 Drink,,,,,,0.0,shopify,100,deny,manual,20.00,,false,true,,,,,,,,,,,,,,,kg,,,
 american-gangster-greg,,,,,,,,,26/06/2026,,,General Rate + 1 Drink,,,,,,0.0,shopify,100,deny,manual,25.00,,false,true,,,,,,,,,,,,,,,kg,,,

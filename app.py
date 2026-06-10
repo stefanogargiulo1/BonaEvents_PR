@@ -816,10 +816,25 @@ def view_ticket(ticket_code):
 
     ticket = cursor.fetchone()
 
-    conn.close()
-
     if not ticket:
+        conn.close()
         return "Ticket non trovato"
+
+    image_url = ""
+
+    cursor.execute("""
+        SELECT image
+        FROM events
+        WHERE lower(title) = lower(%s)
+        LIMIT 1
+    """, (ticket["event"],))
+
+    event_row = cursor.fetchone()
+
+    if event_row:
+        image_url = event_row["image"]
+
+    conn.close()
 
     qr = qrcode.make(ticket["ticket_code"])
 
@@ -838,7 +853,8 @@ def view_ticket(ticket_code):
         rate=ticket["rate"],
         ticket_code=ticket["ticket_code"],
         event_date=ticket["event_date"],
-        qr_base64=qr_base64
+        qr_base64=qr_base64,
+        image_url=image_url
     )
 
 @app.route("/admin/users")
