@@ -848,21 +848,13 @@ def event_stats(event_name):
 
     conn.close()
 
-    return f"""
-    <h1>{event_name}</h1>
-
-    <br>
-
-    🎟️ Venduti: {sold}
-
-    <br><br>
-
-    📦 Disponibili: {available}
-
-    <br><br>
-
-    🔥 Riempimento: {fill_percentage}%
-    """
+    return render_template(
+        "event_stats.html",
+        event_name=event_name,
+        sold=sold,
+        available=available,
+        fill_percentage=fill_percentage
+    )
 
 @app.route("/ticket-view/<ticket_code>")
 def view_ticket(ticket_code):

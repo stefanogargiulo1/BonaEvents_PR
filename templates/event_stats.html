@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ event_name }}</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#0f172a;
+            color:white;
+            padding:30px;
+            margin:0;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+        }
+
+        .card{
+            background:#1e293b;
+            padding:25px;
+            border-radius:16px;
+            margin-bottom:20px;
+        }
+
+        .stats{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .value{
+            font-size:32px;
+            font-weight:bold;
+            margin-top:10px;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            padding:12px 20px;
+            border-radius:10px;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="/dashboard" class="btn">
+        ← Dashboard
+    </a>
+
+    <h1 style="margin-top:25px;">
+        📊 {{ event_name }}
+    </h1>
+
+    <div class="stats">
+
+        <div class="card">
+            <div>🎟️ Venduti</div>
+            <div class="value">
+                {{ sold }}
+            </div>
+        </div>
+
+        <div class="card">
+            <div>📦 Disponibili</div>
+            <div class="value">
+                {{ available }}
+            </div>
+        </div>
+
+        <div class="card">
+            <div>🔥 Riempimento</div>
+            <div class="value">
+                {{ fill_percentage }}%
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
