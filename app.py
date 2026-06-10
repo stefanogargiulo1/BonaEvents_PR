@@ -808,6 +808,17 @@ def dashboard():
         top_pr=top_pr
     )
 
+@app.route("/event-stats/<event_name>")
+def event_stats(event_name):
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    return f"Statistiche evento: {event_name}"
+
 @app.route("/ticket-view/<ticket_code>")
 def view_ticket(ticket_code):
 

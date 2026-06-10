@@ -295,6 +295,13 @@
                 >
                     Crea ticket
                 </a>
+
+                <a
+                    class="btn green"
+                    href="{{ url_for('event_stats', event_name=event.title) }}"
+                >
+                    📊 Statistiche
+                </a>
                 
                 {% else %}
 
