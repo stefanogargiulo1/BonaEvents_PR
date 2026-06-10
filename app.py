@@ -836,6 +836,16 @@ def event_stats(event_name):
 
     available = cursor.fetchone()["available"]
 
+    total_capacity = sold + available
+
+    fill_percentage = 0
+
+    if total_capacity > 0:
+        fill_percentage = round(
+            (sold / total_capacity) * 100,
+            1
+        )
+
     conn.close()
 
     return f"""
@@ -848,6 +858,10 @@ def event_stats(event_name):
     <br><br>
 
     📦 Disponibili: {available}
+
+    <br><br>
+
+    🔥 Riempimento: {fill_percentage}%
     """
 
 @app.route("/ticket-view/<ticket_code>")
