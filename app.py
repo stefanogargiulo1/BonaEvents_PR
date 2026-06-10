@@ -865,6 +865,26 @@ def event_stats(event_name):
 
     top_pr = cursor.fetchall()
 
+    cursor.execute("""
+        SELECT
+            COALESCE(SUM(ticket_price),0) as revenue
+        FROM tickets
+        WHERE event = %s
+    """, (event_name,))
+
+    revenue = cursor.fetchone()["revenue"] or 0
+
+    cursor.execute("""
+        SELECT
+            sale_source,
+            COALESCE(SUM(ticket_price),0) as revenue
+        FROM tickets
+        WHERE event = %s
+        GROUP BY sale_source
+    """, (event_name,))
+
+    sources = cursor.fetchall()
+
     total_capacity = sold + available
 
     fill_percentage = 0
@@ -884,7 +904,9 @@ def event_stats(event_name):
         available=available,
         fill_percentage=fill_percentage,
         checked=checked,
-        top_pr=top_pr
+        top_pr=top_pr,
+        revenue=revenue,
+        sources=sources
 
     )
 
