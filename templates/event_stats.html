@@ -93,6 +93,51 @@
                 {{ checked }}
             </div>
         </div>
+
+        <div class="card">
+
+            <h2>🏆 Top PR Evento</h2>
+
+            {% if top_pr %}
+
+                {% for pr in top_pr %}
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    padding:12px 0;
+                    border-bottom:1px solid rgba(255,255,255,0.1);
+                ">
+
+                    <div>
+
+                        {% if loop.index == 1 %}
+                            🥇
+                        {% elif loop.index == 2 %}
+                            🥈
+                        {% elif loop.index == 3 %}
+                            🥉
+                        {% endif %}
+
+                        {{ pr.pr_username }}
+
+                    </div>
+
+                    <div>
+                        {{ pr.vendite }} ticket
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>Nessuna vendita PR per questo evento.</p>
+
+            {% endif %}
+
+        </div>
     </div>
 
 </div>
