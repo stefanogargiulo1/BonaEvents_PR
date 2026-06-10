@@ -326,11 +326,17 @@ def orders_create_webhook():
 
         for i in range(quantity):
 
-            cursor.execute("SELECT COUNT(*) AS count FROM tickets")
+            cursor.execute(
+                "SELECT COUNT(*) AS count FROM tickets"
+            )
+
             total = cursor.fetchone()["count"] + 1
 
             year = datetime.now().year
-            ticket_code = f"BE-{year}-{total:06d}"
+
+            ticket_code = (
+                f"BE-{year}-{total:06d}"
+            )
 
             qr = qrcode.QRCode(
                 version=1,
@@ -965,6 +971,14 @@ def ticket(event_name):
 
     if request.method == "POST":
         rate = request.form.get("rate")
+        
+        quantity = int(
+            request.form.get(
+                "quantity",
+                1
+            )
+        )
+        event_date = ""
         if " / " in rate:
             event_date = rate.split(" / ")[0].strip()
 
@@ -1005,82 +1019,95 @@ def ticket(event_name):
 
             return "Variante non trovata", 400
 
-        if stock_row["inventory"] <= 0:
+        if stock_row["inventory"] < quantity:
 
             conn.close()
 
-            return "BIGLIETTO ESAURITO", 400
+            return f"""
+            Disponibilità insufficiente.
+            Rimasti: {stock_row['inventory']}
+            """, 400
 
         year = datetime.now().year
-        ticket_code = f"BE-{year}-{total:06d}"
 
-        qr = qrcode.QRCode(
-            version=1,
-            box_size=20,
-            border=5
-        )
-        qr.add_data(ticket_code)
-        qr.make(fit=True)
+        generated_tickets = []
 
-        img = qr.make_image(
-            fill_color="black",
-            back_color="white"
-        ).convert("RGB")
+        for i in range(quantity):
 
-        os.makedirs("static/qrcodes", exist_ok=True)
-        qr_path = f"static/qrcodes/{ticket_code}.png"
-        img.save(qr_path)
+                ticket_code = (
+                    f"BE-{year}-{total+i:06d}"
+                )
 
-        cursor.execute("""
-            INSERT INTO tickets (
-                ticket_code,
-                event,
-                rate,
-                customer,
-                email,
-                phone,
-                event_date,
-                pr_username,
-                sale_source,
-                commission_amount,
-                used,
-                validated_at
-            )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
-        """, (
-            ticket_code,
-            event_name,
-            rate,
-            customer,
-            email,
-            phone,
-            event_date,
-            pr_username,
-            "CASH",
-            commission_amount
-        ))
+                qr = qrcode.QRCode(
+                    version=1,
+                    box_size=20,
+                    border=5
+                )
+                qr.add_data(ticket_code)
+                qr.make(fit=True)
 
+                img = qr.make_image(
+                    fill_color="black",
+                    back_color="white"
+                ).convert("RGB")
+
+                os.makedirs("static/qrcodes", exist_ok=True)
+                qr_path = f"static/qrcodes/{ticket_code}.png"
+                img.save(qr_path)
+
+                cursor.execute("""
+                    INSERT INTO tickets (
+                        ticket_code,
+                        event,
+                        rate,
+                        customer,
+                        email,
+                        phone,
+                        event_date,
+                        pr_username,
+                        sale_source,
+                        commission_amount,
+                        used,
+                        validated_at
+                    )
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+                """, (
+                    ticket_code,
+                    event_name,
+                    rate,
+                    customer,
+                    email,
+                    phone,
+                    event_date,
+                    pr_username,
+                    "CASH",
+                    commission_amount
+                ))
+
+                generated_tickets.append(ticket_code)
+                if email:
+
+                    send_ticket_email(
+                        customer,
+                        email,
+                        event_name,
+                        rate,
+                        ticket_code
+                    )
         cursor.execute("""
             UPDATE events
-            SET inventory = inventory - 1
+            SET inventory = inventory - %s
             WHERE title = %s
             AND variant = %s
         """, (
+            quantity,
             event_name,
             rate
         ))
 
         conn.commit()
         conn.close()
-        if email:
-
-            send_ticket_email(
-                customer,
-                email,
-                event_name,
-                rate,
-                ticket_code
-            )
+        
 
         ticket_url = url_for(
             "view_ticket",
