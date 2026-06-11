@@ -348,6 +348,18 @@ def orders_create_webhook():
         if event_name in PACK_EVENTS:
             events_to_generate = PACK_EVENTS[event_name]
             print("PACK_DETECTED:", event_name)
+        
+        if event_name in PACK_EVENTS:
+
+            ticket_price = round(
+                ticket_price / len(events_to_generate),
+                2
+            )
+
+            print(
+                "PACK_PRICE_SPLIT:",
+                ticket_price
+            )
 
         for generated_event_name, generated_event_date in events_to_generate:
 
