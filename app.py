@@ -431,11 +431,27 @@ def orders_create_webhook():
                     variant_title
                 ))
 
+
                 print(
                     "SHOPIFY_STOCK_DECREASED:",
                     event_name,
                     variant_title
                 )
+
+                if event_name in PACK_EVENTS:
+
+                    cursor.execute("""
+                        UPDATE events
+                        SET inventory = inventory - 1
+                        WHERE lower(title) = lower(%s)
+                    """, (
+                        generated_event_name,
+                    ))
+
+                    print(
+                        "PACK_EVENT_STOCK_DECREASED:",
+                        generated_event_name
+                    )
                 
                 print("TICKET_SAVED:", ticket_code)
 
