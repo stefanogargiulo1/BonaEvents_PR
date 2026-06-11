@@ -327,110 +327,134 @@ def orders_create_webhook():
 
         quantity = int(item.get("quantity", 1))
 
-        for i in range(quantity):
+        PACK_EVENTS = {
+            "3 Days Pack (12-14 Giugno)": [
+                ("Cookies and cream mango", "12/06/2026"),
+                ("The wolf of wall street Principotes", "13/06/2026"),
+                ("Flamingo pool party mercury hotel", "14/06/2026")
+            ],
 
-            cursor.execute(
-                "SELECT COUNT(*) AS count FROM tickets"
-            )
+            "4 Days Pack (11-14 Giugno)": [
+                ("Boat party Open Bar Collaborazione", "11/06/2026"),
+                ("La guerre Principotes (ita vs Francia)", "11/06/2026"),
+                ("Cookies and cream mango", "12/06/2026"),
+                ("The wolf of wall street Principotes", "13/06/2026"),
+                ("Flamingo pool party mercury hotel", "14/06/2026")
+            ]
+        }
 
-            total = cursor.fetchone()["count"] + 1
+        events_to_generate = [(event_name, event_date)]
 
-            year = datetime.now().year
+        if event_name in PACK_EVENTS:
+            events_to_generate = PACK_EVENTS[event_name]
+            print("PACK_DETECTED:", event_name)
 
-            ticket_code = (
-                f"BE-{year}-{total:06d}"
-            )
+        for generated_event_name, generated_event_date in events_to_generate:
 
-            qr = qrcode.QRCode(
-                version=1,
-                box_size=20,
-                border=5
-            )
-            print("INSIDE_FOR_LOOP")
+            for i in range(quantity):
 
-            qr.add_data(ticket_code)
-            qr.make(fit=True)
-
-            img = qr.make_image(
-                fill_color="black",
-                back_color="white"
-            ).convert("RGB")
-
-            os.makedirs("static/qrcodes", exist_ok=True)
-
-            qr_path = f"static/qrcodes/{ticket_code}.png"
-
-            img.save(qr_path)
-
-            print("EVENT_DATE_BEFORE_SAVE:", event_date)
-            cursor.execute("""
-                INSERT INTO tickets (
-                    ticket_code,
-                    event,
-                    rate,
-                    customer,
-                    email,
-                    phone,
-                    shopify_order_id,
-                    event_date,
-                    pr_username,
-                    sale_source,
-                    commission_amount,
-                    ticket_price,
-                    used,
-                    validated_at
+                cursor.execute(
+                    "SELECT COUNT(*) AS count FROM tickets"
                 )
 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+                total = cursor.fetchone()["count"] + 1
+
+                year = datetime.now().year
+
+                ticket_code = (
+                    f"BE-{year}-{total:06d}"
+                )
+
+                qr = qrcode.QRCode(
+                    version=1,
+                    box_size=20,
+                    border=5
+                )
+                print("INSIDE_FOR_LOOP")
+
+                qr.add_data(ticket_code)
+                qr.make(fit=True)
+
+                img = qr.make_image(
+                    fill_color="black",
+                    back_color="white"
+                ).convert("RGB")
+
+                os.makedirs("static/qrcodes", exist_ok=True)
+
+                qr_path = f"static/qrcodes/{ticket_code}.png"
+
+                img.save(qr_path)
+
+                print("EVENT_DATE_BEFORE_SAVE:", event_date)
+                cursor.execute("""
+                    INSERT INTO tickets (
+                        ticket_code,
+                        event,
+                        rate,
+                        customer,
+                        email,
+                        phone,
+                        shopify_order_id,
+                        event_date,
+                        pr_username,
+                        sale_source,
+                        commission_amount,
+                        ticket_price,
+                        used,
+                        validated_at
+                    )
+
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 0, NULL)
+                    """, (
+                        ticket_code,
+                        generated_event_name,
+                        variant_name,
+                        customer_name,
+                        email,
+                        phone,
+                        shopify_order_id,
+                        generated_event_date,
+                        pr_username,
+                        sale_source,
+                        commission_amount,
+                        ticket_price
+                    ))
+
+                cursor.execute("""
+                    UPDATE events
+                    SET inventory = inventory - 1
+                    WHERE lower(title) = lower(%s)
+                    AND variant = %s
                 """, (
-                    ticket_code,
                     event_name,
-                    variant_name,
-                    customer_name,
-                    email,
-                    phone,
-                    shopify_order_id,
-                    event_date,
-                    pr_username,
-                    sale_source,
-                    commission_amount,
-                    ticket_price
+                    variant_title
                 ))
 
-            cursor.execute("""
-                UPDATE events
-                SET inventory = inventory - 1
-                WHERE lower(title) = lower(%s)
-                AND variant = %s
-            """, (
-                event_name,
-                variant_title
-            ))
-
-            print(
-                "SHOPIFY_STOCK_DECREASED:",
-                event_name,
-                variant_title
-            )
-            
-            print("TICKET_SAVED:", ticket_code)
-
-            generated.append(ticket_code)
-            send_ticket_email(
-                customer_name,
-                email, 
-                event_name, 
-                variant_name, 
-                ticket_code
-            )
+                print(
+                    "SHOPIFY_STOCK_DECREASED:",
+                    event_name,
+                    variant_title
+                )
                 
-            ticket_url = f"https://staff.bonaevents.site/ticket-view/{ticket_code}"
-            order_id = payload.get("id")
+                print("TICKET_SAVED:", ticket_code)
 
-            update_shopify_order_note(
-                order_id,
-                ticket_url
-            )
+                generated.append(ticket_code)
+                send_ticket_email(
+                    customer_name,
+                    email,
+                    generated_event_name,  
+                    variant_name, 
+                    ticket_code
+                )
+                    
+                ticket_url = f"https://staff.bonaevents.site/ticket-view/{ticket_code}"
+                order_id = payload.get("id")
+
+                update_shopify_order_note(
+                    order_id,
+                    ticket_url
+                )
 
 
             # msg = Message(
