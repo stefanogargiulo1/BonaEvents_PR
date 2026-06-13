@@ -875,6 +875,26 @@ def dashboard():
         top_pr=top_pr
     )
 
+@app.route("/toggle-event/<int:event_id>")
+def toggle_event(event_id):
+
+    if "user_id" not in session:
+        return redirect("/")
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE events
+        SET is_active = NOT is_active
+        WHERE id = %s
+    """, (event_id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/dashboard")
+
 @app.route("/event-stats/<event_name>")
 def event_stats(event_name):
 
