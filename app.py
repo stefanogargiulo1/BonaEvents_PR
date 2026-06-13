@@ -1348,15 +1348,23 @@ def ticket(event_name):
             key=lambda x: x["rate"]
         )
 
-    dates = dict(
-        sorted(
-            dates.items(),
-            key=lambda x: datetime.strptime(
-                x[0],
-                "%d/%m/%Y"
+    try:
+
+        dates = dict(
+            sorted(
+                dates.items(),
+                key=lambda x: datetime.strptime(
+                    x[0],
+                    "%d/%m/%Y"
+                )
             )
         )
-    )
+
+    except:
+
+        dates = dict(
+            sorted(dates.items())
+        )
 
     conn.close()
 
