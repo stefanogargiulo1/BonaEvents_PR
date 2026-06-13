@@ -1243,7 +1243,7 @@ def ticket(event_name):
             for i in range(quantity):
 
                 ticket_code = (
-                    f"BE-{year}-{total+i:06d}"
+                    f"BE-{year}-{total + len(generated_tickets):06d}"
                 )
 
                 qr = qrcode.QRCode(
