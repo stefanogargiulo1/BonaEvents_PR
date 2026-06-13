@@ -679,7 +679,7 @@ def fetch_shopify_events():
     cursor.execute("""
         SELECT *
         FROM events
-        ORDER BY title ASC
+        ORDER BY title ASC, id ASC
     """)
 
     rows = cursor.fetchall()
@@ -696,9 +696,11 @@ def fetch_shopify_events():
         if title not in grouped:
 
             grouped[title] = {
+                "id": row["id"],
                 "title": row["title"],
                 "handle": row["handle"],
                 "image": row["image"],
+                "is_active": row["is_active"],
                 "variants": [],
                 "stock": 0
             }
