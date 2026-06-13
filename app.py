@@ -616,6 +616,16 @@ def init_db():
         )
     """)
 
+    try:
+        cursor.execute("""
+            ALTER TABLE events
+            ADD COLUMN is_active BOOLEAN DEFAULT TRUE
+        """)
+        conn.commit()
+
+    except:
+        conn.rollback()
+
 
     cursor.execute("""
     INSERT INTO users (
