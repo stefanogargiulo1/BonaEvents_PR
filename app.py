@@ -845,6 +845,15 @@ def dashboard():
         return redirect(url_for("login"))
 
     events = fetch_shopify_events()
+
+    if session.get("role") == "pr":
+
+        events = [
+            event
+            for event in events
+            if event.get("is_active", True)
+        ]
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
