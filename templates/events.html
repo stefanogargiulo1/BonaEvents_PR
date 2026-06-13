@@ -302,6 +302,21 @@
                 >
                     📊 Statistiche
                 </a>
+
+                {% if role == 'admin' %}
+
+                <a
+                    class="btn {% if event.is_active %}green{% else %}red{% endif %}"
+                    href="{{ url_for('toggle_event', event_id=event.id) }}"
+                >
+                    {% if event.is_active %}
+                        🟢 Attivo
+                    {% else %}
+                        🔴 Disattivato
+                    {% endif %}
+                </a>
+
+                {% endif %}
                 
                 {% else %}
 
