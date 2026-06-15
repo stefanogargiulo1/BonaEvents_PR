@@ -1035,9 +1035,10 @@ def view_ticket(ticket_code):
         return "Ticket non trovato"
 
     image_url = ""
+    description = ""
 
     cursor.execute("""
-        SELECT image
+        SELECT image, description
         FROM events
         WHERE lower(title) = lower(%s)
         LIMIT 1
@@ -1047,6 +1048,7 @@ def view_ticket(ticket_code):
 
     if event_row:
         image_url = event_row["image"]
+        description = event_row["description"] or ""
 
     conn.close()
 
@@ -1068,7 +1070,8 @@ def view_ticket(ticket_code):
         ticket_code=ticket["ticket_code"],
         event_date=ticket["event_date"],
         qr_base64=qr_base64,
-        image_url=image_url
+        image_url=image_url,
+        description=description
     )
 
 @app.route("/admin/users")
@@ -1781,6 +1784,7 @@ def import_shopify_csv():
                 inventory = 0
             commission = row.get("importo_della_commissione", "0").strip()
             image = row.get("Image Src", "").strip()
+            description = row.get("Body (HTML)", "").strip()
 
             if title:
                 print("TITLE:", title)
@@ -1829,16 +1833,18 @@ def import_shopify_csv():
                     title,
                     handle,
                     image,
+                    description,
                     variant,
                     price,
                     inventory,
                     commission_amount     
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """, (
                 title,
                 handle,
                 image,
+                description,
                 variant,
                 price,
                 inventory,

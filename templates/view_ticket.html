@@ -97,6 +97,22 @@
                 {{ event }}
             </div>
 
+            {% if description %}
+
+            <div class="label">
+                Descrizione Evento
+            </div>
+
+            <div style="
+                margin-top:10px;
+                line-height:1.6;
+                color:#ddd;
+            ">
+                {{ description|safe }}
+            </div>
+
+            {% endif %}
+
             <div class="label">
                 Data Evento
             </div>
