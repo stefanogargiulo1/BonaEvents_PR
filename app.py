@@ -616,6 +616,16 @@ def init_db():
         )
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS system_logs (
+        id SERIAL PRIMARY KEY,
+        log_type TEXT,
+        username TEXT,
+        description TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
     try:
         cursor.execute("""
             ALTER TABLE events
