@@ -140,7 +140,7 @@
 
         <div class="actions">
 
-            {% if role == 'admin' %}
+            {% if role in ['admin','dontshop'] %}
 
             <a class="btn amber" href="{{ url_for('admin_users') }}">
                 👥 Gestione utenti
@@ -221,7 +221,7 @@
 
 {% endif %}
 
-    {% if role in ['admin','pr','team_leader'] %}
+    {% if role in ['admin','dontshop','pr','team_leader'] %}
 
         {% if events and events|length > 0 %}
 
@@ -303,7 +303,7 @@
                     📊 Statistiche
                 </a>
 
-                {% if role == 'admin' %}
+                {% if role in ['admin','dontshop'] %}
 
                 <a
                     class="btn {% if event.is_active %}green{% else %}red{% endif %}"
