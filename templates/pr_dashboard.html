@@ -205,6 +205,54 @@
 
     </div>
 
+    {% if team_stats and team_stats|length > 0 %}
+
+    <div class="card" style="margin-bottom:30px;">
+
+        <h2 style="margin-bottom:20px;">
+            👥 Il Mio Team
+        </h2>
+
+        <table style="margin-top:15px;">
+
+            <thead>
+                <tr>
+                    <th>PR</th>
+                    <th>Vendite</th>
+                    <th>Commissioni</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for member in team_stats %}
+
+                <tr>
+
+                    <td>
+                        {{ member.username }}
+                    </td>
+
+                    <td>
+                        {{ member.tickets }}
+                    </td>
+
+                    <td class="money">
+                        € {{ '%.2f'|format(member.commissions) }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% endif %}
+
     <input
         type="text"
         id="searchInput"
