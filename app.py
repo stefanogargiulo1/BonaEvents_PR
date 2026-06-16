@@ -949,10 +949,29 @@ def toggle_event(event_id):
     cursor = conn.cursor()
 
     cursor.execute("""
+        SELECT title, is_active
+        FROM events
+        WHERE id = %s
+    """, (event_id,))
+
+    event = cursor.fetchone()
+
+    cursor.execute("""
         UPDATE events
         SET is_active = NOT is_active
         WHERE id = %s
     """, (event_id,))
+
+    action = "attivato"
+
+    if event["is_active"]:
+        action = "disattivato"
+
+    log_event(
+        "EVENT",
+        session.get("user"),
+        f"Ha {action} evento {event['title']}"
+    )
 
     conn.commit()
     conn.close()
@@ -1179,16 +1198,31 @@ def approve_user(user_id):
     cursor = conn.cursor()
 
     cursor.execute("""
+        SELECT username
+        FROM users
+        WHERE id = %s
+    """, (user_id,))
+
+    target_user = cursor.fetchone()
+
+    cursor.execute("""
         UPDATE users
         SET status = 'approved',
             approved_at = CURRENT_TIMESTAMP
         WHERE id = %s AND username != 'admin'
     """, (user_id,))
 
+    log_event(
+        "ADMIN",
+        session.get("user"),
+        f"Ha approvato utente {target_user['username']}"
+    )
+
     conn.commit()
     conn.close()
 
     return redirect(url_for("admin_users"))
+
 
 
 @app.route("/admin/users/<int:user_id>/reject", methods=["POST"])
@@ -1203,11 +1237,25 @@ def reject_user(user_id):
     cursor = conn.cursor()
 
     cursor.execute("""
+        SELECT username
+        FROM users
+        WHERE id = %s
+    """, (user_id,))
+
+    target_user = cursor.fetchone()
+
+    cursor.execute("""
         UPDATE users
         SET status = 'rejected',
             approved_at = NULL
         WHERE id = %s AND username != 'admin'
     """, (user_id,))
+
+    log_event(
+        "ADMIN",
+        session.get("user"),
+        f"Ha rifiutato utente {target_user['username']}"
+    )
 
     conn.commit()
     conn.close()
@@ -1260,6 +1308,14 @@ def edit_user(user_id):
     if request.method == "POST":
 
         cursor.execute("""
+            SELECT username
+            FROM users
+            WHERE id = %s
+        """, (user_id,))
+
+        target_user = cursor.fetchone()
+
+        cursor.execute("""
             UPDATE users
             SET
                 password = %s,
@@ -1274,6 +1330,12 @@ def edit_user(user_id):
             request.form["team_leader_username"] or None,
             user_id
         ))
+
+        log_event(
+            "ADMIN",
+            session.get("user"),
+            f"Ha modificato utente {target_user['username']}"
+        )
 
         conn.commit()
 
@@ -1312,6 +1374,7 @@ def edit_user(user_id):
 
 @app.route("/admin/users/<int:user_id>/delete", methods=["POST"])
 def delete_user(user_id):
+
     if not is_logged_in():
         return redirect(url_for("login"))
 
@@ -1322,9 +1385,23 @@ def delete_user(user_id):
     cursor = conn.cursor()
 
     cursor.execute("""
+        SELECT username
+        FROM users
+        WHERE id = %s
+    """, (user_id,))
+
+    target_user = cursor.fetchone()
+
+    cursor.execute("""
         DELETE FROM users
         WHERE id = %s AND username != 'admin'
     """, (user_id,))
+
+    log_event(
+        "ADMIN",
+        session.get("user"),
+        f"Ha eliminato utente {target_user['username']}"
+    )
 
     conn.commit()
     conn.close()
@@ -1917,6 +1994,12 @@ def validate_ticket():
     """, (ticket_code,))
     updated_ticket = cursor.fetchone()
 
+    log_event(
+        "SCAN",
+        session.get("user"),
+        f"Ha validato ticket {updated_ticket['ticket_code']} - {updated_ticket['event']} - {updated_ticket['customer']}"
+    )
+
     conn.close()
 
     return jsonify({
@@ -2156,6 +2239,12 @@ def reset_sales():
     cursor.execute("""
         DELETE FROM tickets
     """)
+
+    log_event(
+        "RESET",
+        session.get("user"),
+        "Ha azzerato tutte le vendite"
+    )
 
     conn.commit()
     conn.close()
