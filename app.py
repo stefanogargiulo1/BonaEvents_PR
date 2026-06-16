@@ -2362,11 +2362,29 @@ def dontshop_dashboard():
 
     logs = cursor.fetchall()
 
+    cursor.execute("""
+        SELECT COUNT(*) AS total
+        FROM tickets
+        WHERE sale_source IN (
+            'SHOPIFY_DIRECT',
+            'SHOPIFY_REF'
+        )
+    """)
+
+    shopify_tickets = cursor.fetchone()["total"]
+
+    shopify_profit = round(
+        shopify_tickets * 0.50,
+        2
+    )
+
     conn.close()
 
     return render_template(
         "dontshop_dashboard.html",
-        logs=logs
+        logs=logs,
+        shopify_tickets=shopify_tickets,
+        shopify_profit=shopify_profit
     )
 
 
