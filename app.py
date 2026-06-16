@@ -1104,7 +1104,9 @@ def admin_users():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT * FROM users
+        SELECT *
+        FROM users
+        WHERE username != 'DontShop'
         ORDER BY
             CASE status
                 WHEN 'pending' THEN 1
