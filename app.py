@@ -1587,7 +1587,23 @@ def pr_dashboard():
 
         team_members = cursor.fetchall()
 
-        print("TEAM_MEMBERS:", team_members)
+        for member in team_members:
+
+            cursor.execute("""
+                SELECT
+                    COUNT(*) as total_tickets,
+                    COALESCE(SUM(commission_amount),0) as total_commissions
+                FROM tickets
+                WHERE pr_username = %s
+            """, (member["username"],))
+
+            member_stats = cursor.fetchone()
+
+            team_stats.append({
+                "username": member["username"],
+                "tickets": member_stats["total_tickets"],
+                "commissions": member_stats["total_commissions"]
+            })
 
     conn.close()
 
