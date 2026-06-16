@@ -526,7 +526,26 @@ def get_db_connection():
 
     return conn
 
+def log_event(log_type, username, description):
 
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO system_logs (
+            log_type,
+            username,
+            description
+        )
+        VALUES (%s, %s, %s)
+    """, (
+        log_type,
+        username,
+        description
+    ))
+
+    conn.commit()
+    conn.close()
 
 
 def init_db():
