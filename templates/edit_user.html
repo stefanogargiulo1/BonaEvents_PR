@@ -75,6 +75,8 @@
         ← Torna agli utenti
     </a>
 
+    <form method="POST">
+    
     <div class="card">
 
         <h1>
@@ -97,31 +99,78 @@
 
         <label>Password</label>
         <input
-            class="readonly"
+            type="text"
+            name="password"
             value="{{ user.password }}"
-            readonly
         >
 
         <label>Ruolo</label>
-        <input
-            class="readonly"
-            value="{{ user.role }}"
-            readonly
-        >
+
+        <select name="role">
+
+            <option value="admin"
+                {% if user.role == 'admin' %}selected{% endif %}>
+                Admin
+            </option>
+
+            <option value="pr"
+                {% if user.role == 'pr' %}selected{% endif %}>
+                PR
+            </option>
+
+            <option value="team_leader"
+                {% if user.role == 'team_leader' %}selected{% endif %}>
+                Team Leader
+            </option>
+
+            <option value="scanner"
+                {% if user.role == 'scanner' %}selected{% endif %}>
+                Scanner
+            </option>
+
+        </select>
 
         <label>Stato</label>
-        <input
-            class="readonly"
-            value="{{ user.status }}"
-            readonly
-        >
+
+        <select name="status">
+
+            <option value="approved"
+                {% if user.status == 'approved' %}selected{% endif %}>
+                Approved
+            </option>
+
+            <option value="pending"
+                {% if user.status == 'pending' %}selected{% endif %}>
+                Pending
+            </option>
+
+            <option value="rejected"
+                {% if user.status == 'rejected' %}selected{% endif %}>
+                Rejected
+            </option>
+
+        </select>
 
         <label>Team Leader</label>
-        <input
-            class="readonly"
-            value="{{ user.team_leader_username or '-' }}"
-            readonly
-        >
+
+        <select name="team_leader_username">
+
+            <option value="">
+                Nessuno
+            </option>
+
+            {% for leader in team_leaders %}
+
+                <option
+                    value="{{ leader.username }}"
+                    {% if user.team_leader_username == leader.username %}selected{% endif %}
+                >
+                    {{ leader.username }}
+                </option>
+
+            {% endfor %}
+
+        </select>
 
         <label>Creato il</label>
         <input
@@ -137,7 +186,14 @@
             readonly
         >
 
+        <button class="btn">
+            💾 Salva Modifiche
+        </button>
+
+
     </div>
+
+    </form>
 
 </body>
 </html>
