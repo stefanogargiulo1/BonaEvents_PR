@@ -156,7 +156,7 @@
 
             {% endif %}
 
-            {% if role == 'pr' %}
+            {% if role in ['pr','team_leader'] %}
 
             <a class="btn green" href="{{ url_for('pr_dashboard') }}">
                 💸 PR Dashboard
@@ -221,7 +221,7 @@
 
 {% endif %}
 
-    {% if role in ['admin','pr'] %}
+    {% if role in ['admin','pr','team_leader'] %}
 
         {% if events and events|length > 0 %}
 
