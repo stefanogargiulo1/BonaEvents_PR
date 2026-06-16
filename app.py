@@ -1190,6 +1190,44 @@ def set_team_leader(user_id, leader):
     return redirect("/admin/users")
 
 
+@app.route("/admin/user/<int:user_id>")
+def edit_user(user_id):
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+    cursor.execute("""
+        SELECT *
+        FROM users
+        WHERE id = %s
+    """, (user_id,))
+
+    user = cursor.fetchone()
+
+    cursor.execute("""
+        SELECT username
+        FROM users
+        WHERE role = 'team_leader'
+        ORDER BY username
+    """)
+
+    team_leaders = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "edit_user.html",
+        user=user,
+        team_leaders=team_leaders
+    )
+
+
 @app.route("/admin/users/<int:user_id>/delete", methods=["POST"])
 def delete_user(user_id):
     if not is_logged_in():
