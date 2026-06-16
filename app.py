@@ -664,7 +664,7 @@ def is_admin():
 
 
 def can_create_tickets():
-    return session.get("role") in ["admin", "pr"]
+    return session.get("role") in ["admin", "pr", "team_leader"]
 
 
 def can_scan_tickets():
@@ -801,7 +801,7 @@ def register():
         password = request.form.get("password", "").strip()
         role = request.form.get("role", "").strip().lower()
 
-        if not username or not password or role not in ["pr", "scanner"]:
+        if not username or not password or role not in ["pr", "scanner", "team_leader"]:
             return render_template(
                 "register.html",
                 error="Compila tutti i campi e scegli un ruolo valido"
@@ -1097,9 +1097,19 @@ def admin_users():
             created_at DESC
     """)
     users = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT username
+        FROM users
+        WHERE role = 'team_leader'
+        ORDER BY username
+    """)
+
+    team_leaders = cursor.fetchall()
+
     conn.close()
 
-    return render_template("admin_users.html", users=users)
+    return render_template("admin_users.html", users=users, team_leaders=team_leaders)
 
 
 @app.route("/admin/users/<int:user_id>/approve", methods=["POST"])
@@ -1510,6 +1520,9 @@ def pr_dashboard():
 
     if "user" not in session:
         return redirect(url_for("login"))
+    
+    if session.get("role") not in ["pr", "team_leader"]:
+        return redirect(url_for("dashboard"))
 
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)

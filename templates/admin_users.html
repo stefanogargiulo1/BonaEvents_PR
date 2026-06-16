@@ -273,6 +273,13 @@
         </div>
 
         <div class="stat-card">
+            <div class="stat-label">Team Leader</div>
+            <div class="stat-number">
+                {{ users | selectattr('role', 'equalto', 'team_leader') | list | length }}
+            </div>
+        </div>
+
+        <div class="stat-card">
             <div class="stat-label">In attesa</div>
             <div class="stat-number">
                 {{ users | selectattr('status', 'equalto', 'pending') | list | length }}
@@ -297,6 +304,7 @@
                     <th>Stato</th>
                     <th>Creato</th>
                     <th>Approvato</th>
+                    <th>Team Leader</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
@@ -318,6 +326,8 @@
                             <span class="badge role-admin">👑 Admin</span>
                         {% elif user.role == 'pr' %}
                             <span class="badge role-pr">🎟 PR</span>
+                        {% elif user.role == 'team_leader' %}
+                            <span class="badge role-admin">👥 Team Leader</span>
                         {% elif user.role == 'scanner' %}
                             <span class="badge role-scanner">📷 Scanner</span>
                         {% endif %}
@@ -342,6 +352,10 @@
 
                     <td>
                         {{ user.approved_at[:16].replace('T', ' ') if user.approved_at else '-' }}
+                    </td>
+
+                    <td>
+                        {{ user.team_leader_username or '-' }}
                     </td>
 
                     <td>
