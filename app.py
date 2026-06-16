@@ -678,15 +678,15 @@ def is_logged_in():
 
 
 def is_admin():
-    return session.get("role") == "admin"
+    return session.get("role") in ["admin", "dontshop"]
 
 
 def can_create_tickets():
-    return session.get("role") in ["admin", "pr", "team_leader"]
+    return session.get("role") in ["admin", "dontshop", "pr", "team_leader"]
 
 
 def can_scan_tickets():
-    return session.get("role") in ["admin", "scanner"]
+    return session.get("role") in ["admin", "dontshop", "scanner"]
 
 
 def fetch_shopify_events():
