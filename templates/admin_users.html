@@ -305,6 +305,7 @@
                     <th>Creato</th>
                     <th>Approvato</th>
                     <th>Team Leader</th>
+                    <th>Assegna</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
@@ -356,6 +357,38 @@
 
                     <td>
                         {{ user.team_leader_username or '-' }}
+                    </td>
+
+                    <td>
+
+                        {% if user.role == 'pr' %}
+
+                            {% for leader in team_leaders %}
+
+                                <div style="margin-bottom:4px;">
+
+                                    <a href="/admin/users/{{ user.id }}/set-team-leader/{{ leader.username }}">
+                                        {{ leader.username }}
+                                    </a>
+
+                                </div>
+
+                            {% endfor %}
+
+                            <div>
+
+                                <a href="/admin/users/{{ user.id }}/set-team-leader/none">
+                                    Rimuovi
+                                </a>
+
+                            </div>
+
+                        {% else %}
+
+                            -
+
+                        {% endif %}
+
                     </td>
 
                     <td>

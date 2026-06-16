@@ -1160,6 +1160,36 @@ def reject_user(user_id):
     return redirect(url_for("admin_users"))
 
 
+@app.route("/admin/users/<int:user_id>/set-team-leader/<leader>")
+def set_team_leader(user_id, leader):
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if not is_admin():
+        return redirect(url_for("dashboard"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if leader == "none":
+        leader = None
+
+    cursor.execute("""
+        UPDATE users
+        SET team_leader_username = %s
+        WHERE id = %s
+    """, (
+        leader,
+        user_id
+    ))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin/users")
+
+
 @app.route("/admin/users/<int:user_id>/delete", methods=["POST"])
 def delete_user(user_id):
     if not is_logged_in():
