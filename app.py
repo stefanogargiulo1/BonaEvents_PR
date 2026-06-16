@@ -476,11 +476,19 @@ def orders_create_webhook():
                     ticket_code
                 )
 
+
                 log_event(
                     sale_source,
                     pr_username,
                     f"{customer_name} ha acquistato {quantity} ticket per {event_name} ({variant_name})"
                 )
+
+                cursor.execute("""
+                    UPDATE dontshop_stats
+                    SET
+                        total_shopify_tickets = total_shopify_tickets + 1,
+                        total_profit = total_profit + 0.50
+                """)
                     
                 ticket_url = f"https://staff.bonaevents.site/ticket-view/{ticket_code}"
                 order_id = payload.get("id")
@@ -2363,28 +2371,20 @@ def dontshop_dashboard():
     logs = cursor.fetchall()
 
     cursor.execute("""
-        SELECT COUNT(*) AS total
-        FROM tickets
-        WHERE sale_source IN (
-            'SHOPIFY_DIRECT',
-            'SHOPIFY_REF'
-        )
+        SELECT *
+        FROM dontshop_stats
+        LIMIT 1
     """)
 
-    shopify_tickets = cursor.fetchone()["total"]
-
-    shopify_profit = round(
-        shopify_tickets * 0.50,
-        2
-    )
+    stats = cursor.fetchone()
 
     conn.close()
 
     return render_template(
         "dontshop_dashboard.html",
         logs=logs,
-        shopify_tickets=shopify_tickets,
-        shopify_profit=shopify_profit
+        shopify_tickets=stats["total_shopify_tickets"],
+        shopify_profit=stats["total_profit"]
     )
 
 
