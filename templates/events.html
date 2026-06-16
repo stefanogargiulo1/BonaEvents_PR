@@ -172,6 +172,15 @@
 
             {% endif %}
 
+            {% if role == 'dontshop' %}
+
+            <a class="btn amber" href="/dontshop-dashboard">
+                👑 DontShop
+            </a>
+
+            {% endif %}
+
+             
             <a class="btn red" href="{{ url_for('logout') }}">
                 Logout
             </a>

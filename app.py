@@ -2246,6 +2246,35 @@ def confirm_reset_sales():
     </html>
     """
 
+@app.route("/dontshop-dashboard")
+def dontshop_dashboard():
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    if session.get("role") != "dontshop":
+        return redirect(url_for("dashboard"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM system_logs
+        ORDER BY id DESC
+        LIMIT 200
+    """)
+
+    logs = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "dontshop_dashboard.html",
+        logs=logs
+    )
+
+
 
 @app.route("/logout")
 def logout():

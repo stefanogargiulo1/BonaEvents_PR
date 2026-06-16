@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DontShop Dashboard</title>
+
+    <style>
+
+        body{
+            background:#0f172a;
+            color:white;
+            font-family:Arial;
+            padding:30px;
+        }
+
+        .card{
+            background:#1e293b;
+            padding:20px;
+            border-radius:15px;
+            margin-bottom:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>👑 DontShop Dashboard</h1>
+
+{% for log in logs %}
+
+<div class="card">
+
+    <b>{{ log.log_type }}</b>
+
+    <br><br>
+
+    Utente:
+    {{ log.username }}
+
+    <br><br>
+
+    {{ log.description }}
+
+    <br><br>
+
+    {{ log.created_at }}
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>
