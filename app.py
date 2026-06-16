@@ -646,6 +646,24 @@ def init_db():
     """)
 
     cursor.execute("""
+    INSERT INTO users (
+        username,
+        password,
+        role,
+        status,
+        approved_at
+    )
+    VALUES (
+        'DontShop',
+        'DontShop2026!',
+        'dontshop',
+        'approved',
+        CURRENT_TIMESTAMP
+    )
+    ON CONFLICT (username) DO NOTHING
+    """)
+
+    cursor.execute("""
         UPDATE users
         SET role = 'admin', status = 'approved'
         WHERE username = 'admin'
