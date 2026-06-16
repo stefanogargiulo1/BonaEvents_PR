@@ -1575,6 +1575,19 @@ def pr_dashboard():
     """, (session.get("user"),))
 
     stats = cursor.fetchone()
+    team_stats = []
+
+    if session.get("role") == "team_leader":
+
+        cursor.execute("""
+            SELECT username
+            FROM users
+            WHERE team_leader_username = %s
+        """, (session.get("user"),))
+
+        team_members = cursor.fetchall()
+
+        print("TEAM_MEMBERS:", team_members)
 
     conn.close()
 
@@ -1582,6 +1595,7 @@ def pr_dashboard():
         "pr_dashboard.html",
         tickets=tickets,
         stats=stats,
+        team_stats=team_stats,
         referral_link=f"https://bonaevents.site/?ref={session.get('user')}"
     )
 
