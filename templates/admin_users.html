@@ -395,6 +395,14 @@
 
                         <div class="actions">
 
+                            <a
+                                href="/admin/user/{{ user.id }}"
+                                class="btn active-btn"
+                                style="text-decoration:none;"
+                            >
+                                ⚙️ Modifica
+                            </a>
+
                             {% if user.username == 'admin' %}
 
                                 <button class="btn protected-btn">
