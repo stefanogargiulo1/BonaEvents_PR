@@ -1534,6 +1534,13 @@ def ticket(event_name):
                     generated_event_name
                 ))
 
+
+        log_event(
+            "PR_TICKET",
+            pr_username,
+            f"Ha creato {quantity} ticket per {event_name}"
+        )
+        
         conn.commit()
         conn.close()
         
