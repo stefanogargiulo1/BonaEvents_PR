@@ -19,7 +19,7 @@
 <body>
     <div class="box">
         <h1>Registrazione account</h1>
-        <p>Crea un account PR oppure Scanner. L'admin dovrà approvarlo.</p>
+        <p>Crea un account, L'admin dovrà approvarlo.</p>
         {% if error %}<div class="msg err">{{ error }}</div>{% endif %}
         {% if success %}<div class="msg ok">{{ success }}</div>{% endif %}
         <form method="POST">
@@ -28,6 +28,7 @@
             <select name="role" required>
                 <option value="">Seleziona ruolo</option>
                 <option value="pr">PR</option>
+                <option value="team_leader">Team Leader</option>
                 <option value="scanner">Scanner</option>
             </select>
             <button type="submit">Invia registrazione</button>
