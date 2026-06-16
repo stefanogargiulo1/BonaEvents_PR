@@ -151,12 +151,12 @@
                 <br><br>
 
                 Email:
-                <b>{{ email or "-" }}</b
+                <b>{{ email or "-" }}</b>
 
                 <br><br>
 
-                Email:
-                <b>{{ email or "-" }}</b
+                Telefono:
+                <b>{{ phone or "-" }}</b>
 
             </div>
 
@@ -186,6 +186,16 @@
                     target="_blank"
                 >
                     VISUALIZZA TICKET
+                </a>
+
+                <br>
+
+                <a
+                    class="btn whatsapp"
+                    href="https://wa.me/{{ phone|replace('+','')|replace(' ','') }}?text=Ciao%20{{ customer }}%2C%20ecco%20il%20tuo%20ticket%20BonaEvents%3A%20{{ ticket.ticket_url }}"
+                    target="_blank"
+                >
+                    📲 INVIA SU WHATSAPP
                 </a>
 
             </div>
