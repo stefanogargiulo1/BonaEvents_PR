@@ -1190,7 +1190,7 @@ def set_team_leader(user_id, leader):
     return redirect("/admin/users")
 
 
-@app.route("/admin/user/<int:user_id>")
+@app.route("/admin/user/<int:user_id>", methods=["GET", "POST"])
 def edit_user(user_id):
 
     if not is_logged_in():
@@ -1201,6 +1201,33 @@ def edit_user(user_id):
 
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+    if request.method == "POST":
+
+        cursor.execute("""
+            UPDATE users
+            SET
+                password = %s,
+                role = %s,
+                status = %s,
+                team_leader_username = %s
+            WHERE id = %s
+        """, (
+            request.form["password"],
+            request.form["role"],
+            request.form["status"],
+            request.form["team_leader_username"] or None,
+            user_id
+        ))
+
+        conn.commit()
+
+        return redirect(
+            url_for(
+                "edit_user",
+                user_id=user_id
+            )
+        )
 
     cursor.execute("""
         SELECT *
