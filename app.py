@@ -475,6 +475,12 @@ def orders_create_webhook():
                     variant_name, 
                     ticket_code
                 )
+
+                log_event(
+                    sale_source,
+                    pr_username,
+                    f"{customer_name} ha acquistato {quantity} ticket per {event_name} ({variant_name})"
+                )
                     
                 ticket_url = f"https://staff.bonaevents.site/ticket-view/{ticket_code}"
                 order_id = payload.get("id")
